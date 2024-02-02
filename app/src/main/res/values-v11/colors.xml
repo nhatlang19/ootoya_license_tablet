@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="backgroundColor">#FFFFFF</color>
+    <color name="backgroundColorPress">#DBDBD3</color>
+    <color name="red">#FF3B00</color>
+    <color name="red_press">#990000</color>
+    <color name="dark_gray">#4C535B</color>
+    <color name="dark_gray_press">#ff7e8a97</color>
+
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="navigationBarColor">#000000</color>
+
+    <color name="background_default">#f7f1fd</color>
+    <color name="background_bluelight">#92fff2</color>
+    <color name="background_bluelight_2">#a2daff</color>
+    <color name="background_orange">#efaa48</color>
+    <color name="background_brown">#7b5b2f</color>
+    <color name="background_pink">#e998ff</color>
+    <color name="background_pink_light">#f7dbff</color>
+    <color name="background_red">#fc9e8f</color>
+    <color name="background_yellow">#ffee98</color>
+    <color name="background_yellow_2">#f7d62f</color>
+
+    <color name="row_bg">#FFFFFF</color>
+    <color name="row_bg_hover">#faceb1</color>
+</resources>

@@ -1,0 +1,48 @@
+apply plugin: 'com.android.application'
+
+android {
+    namespace 'com.vn.vietatech.combo'
+    compileSdkVersion 34
+
+    defaultConfig {
+        applicationId "com.vn.vietatech.combo"
+        minSdkVersion 19
+        targetSdkVersion 33
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_17
+            targetCompatibility JavaVersion.VERSION_17
+        }
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //Enabling multidex support.
+        //multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+repositories {
+    maven { url 'https://oss.sonatype.org/content/repositories/ksoap2-android-releases' }
+    mavenCentral()
+    google()
+}
+
+dependencies {
+    //compile 'com.android.support:support-v4:22.2.1'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.10'
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.google.code.ksoap2-android:ksoap2-android:3.6.2'
+    //implementation group: 'com.google.guava', name: 'guava', version: '18.0'
+}
