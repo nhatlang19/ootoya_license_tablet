@@ -1,7 +1,10 @@
 package com.vn.vietatech.api;
 
-import java.util.HashMap;
-import java.util.Set;
+import android.content.Context;
+import android.os.AsyncTask;
+
+import com.vn.vietatech.utils.SettingUtil;
+import com.vn.vietatech.utils.Utils;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.SoapFault;
@@ -9,11 +12,8 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
-import android.content.Context;
-import android.os.AsyncTask;
-
-import com.vn.vietatech.utils.SettingUtil;
-import com.vn.vietatech.utils.Utils;
+import java.util.HashMap;
+import java.util.Set;
 
 public class AbstractAPI extends AsyncTask<String, String, String> {
     protected Context mContext;

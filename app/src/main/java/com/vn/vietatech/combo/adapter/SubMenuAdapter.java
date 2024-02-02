@@ -23,56 +23,56 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class SubMenuAdapter extends BaseAdapter {
-	private Context mContext;
-	ArrayList<SubMenu> listSubMenu = new ArrayList<SubMenu>();
-	
-	private PosMenu selectedPOSMenu;
-	
-	ArrayList<Button> listButtonMenu = new ArrayList<Button>();
+    private Context mContext;
+    ArrayList<SubMenu> listSubMenu = new ArrayList<SubMenu>();
 
-	public SubMenuAdapter(Context c, PosMenu selectedPOSMenu) {
-		this.mContext = c;
-		this.selectedPOSMenu = selectedPOSMenu;
+    private PosMenu selectedPOSMenu;
 
-		String POSGroup;
-		try {
-			POSGroup = SettingUtil.read(mContext).getPosGroup();
-			if(selectedPOSMenu.getSubMenu().size() == 0) {
-				// load form server
-				listSubMenu = new PosMenuAPI(mContext).getSubMenu(selectedPOSMenu.getDefaultValue(), POSGroup);
-				selectedPOSMenu.setSubMenu(listSubMenu);
-			} else {
-				// load from local
-				listSubMenu = selectedPOSMenu.getSubMenu();
-			}
-		} catch (IOException e) {
-			Toast.makeText(this.mContext, e.getMessage(), Toast.LENGTH_LONG).show();
-		} catch (Exception e) {
-			Toast.makeText(this.mContext, e.getMessage(), Toast.LENGTH_LONG).show();
-		}
-		
-	}
+    ArrayList<Button> listButtonMenu = new ArrayList<Button>();
 
-	public int getCount() {
-		return listSubMenu.size();
-	}
+    public SubMenuAdapter(Context c, PosMenu selectedPOSMenu) {
+        this.mContext = c;
+        this.selectedPOSMenu = selectedPOSMenu;
 
-	public SubMenu getItem(int position) {
-		return listSubMenu.get(position);
-	}
+        String POSGroup;
+        try {
+            POSGroup = SettingUtil.read(mContext).getPosGroup();
+            if (selectedPOSMenu.getSubMenu().size() == 0) {
+                // load form server
+                listSubMenu = new PosMenuAPI(mContext).getSubMenu(selectedPOSMenu.getDefaultValue(), POSGroup);
+                selectedPOSMenu.setSubMenu(listSubMenu);
+            } else {
+                // load from local
+                listSubMenu = selectedPOSMenu.getSubMenu();
+            }
+        } catch (IOException e) {
+            Toast.makeText(this.mContext, e.getMessage(), Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(this.mContext, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
 
-	public long getItemId(int position) {
-		return position;
-	}
+    }
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		final SubmenuButton btn;
-		final SubMenu subMenu = listSubMenu.get(position);
+    public int getCount() {
+        return listSubMenu.size();
+    }
 
-		btn = new SubmenuButton(mContext, subMenu, listButtonMenu, selectedPOSMenu);
-		listButtonMenu.add(btn);
+    public SubMenu getItem(int position) {
+        return listSubMenu.get(position);
+    }
 
-		return btn;
-	}
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        final SubmenuButton btn;
+        final SubMenu subMenu = listSubMenu.get(position);
+
+        btn = new SubmenuButton(mContext, subMenu, listButtonMenu, selectedPOSMenu);
+        listButtonMenu.add(btn);
+
+        return btn;
+    }
 }

@@ -3,12 +3,9 @@ package com.vn.vietatech.api.async;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.vn.vietatech.api.PosMenuAPI;
 import com.vn.vietatech.combo.POSMenuActivity;
-import com.vn.vietatech.combo.dialog.TransparentProgressDialog;
-import com.vn.vietatech.combo.view.TableOrder;
-import com.vn.vietatech.model.Order;
 import com.vn.vietatech.combo.R;
+import com.vn.vietatech.combo.dialog.TransparentProgressDialog;
 import com.vn.vietatech.utils.Utils;
 
 public class TableSendOrderAsync extends AsyncTask<String, String, String> {

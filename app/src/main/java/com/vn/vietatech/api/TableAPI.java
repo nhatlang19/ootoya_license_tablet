@@ -1,15 +1,15 @@
 package com.vn.vietatech.api;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import org.ksoap2.serialization.SoapObject;
+import android.content.Context;
 
 import com.vn.vietatech.combo.MyApplication;
 import com.vn.vietatech.model.Section;
 import com.vn.vietatech.model.Table;
 
-import android.content.Context;
+import org.ksoap2.serialization.SoapObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TableAPI extends AbstractAPI {
     public TableAPI(Context context) throws Exception {
