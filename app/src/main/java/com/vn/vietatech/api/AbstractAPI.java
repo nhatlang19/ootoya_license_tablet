@@ -79,7 +79,7 @@ public class AbstractAPI extends AsyncTask<String, String, String> {
         request = new SoapObject(NAMESPACE, getMethod());
 
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
-                SoapEnvelope.VER11);
+                SoapEnvelope.VER12);
         envelope.dotNet = true;
         envelope.setOutputSoapObject(request);
         try {
