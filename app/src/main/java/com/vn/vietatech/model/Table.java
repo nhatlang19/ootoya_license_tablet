@@ -67,6 +67,9 @@ public class Table {
 	}
 
 	public void setOpenBy(String openBy) {
+		if(openBy.toLowerCase().equals("anytype{}")) {
+			openBy = "";
+		}
 		this.openBy = openBy;
 	}
 

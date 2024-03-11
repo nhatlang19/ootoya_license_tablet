@@ -160,14 +160,14 @@
     <GridView
         android:id="@+id/gridMainMenu"
         android:layout_width="match_parent"
-        android:layout_height="155dp"
+        android:layout_height="200dp"
         android:columnWidth="45dp"
         android:horizontalSpacing="1dp"
         android:numColumns="5"
-        android:paddingBottom="1dp"
         android:paddingLeft="1dp"
-        android:paddingRight="1dp"
         android:paddingTop="1dp"
+        android:paddingRight="1dp"
+        android:paddingBottom="1dp"
         android:stretchMode="columnWidth"
         android:verticalSpacing="1dp" />
 

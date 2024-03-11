@@ -215,11 +215,11 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
         }
-        if (!izValidBizDate.equals("1")) {
-            Utils.playAlarm(context);
-            Utils.showAlert(context, "Vui lòng kết ngày trước khi Order");
-            return;
-        }
+//        if (!izValidBizDate.equals("1")) {
+//            Utils.playAlarm(context);
+//            Utils.showAlert(context, "Vui lòng kết ngày trước khi Order");
+//            return;
+//        }
         //new UpdateTimeAsync(context).execute();
         new LoginAsync(context, getApplication()).execute(username, password);
     }

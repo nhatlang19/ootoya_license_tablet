@@ -1,6 +1,7 @@
 package com.vn.vietatech.model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Item {
 	private String id;
@@ -15,12 +16,14 @@ public class Item {
 	private String modifierInt;
 	private String masterCode;
 	private String comboPack;
+	private String weightItem;
 	private String hidden;
 	private String instruction;
 	private String segNo;
 	private String onPromotion;
 	private ArrayList<Remark> remarks;
 	private String promoCode;
+	private String promoItem;
 	private String promoPrice;
 	private String promoDesc;
 	private String promoClass;
@@ -28,11 +31,25 @@ public class Item {
 	private String endDate;
 	private String minQty;
 	private String maxQty;
+	private String reCurr;
+	private String pkgQty1;
+	private String minTrxAmt;
+	private String maxTrxAmt;
+	private String Ratio;
+	private String mon;
+	private String tue;
+	private String wed;
+	private String thu;
+	private String fri;
+	private String sat;
+	private String sun;
 	private String pkgPrice;
 	private String pkgQty;
 	private String pkgItems;
 	private String blanket;
 	private String discountable;
+	private String subcatg;
+	private String sptax;
 	private String tax;
 	private String taxAmt;
 	private ArrayList<ItemCombo> itemCombo;
@@ -412,5 +429,160 @@ public class Item {
 		result += tax + SEPARATE;
 		result += taxAmt;
 		return result;
+	}
+
+	public String getWeightItem() {
+		return weightItem;
+	}
+
+	public void setWeightItem(String weightItem) {
+		this.weightItem = weightItem;
+	}
+
+	public String getSubcatg() {
+		return subcatg;
+	}
+
+	public void setSubcatg(String subcatg) {
+		this.subcatg = subcatg;
+	}
+
+	public String getSptax() {
+		return sptax;
+	}
+
+	public void setSptax(String sptax) {
+		this.sptax = sptax;
+	}
+
+	public String getPromoItem() {
+		return promoItem;
+	}
+
+	public void setPromoItem(String promoItem) {
+		this.promoItem = promoItem;
+	}
+
+	public String getReCurr() {
+		return reCurr;
+	}
+
+	public void setReCurr(String reCurr) {
+		this.reCurr = reCurr;
+	}
+
+	public String getPkgQty1() {
+		return pkgQty1;
+	}
+
+	public void setPkgQty1(String pkgQty1) {
+		this.pkgQty1 = pkgQty1;
+	}
+
+	public String getMinTrxAmt() {
+		return minTrxAmt;
+	}
+
+	public void setMinTrxAmt(String minTrxAmt) {
+		this.minTrxAmt = minTrxAmt;
+	}
+
+	public String getMaxTrxAmt() {
+		return maxTrxAmt;
+	}
+
+	public void setMaxTrxAmt(String maxTrxAmt) {
+		this.maxTrxAmt = maxTrxAmt;
+	}
+
+	public String getRatio() {
+		return Ratio;
+	}
+
+	public void setRatio(String ratio) {
+		Ratio = ratio;
+	}
+
+	public String getMon() {
+		return mon;
+	}
+
+	public void setMon(String mon) {
+		this.mon = mon;
+	}
+
+	public String getTue() {
+		return tue;
+	}
+
+	public void setTue(String tue) {
+		this.tue = tue;
+	}
+
+	public String getWed() {
+		return wed;
+	}
+
+	public void setWed(String wed) {
+		this.wed = wed;
+	}
+
+	public String getThu() {
+		return thu;
+	}
+
+	public void setThu(String thu) {
+		this.thu = thu;
+	}
+
+	public String getFri() {
+		return fri;
+	}
+
+	public void setFri(String fri) {
+		this.fri = fri;
+	}
+
+	public String getSat() {
+		return sat;
+	}
+
+	public void setSat(String sat) {
+		this.sat = sat;
+	}
+
+	public String getSun() {
+		return sun;
+	}
+
+	public void setSun(String sun) {
+		this.sun = sun;
+	}
+
+	public String getPromoDay(String promoDay) {
+		switch (promoDay) {
+			case "MON" -> {
+				return getMon();
+			}
+			case "TUE" -> {
+				return getTue();
+			}
+			case "WED" -> {
+				return getWed();
+			}
+			case "THU" -> {
+				return getThu();
+			}
+			case "FRI" -> {
+				return getFri();
+			}
+			case "SAT" -> {
+				return getSat();
+			}
+			case "SUN" -> {
+				return getSun();
+			}
+		}
+		return getMon();
 	}
 }

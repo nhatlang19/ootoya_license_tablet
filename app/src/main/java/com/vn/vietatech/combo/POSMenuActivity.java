@@ -48,6 +48,7 @@ import com.vn.vietatech.combo.view.TableOrder;
 import com.vn.vietatech.combo.view.tab.FragmentDialog;
 import com.vn.vietatech.model.Item;
 import com.vn.vietatech.model.PosMenu;
+import com.vn.vietatech.model.Promotion;
 import com.vn.vietatech.model.Remark;
 import com.vn.vietatech.model.Table;
 import com.vn.vietatech.utils.SettingUtil;
@@ -111,13 +112,13 @@ public class POSMenuActivity extends AppCompatActivity {
         loadEvent();
 
         try {
-            boolean result = new AbstractAPI(this).isKitFolderExist();
-            if (!result) {
-                result = new AbstractAPI(this).createKitFolder();
-                if (!result) {
-                    Utils.showAlert(this, "Không thể tạo thư mục KIT");
-                }
-            }
+//            boolean result = new AbstractAPI(this).isKitFolderExist();
+//            if (!result) {
+//                result = new AbstractAPI(this).createKitFolder();
+//                if (!result) {
+//                    Utils.showAlert(this, "Không thể tạo thư mục KIT");
+//                }
+//            }
             loadItems();
 
         } catch (Exception e) {
@@ -696,6 +697,12 @@ public class POSMenuActivity extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
         FragmentDialog overlay = new FragmentDialog(item);
         overlay.show(fm, "FragmentDialog");
+    }
+
+    public void onOpenDialogPromotion(ArrayList<Promotion> promotions) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentPromotion promotion = new FragmentPromotion(promotions);
+        promotion.show(fm, "FragmentPromotion");
     }
 
     public TableOrder getTableOrder() {

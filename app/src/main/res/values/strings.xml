@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="appName">VietA OneES®Mobility</string>
+    <string name="appName">VietA OneES®Mobility</string>
     <string name="app_name">WizPOS PDA</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -33,5 +33,7 @@
     <string name="setting_salescode">SalesCode</string>
     <string name="setting_vat">VAT</string>
     <string name="title_activity_posmenu">POSMenuActivity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

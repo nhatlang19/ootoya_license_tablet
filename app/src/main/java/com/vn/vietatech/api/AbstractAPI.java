@@ -30,7 +30,7 @@ public class AbstractAPI extends AsyncTask<String, String, String> {
     protected static String METHOD_IS_VALID_BIZDATE = "IsValidBizDate";
     protected static String METHOD_IS_KIT_EXITS = "IsKitFolderExist";
     protected static String METHOD_CREATE_KIT_FOLDER = "CreateKITFolder";
-    protected static String METHOD_GET_ITEM = "GetItemBySubMenuSelected";
+    protected static String METHOD_GET_ITEM = "GetItemBySubMenuSelected_CheckPromo";
     protected static String METHOD_GET_ITEM_COMBO = "GetItemComboBySubMenuSelected";
     protected static String METHOD_GET_ITEM_MODIFIER = "GetModifierByModifierItem";
     protected static String METHOD_GET_ORDER_EDIT_TYPE = "GetOrderEditType";
