@@ -18,102 +18,137 @@ import java.util.ArrayList;
 
 public class TableOrder extends TableLayout
 {
-    public static final String colQ = "Q";
-    public static final String colP = "P";
-    public static final String colName = "Name";
-    public static final String colPrice = "Price";
-    public static final String colDisc = "Disc";
-    public static final String colTotal = "Total";
-    public static final String colType = "Type";
-    public static final String colItemCode = "ItemCode";
-    public static final String colInstruction = "Instruction";
-    public static final String colModifier = "Modifier";
-    public static final String colMasterCode = "MasterCode";
-    public static final String colCombo = "Combo";
-    public static final String colHidden = "Hidden";
-    public static final String colSegNo = "SegNo";
-    public static final String colpCode = "p.Code";
-    public static final String colpClass = "p.Class";
-    public static final String colpPkgPrice = "p.PkgPrice";
-    public static final String colpPkgQty = "p.PkgQty";
-    public static final String colpPkgItems = "p.PkgItems";
-    public static final String colpBlanket = "p.Blanket";
-    public static final String colTax = "Tax";
-    public static final String colTaxAmt = "TaxAmt";
+    public static final String colnP = "P";
+    public static final String colnQty = "Qty";
+    public static final String colnType = "Type";
+    public static final String colnSegNo = "SegNo";
+
+    public static final String colnItemName = "Item#";
+    public static final String colnGiaKM = "Giá KM";
+    public static final String colnGiaGoc = "Giá gốc";
+    public static final String colnDisc = "Disc";
+    public static final String colnSubTotal = "SubTotal";
+    public static final String colnInstruction = "Instruction";
+    public static final String colnTT = "TT";
+    public static final String colnPCode = "p.Code";
+    public static final String colnPClass = "p.Class";
+    public static final String colnPQty = "p.Qty";
+    public static final String colnKhuyenMai = "Khuyến mãi";
+    public static final String colnDiscId = "DiscId";
+    public static final String colnTotal = "Total";
+    public static final String colnTax = "Tax";
+    public static final String colnTaxAmt = "TaxAmt";
+    public static final String colnSPTax = "SPTax";
+    public static final String colnSPAmt = "SPAmt";
+    public static final String colnServAmt = "ServAmt";
+    public static final String colnSubCatg = "SubCatg";
+    public static final String colnBrand = "Brand";
+    public static final String colnMemberId = "MemberID";
+    public static final String colnMemberName = "MemberName";
+    public static final String colnJocketWallet = "JockerWallet";
+    public static final String colnCashVoucher = "CashVoucher";
+    public static final String colnDiscountVoucher = "DiscountVoucher";
+    public static final String colnDiscountMember = "DiscountMember";
+
     public static String STATUS_DATATABLE_NO_DATA = "No Data";
     public static String STATUS_DATATABLE_SEND_ALL = "Send All";
     public static String STATUS_DATATABLE_RESEND = "Bạn muốn Gửi Lại order ?";
     private String[] headers = new String[]{
-            colQ,
-            colP,
-            colName,
-            colPrice,
-            colDisc,
-            colTotal,
-            colType,
-            colItemCode,
-            colInstruction,
-            colModifier,
-            colMasterCode,
-            colCombo,
-            colHidden,
-            colSegNo,
-            colpCode,
-            colpClass,
-            colpPkgPrice,
-            colpPkgQty,
-            colpPkgItems,
-            colpBlanket,
-            colTax,
-            colTaxAmt
+            colnQty,
+            colnP,
+            colnItemName,
+            colnGiaKM,
+            colnGiaGoc,
+            colnDisc,
+            colnSubTotal,
+            colnInstruction,
+            colnTT,
+            colnPCode,
+            colnPClass,
+            colnPQty,
+            colnKhuyenMai,
+            colnDiscId,
+            colnTotal,
+            colnTax,
+            colnTaxAmt,
+            colnSPTax,
+            colnSPAmt,
+            colnServAmt,
+            colnSubCatg,
+            colnBrand,
+            colnMemberId,
+            colnMemberName,
+            colnJocketWallet,
+            colnCashVoucher,
+            colnDiscountVoucher,
+            colnDiscountMember,
+            colnType,
+            colnSegNo
     };
     private Integer[] headerWidth = new Integer[]{
-            80, //Q
-            60, //P
-            420, //Name
-            170, //OPrice
-            170, //P.Price
-            170, //Total
-            150, //Type
-            220, //ItemCode
-            300, //Instruction
-            200, //Modifier
-            250, //MasterCode
-            180, //Combo
-            170, //Hiden
-            170, //SeqNo
-            200, //p.Code
-            230, //p.Class
-            250, //p.PkgPrice
-            250, //p.PkgQty
-            250, //p.PkgItem
-            250, //p.Blanket
-            100, //Tax
-            250, //TaxAmt
+            80,
+            80,
+            420,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
     };
     private Integer[] headerGravity = new Integer[]{
             Gravity.CENTER,
             Gravity.CENTER,
-            Gravity.LEFT,
-            Gravity.RIGHT,
-            Gravity.RIGHT,
-            Gravity.RIGHT,
-            Gravity.LEFT,
             Gravity.CENTER,
             Gravity.CENTER,
             Gravity.CENTER,
             Gravity.CENTER,
             Gravity.CENTER,
             Gravity.CENTER,
-            Gravity.LEFT,
-            Gravity.LEFT,
-            Gravity.LEFT,
-            Gravity.LEFT,
-            Gravity.LEFT,
-            Gravity.LEFT,
-            Gravity.LEFT,
-            Gravity.RIGHT,
-            Gravity.RIGHT,};
+            Gravity.CENTER,
+            Gravity.CENTER,
+            Gravity.CENTER,
+            Gravity.CENTER,
+            Gravity.CENTER,
+            Gravity.CENTER,
+            Gravity.CENTER,
+            Gravity.CENTER,
+            Gravity.CENTER,
+            Gravity.CENTER,
+            Gravity.CENTER,
+            Gravity.CENTER,
+            Gravity.CENTER,
+            Gravity.CENTER,
+            Gravity.CENTER,
+            Gravity.CENTER,
+            Gravity.CENTER,
+            Gravity.CENTER,
+            Gravity.CENTER,
+            Gravity.CENTER,
+            Gravity.CENTER,
+            Gravity.CENTER,
+    };
     private MyTable table;
 
     public TableOrder(Context context, LinearLayout parent)
@@ -172,6 +207,7 @@ public class TableOrder extends TableLayout
 
     public boolean createNewRow(Item item)
     {
+        item.autoCalculate();
         ArrayList<ItemRow> listRow = table.getBody().getAllRows();
         int index = -1;
         if (!item.getItemType().equals("C") && !item.getItemType().equals("M"))
@@ -189,7 +225,7 @@ public class TableOrder extends TableLayout
         if (index != -1)
         {
             // update quality
-            TextView txtStatus = (TextView) getColumnByRow(index, colP);
+            TextView txtStatus = (TextView) getColumnByRow(index, colnP);
             if (txtStatus != null
                     && !txtStatus.getText().equals(Item.STATUS_OLD)
                     && !txtStatus.getText().equals(Item.STATUS_CANCEL))
@@ -200,7 +236,7 @@ public class TableOrder extends TableLayout
                         .setBackgroundColor(Color.parseColor("#edf0fe"));
                 table.getBody().setCurrentIndex(index);
 
-                TextView txtQ = (TextView) getColumnByRow(index, colQ);
+                TextView txtQ = (TextView) getColumnByRow(index, colnQty);
                 int q = Integer.parseInt(txtQ.getText().toString()) + Integer.parseInt(item.getQty().trim());
                 txtQ.setText(String.valueOf(q));
 
@@ -222,17 +258,17 @@ public class TableOrder extends TableLayout
     public boolean sub()
     {
         boolean delete = false;
-        TextView txtStatus = (TextView) getColumnCurrentRow(colP);
+        TextView txtStatus = (TextView) getColumnCurrentRow(colnP);
         if (txtStatus != null && !txtStatus.getText().equals(Item.STATUS_OLD)
                 && !txtStatus.getText().equals(Item.STATUS_CANCEL))
         {
-            TextView txtItemCode = (TextView) getColumnCurrentRow(colType);
+            TextView txtItemCode = (TextView) getColumnCurrentRow(colnType);
             if (txtItemCode != null && (txtItemCode.getText().equals("N")
                     || txtItemCode.getText().equals("R")
                     || txtItemCode.getText().equals("C")
                     || txtItemCode.getText().equals("M")))
             {
-                TextView txtQty = (TextView) getColumnCurrentRow(colQ);
+                TextView txtQty = (TextView) getColumnCurrentRow(colnQty);
                 if (txtQty != null)
                 {
                     int qty = Integer.parseInt(txtQty.getText().toString());
@@ -259,15 +295,15 @@ public class TableOrder extends TableLayout
 
     public void plus()
     {
-        TextView txtStatus = (TextView) getColumnCurrentRow(colP);
+        TextView txtStatus = (TextView) getColumnCurrentRow(colnP);
         if (txtStatus != null && !txtStatus.getText().equals(Item.STATUS_OLD)
                 && !txtStatus.getText().equals(Item.STATUS_CANCEL))
         {
-            TextView txtItemCode = (TextView) getColumnCurrentRow(colType);
+            TextView txtItemCode = (TextView) getColumnCurrentRow(colnType);
             if (txtItemCode != null && (txtItemCode.getText().equals("N")
                     || txtItemCode.getText().equals("R") || txtItemCode.getText().equals("C") || txtItemCode.getText().equals("M")))
             {
-                TextView txtQty = (TextView) getColumnCurrentRow(TableOrder.colQ);
+                TextView txtQty = (TextView) getColumnCurrentRow(TableOrder.colnQty);
                 if (txtQty != null)
                 {
                     int qty = Integer.parseInt(txtQty.getText().toString());
@@ -282,8 +318,8 @@ public class TableOrder extends TableLayout
 
     public void removeRow()
     {
-        TextView txtStatus = (TextView) getColumnCurrentRow(colP);
-        TextView txtItemCode = (TextView) getColumnCurrentRow(colType);
+        TextView txtStatus = (TextView) getColumnCurrentRow(colnP);
+        TextView txtItemCode = (TextView) getColumnCurrentRow(colnType);
         if (txtStatus != null && !txtStatus.getText().equals(Item.STATUS_OLD)
                 && !txtStatus.getText().equals(Item.STATUS_CANCEL))
         {
@@ -322,12 +358,12 @@ public class TableOrder extends TableLayout
 
     public String getRemark(Remark selectedRemark)
     {
-        TextView txtStatus = (TextView) getColumnCurrentRow(colP);
+        TextView txtStatus = (TextView) getColumnCurrentRow(colnP);
         String instruction = null;
         if (txtStatus != null && !txtStatus.getText().equals(Item.STATUS_OLD)
                 && !txtStatus.getText().equals(Item.STATUS_CANCEL))
         {
-            TextView txtInstruction = (TextView) getColumnCurrentRow(colInstruction);
+            TextView txtInstruction = (TextView) getColumnCurrentRow(colnInstruction);
             if (txtInstruction != null)
             {
                 if (!selectedRemark.getName().isEmpty())
@@ -354,11 +390,11 @@ public class TableOrder extends TableLayout
 
     public void insertRemark(String instruction)
     {
-        TextView txtStatus = (TextView) getColumnCurrentRow(colP);
+        TextView txtStatus = (TextView) getColumnCurrentRow(colnP);
         if (txtStatus != null && !txtStatus.getText().equals(Item.STATUS_OLD)
                 && !txtStatus.getText().equals(Item.STATUS_CANCEL))
         {
-            TextView txtInstruction = (TextView) getColumnCurrentRow(colInstruction);
+            TextView txtInstruction = (TextView) getColumnCurrentRow(colnInstruction);
             txtInstruction.setText(instruction);
             getCurrentRow().getCurrentItem().setInstruction(instruction);
         }
@@ -384,30 +420,30 @@ public class TableOrder extends TableLayout
             ItemRow itemRow = listRow.get(i);
             Item itemData = itemRow.getCurrentItem();
 
-            TextView txtQ = (TextView) getColumnByRow(i, colQ);
-            int q = Integer.parseInt(txtQ.getText().toString());
-            String promotion = itemData.getOnPromotion();
-            TextView txtPrice = (TextView) getColumnByRow(i, colPrice);
-            TextView txtDiscount = (TextView) getColumnByRow(i, colDisc);
-            TextView txtTotal = (TextView) getColumnByRow(i, colTotal);
-            TextView txtTax = (TextView) getColumnByRow(i, colTax);
-            TextView txtTaxAmt = (TextView) getColumnByRow(i, colTaxAmt);
-            TextView txtStatus = (TextView) getColumnByRow(i, colP);
+//            TextView txtQ = (TextView) getColumnByRow(i, colQ);
+//            int q = Integer.parseInt(txtQ.getText().toString());
+//            String promotion = itemData.getOnPromotion();
+//            TextView txtPrice = (TextView) getColumnByRow(i, colnPrice);
+//            TextView txtDiscount = (TextView) getColumnByRow(i, colDisc);
+            TextView txtTotal = (TextView) getColumnByRow(i, colnTotal);
+//            TextView txtTax = (TextView) getColumnByRow(i, colTax);
+//            TextView txtTaxAmt = (TextView) getColumnByRow(i, colTaxAmt);
+//            TextView txtStatus = (TextView) getColumnByRow(i, colnP);
 
-            String stat = txtStatus.getText().toString();
+//            String stat = txtStatus.getText().toString();
 
             int totAmt = Integer.parseInt(txtTotal.getText().toString());
-            int taxAmt = Integer.parseInt(txtTax.getText().toString());
+//            int taxAmt = Integer.parseInt(txtTax.getText().toString());
 
-            if (stat.equals(""))
-            {
-                totAmt = Integer.parseInt(txtPrice.getText().toString()) * q - Integer.parseInt(txtDiscount.getText().toString());
-                taxAmt = totAmt * Integer.parseInt(txtTax.getText().toString()) / 100;
-                txtTotal.setText(String.valueOf(totAmt));
-                txtTaxAmt.setText(String.valueOf(taxAmt));
-            }
-            getRowIndex(i).getCurrentItem().setTotal(String.valueOf(totAmt));
-            getRowIndex(i).getCurrentItem().setTaxAmt(String.valueOf(taxAmt));
+//            if (stat.equals(""))
+//            {
+//                totAmt = Integer.parseInt(txtPrice.getText().toString()) * q - Integer.parseInt(txtDiscount.getText().toString());
+//                taxAmt = totAmt * Integer.parseInt(txtTax.getText().toString()) / 100;
+//                txtTotal.setText(String.valueOf(totAmt));
+//                txtTaxAmt.setText(String.valueOf(taxAmt));
+//            }
+//            getRowIndex(i).getCurrentItem().setTotal(String.valueOf(totAmt));
+//            getRowIndex(i).getCurrentItem().setTaxAmt(String.valueOf(taxAmt));
             //int t = Integer.parseInt(txtTotal.getText().toString());
             total += totAmt;
         }
@@ -430,7 +466,7 @@ public class TableOrder extends TableLayout
                 boolean isNew = false;
                 for (int i = listRow.size() - 1; i >= 0; i--)
                 {
-                    TextView txtStatus = (TextView) getColumnByRow(i, colP);
+                    TextView txtStatus = (TextView) getColumnByRow(i, colnP);
                     if (txtStatus != null
                             && !txtStatus.getText().equals(Item.STATUS_OLD)
                             && !txtStatus.getText().equals(Item.STATUS_CANCEL))

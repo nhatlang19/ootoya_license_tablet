@@ -1,8 +1,10 @@
 package com.vn.vietatech.combo.view;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 import com.vn.vietatech.api.ItemAPI;
 import com.vn.vietatech.api.ItemComboAPI;
@@ -10,6 +12,7 @@ import com.vn.vietatech.combo.POSMenuActivity;
 import com.vn.vietatech.model.Item;
 import com.vn.vietatech.model.ItemCombo;
 import com.vn.vietatech.model.PosMenu;
+import com.vn.vietatech.model.PromoClass;
 import com.vn.vietatech.model.Promotion;
 import com.vn.vietatech.model.Setting;
 import com.vn.vietatech.model.SubMenu;
@@ -91,8 +94,11 @@ public class SubmenuButton extends Button {
 
                             if (onPromotionTemp.equals("Y")) {
                                 if (item.getReCurr().equals("Y")) {
-                                    Date startDate = new Date(item.getStartDate());
-                                    Date endDate = new Date(item.getEndDate());
+                                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
+                                    formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+                                    Date startDate = formatter.parse(item.getStartDate());
+                                    Date endDate = formatter.parse(item.getEndDate());
                                     onPromotionTemp = getPromoTime(startDate, endDate);
                                 }
                             }
@@ -119,9 +125,9 @@ public class SubmenuButton extends Button {
 
                     if (dtKM.size() > 0) {
                         int promoClass = Integer.parseInt(items.get(0).getPromoClass());
-                        if (promoClass == 6) {
+                        if (promoClass == PromoClass.MuaMtangN) {
                             dtKM.add(0, new Promotion("NoKM", "Không nhận khuyến mãi"));
-                            activity.onOpenDialogPromotion(dtKM);
+                            activity.onOpenDialogPromotion(dtKM, items, numberClick);
                         }
                     } else {
                         Item item = items.get(0);

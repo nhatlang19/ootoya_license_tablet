@@ -658,7 +658,7 @@ public class POSMenuActivity extends AppCompatActivity {
 
         ArrayList<ItemRow> listRow = tblOrder.getAllRows();
         for (int i = listRow.size() - 1; i >= 0; i--) {
-            TextView txtSeqNo = (TextView) tblOrder.getColumnByRow(i, TableOrder.colSegNo);
+            TextView txtSeqNo = (TextView) tblOrder.getColumnByRow(i, TableOrder.colnSegNo);
             int seqNo = Integer.parseInt(txtSeqNo.getText().toString());
             if (seqNo != i + 1) {
                 //Utils.playAlarm(context);
@@ -699,9 +699,9 @@ public class POSMenuActivity extends AppCompatActivity {
         overlay.show(fm, "FragmentDialog");
     }
 
-    public void onOpenDialogPromotion(ArrayList<Promotion> promotions) {
+    public void onOpenDialogPromotion(ArrayList<Promotion> promotions, ArrayList<Item> items, int numberClick) {
         FragmentManager fm = getSupportFragmentManager();
-        FragmentPromotion promotion = new FragmentPromotion(promotions);
+        FragmentPromotion promotion = new FragmentPromotion(promotions, items, numberClick);
         promotion.show(fm, "FragmentPromotion");
     }
 

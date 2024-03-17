@@ -1,5 +1,7 @@
 package com.vn.vietatech.model;
 
+import com.vn.vietatech.utils.Utils;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -52,6 +54,29 @@ public class Item {
 	private String sptax;
 	private String tax;
 	private String taxAmt;
+
+	private String brand;
+	private String memberId;
+	private String memberName;
+	private String jocketWallet;
+	private String cashVoucher;
+	private String discountVoucher;
+	private String discountMember;
+
+
+	public String getDistAmt() {
+		return distAmt;
+	}
+
+	public void setDistAmt(String distAmt) {
+		this.distAmt = distAmt;
+	}
+
+	private String distAmt;
+
+	private String subTotal;
+	private String serveTaxAmt;
+	private String spTaxAmt;
 	private ArrayList<ItemCombo> itemCombo;
 	private ArrayList<ItemModifier> itemModifiers;
 	private int numberClick;
@@ -97,6 +122,12 @@ public class Item {
 
 		setNumberClick(0);
 		segNo = "0";
+		memberId= "";
+		memberName= "";
+		jocketWallet= "";
+		cashVoucher= "";
+		discountVoucher= "";
+		discountMember= "";
 	}
 
 	public String getId() {
@@ -584,5 +615,138 @@ public class Item {
 			}
 		}
 		return getMon();
+	}
+
+	public boolean hasPromotion() {
+		return this.onPromotion.equals("Y");
+	}
+
+	public void autoCalculate()
+	{
+		String promoCode = this.hasPromotion() ? this.getPromoCode() : "";
+		int promoClass = this.hasPromotion() ? Integer.valueOf(this.getPromoClass()) : 0;
+		int pkgQty = this.hasPromotion() ? Integer.valueOf(this.getPkgQty()) : 0;
+		int pkgItems = this.hasPromotion() ? Integer.valueOf(this.getPkgItems()) : 0;
+		String promoDesc = this.hasPromotion() ? this.getPromoDesc() : "";
+		int unitPromoPrice = (int) (this.hasPromotion() ? Math.round(Double.valueOf(this.getPromoPrice())) : Math.round(Double.valueOf(this.getOrgPrice())));
+
+		int soLuong = 0;
+		int promoQty = 0;
+		if (promoClass == (int)PromoClass.MuaMtangN) {
+			promoQty = numberClick * pkgItems;
+			soLuong = numberClick * (pkgItems + pkgQty);
+		} else {
+			soLuong = numberClick;
+		}
+
+		String comboPack = getComboPack();
+		int taxRate = Integer.valueOf(getTax());
+		int spTaxRate = Integer.valueOf(getSptax());
+		int unitSellPrice = (int)Math.round(Double.valueOf(getOrgPrice()));
+		double serviceTax = 0.07;
+
+		int distAmt = 0;
+		if (this.hasPromotion() && promoClass == PromoClass.MuaMtangN) {
+			distAmt = (unitSellPrice - unitPromoPrice) * promoQty;
+		} else {
+			distAmt = soLuong * (unitSellPrice - unitPromoPrice);
+		}
+
+		double subTotal = soLuong * unitSellPrice - distAmt;
+		double serveTaxAmt = subTotal * serviceTax * 0.01;
+		double spTaxAmt  = (subTotal + serveTaxAmt) * spTaxRate * 0.01;
+		double total = subTotal + spTaxAmt + serveTaxAmt;
+		boolean taxInclude = true;
+		double taxAmt = Utils.taxAmtCalculate(taxInclude, taxRate, total);
+
+		setSubTotal(String.valueOf(subTotal));
+		setServeTaxAmt(String.valueOf(serveTaxAmt));
+		setSpTaxAmt(String.valueOf(spTaxAmt));
+		setTotal(String.valueOf(total));
+		setTaxAmt(String.valueOf(taxAmt));
+		setDistAmt(String.valueOf(distAmt));
+
+		setQty(String.valueOf(soLuong));
+	}
+
+
+	public String getSubTotal() {
+		return subTotal;
+	}
+
+	public void setSubTotal(String subTotal) {
+		this.subTotal = subTotal;
+	}
+
+	public String getServeTaxAmt() {
+		return serveTaxAmt;
+	}
+
+	public void setServeTaxAmt(String serveTaxAmt) {
+		this.serveTaxAmt = serveTaxAmt;
+	}
+
+	public String getSpTaxAmt() {
+		return spTaxAmt;
+	}
+
+	public void setSpTaxAmt(String spTaxAmt) {
+		this.spTaxAmt = spTaxAmt;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+	public String getJocketWallet() {
+		return jocketWallet;
+	}
+
+	public void setJocketWallet(String jocketWallet) {
+		this.jocketWallet = jocketWallet;
+	}
+
+	public String getCashVoucher() {
+		return cashVoucher;
+	}
+
+	public void setCashVoucher(String cashVoucher) {
+		this.cashVoucher = cashVoucher;
+	}
+
+	public String getDiscountVoucher() {
+		return discountVoucher;
+	}
+
+	public void setDiscountVoucher(String discountVoucher) {
+		this.discountVoucher = discountVoucher;
+	}
+
+	public String getDiscountMember() {
+		return discountMember;
+	}
+
+	public void setDiscountMember(String discountMember) {
+		this.discountMember = discountMember;
 	}
 }

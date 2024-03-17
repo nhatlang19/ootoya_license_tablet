@@ -30,88 +30,92 @@ public class ItemRow extends TableRow {
 		currentItem = item;
 		
 		// quality
-		TextView txtQuality = createColumn(currentItem.getQty(), tblHeader, TableOrder.colQ);
+		TextView txtQuality = createColumn(currentItem.getQty(), tblHeader, TableOrder.colnQty);
 		this.addView(txtQuality);
 		// status
-		TextView txtStatus = createColumn(currentItem.getPrintStatus(), tblHeader, TableOrder.colP);
+		TextView txtStatus = createColumn(currentItem.getPrintStatus(), tblHeader, TableOrder.colnP);
 		this.addView(txtStatus);
 		// name
-		TextView txtName = createColumn(currentItem.getItemName(), tblHeader, TableOrder.colName);
+		TextView txtName = createColumn(currentItem.getItemName(), tblHeader, TableOrder.colnItemName);
 		this.addView(txtName);
 		// O.price
-		TextView txtOPrice = createColumn(currentItem.getOrgPrice(), tblHeader, TableOrder.colPrice);
+		TextView txtOPrice = createColumn(currentItem.getOrgPrice(), tblHeader, TableOrder.colnGiaGoc);
 		this.addView(txtOPrice);
 		// P.price
-		TextView txtPPrice = createColumn(currentItem.getPromoPrice(), tblHeader, TableOrder.colDisc);
+		TextView txtPPrice = createColumn(currentItem.getPromoPrice(), tblHeader, TableOrder.colnGiaKM);
 		this.addView(txtPPrice);
-		// total
-//		int total;
-//		if(!currentItem.getOnPromotion().equals("Y")) {
-//			total = Integer.parseInt(currentItem.getQty())
-//					* Integer.parseInt(currentItem.getOrgPrice());
-//		} else {
-//			total = Integer.parseInt(currentItem.getQty())
-//					* Integer.parseInt(currentItem.getPromoPrice());
-//		}
-//		currentItem.setTotal(String.valueOf(total));
-		TextView txtTotal = createColumn(currentItem.getTotal(), tblHeader,TableOrder.colTotal);
-		this.addView(txtTotal);
-		// currentItemType
-		TextView txtItemType = createColumn(currentItem.getItemType(), tblHeader, TableOrder.colType);
-		this.addView(txtItemType);
-		// currentItemCode
-		TextView txtItemCode = createColumn(currentItem.getItemCode(), tblHeader, TableOrder.colItemCode);
-		this.addView(txtItemCode);
+		// disc
+		TextView txtDisc = createColumn(currentItem.getDistAmt(), tblHeader,TableOrder.colnDisc);
+		this.addView(txtDisc);
+		// subtotal
+		TextView txtSubTotal = createColumn(currentItem.getSubTotal(), tblHeader,TableOrder.colnSubTotal);
+		this.addView(txtSubTotal);
 		// Instruction
-		TextView txtInstruction = createColumn(currentItem.getInstruction(), tblHeader, TableOrder.colInstruction);
+		TextView txtInstruction = createColumn(currentItem.getInstruction(), tblHeader, TableOrder.colnInstruction);
 		this.addView(txtInstruction);
-		// ModifierInt
-		TextView txtModifierInt = createColumn(currentItem.getModifier(), tblHeader, TableOrder.colModifier);
-		this.addView(txtModifierInt);
-		// MasterCode
-		TextView txtMasterCode = createColumn(currentItem.getMasterCode(), tblHeader, TableOrder.colMasterCode);
-		this.addView(txtMasterCode);
-		// ComboClass
-		TextView txtComboClass = createColumn(currentItem.getComboPack(), tblHeader, TableOrder.colCombo);
-		this.addView(txtComboClass);
-		// Hidden
-		TextView txtHidden = createColumn(currentItem.getHidden(), tblHeader, TableOrder.colHidden);
-		this.addView(txtHidden);
-		// SegNo
-		
-		int segNoItem = Integer.parseInt(currentItem.getSegNo());
-		TextView txtSegNo = null;
-		if(segNoItem == 0) {
-			txtSegNo = createColumn(String.valueOf(segNo), tblHeader, TableOrder.colSegNo);
-			currentItem.setSegNo(String.valueOf(segNo));
-		} else {
-			txtSegNo = createColumn(currentItem.getSegNo(), tblHeader, TableOrder.colSegNo);
-		}
-		this.addView(txtSegNo);
-		// p.Code
-		TextView txtCode = createColumn(currentItem.getPromoCode(), tblHeader, TableOrder.colpCode);
+		// TT
+		TextView txtTT = createColumn("", tblHeader, TableOrder.colnTT);
+		this.addView(txtTT);
+		// pCode
+		TextView txtCode = createColumn(currentItem.getPromoCode(), tblHeader, TableOrder.colnPCode);
 		this.addView(txtCode);
 		// Class
-		TextView txtClass = createColumn(currentItem.getPromoClass(), tblHeader, TableOrder.colpClass);
+		TextView txtClass = createColumn(currentItem.getPromoClass(), tblHeader, TableOrder.colnPClass);
 		this.addView(txtClass);
-		// PkgPrice
-		TextView txtPkgPrice = createColumn(currentItem.getPkgPrice(), tblHeader, TableOrder.colpPkgPrice);
-		this.addView(txtPkgPrice);
 		// PkgQty
-		TextView txtPkgQty = createColumn(currentItem.getPkgQty(), tblHeader, TableOrder.colpPkgQty);
-		this.addView(txtPkgQty);
-		// PkgItems
-		TextView txtPkgItems = createColumn(currentItem.getPkgItems(), tblHeader,TableOrder.colpPkgItems);
-		this.addView(txtPkgItems);
-		// Blanket
-		TextView txtBlanket = createColumn(currentItem.getBlanket(), tblHeader, TableOrder.colpBlanket);
-		this.addView(txtBlanket);
-
-		TextView txtTax = createColumn(currentItem.getTax(), tblHeader, TableOrder.colTax);
+		TextView txtPQty = createColumn(currentItem.getPkgQty(), tblHeader, TableOrder.colnPQty);
+		this.addView(txtPQty);
+		// colnKhuyenMai
+		TextView txtKM = createColumn("", tblHeader, TableOrder.colnKhuyenMai);
+		this.addView(txtKM);
+		// colnDiscId
+		TextView txtDiscId = createColumn("", tblHeader, TableOrder.colnDiscId);
+		this.addView(txtDiscId);
+		// total
+		TextView txtTotal = createColumn(currentItem.getTotal(), tblHeader,TableOrder.colnTotal);
+		this.addView(txtTotal);
+		// tax
+		TextView txtTax = createColumn(currentItem.getTax(), tblHeader, TableOrder.colnTax);
 		this.addView(txtTax);
-
-		TextView txtTaxAmt = createColumn(currentItem.getTaxAmt(), tblHeader, TableOrder.colTaxAmt);
-		this.addView(txtTaxAmt);
+		// SPTax
+		TextView txtSPTax = createColumn(currentItem.getSptax(), tblHeader, TableOrder.colnSPTax);
+		this.addView(txtSPTax);
+		// SPAmt
+		TextView txtSPAmt = createColumn(currentItem.getSpTaxAmt(), tblHeader, TableOrder.colnSPAmt);
+		this.addView(txtSPAmt);
+		// ServAmt
+		TextView txtServAmt = createColumn(currentItem.getServeTaxAmt(), tblHeader, TableOrder.colnServAmt);
+		this.addView(txtServAmt);
+		// SubCatg
+		TextView txtSubCatg = createColumn(currentItem.getSubcatg(), tblHeader, TableOrder.colnSubCatg);
+		this.addView(txtSubCatg);
+		// Brand
+		TextView txtBrand = createColumn(currentItem.getBrand(), tblHeader, TableOrder.colnBrand);
+		this.addView(txtBrand);
+		// colnMemberId
+		TextView colnMemberId = createColumn(currentItem.getMemberId(), tblHeader, TableOrder.colnMemberId);
+		this.addView(colnMemberId);
+		// colnMemberName
+		TextView colnMemberName = createColumn(currentItem.getMemberName(), tblHeader, TableOrder.colnMemberName);
+		this.addView(colnMemberName);
+		// colnJocketWallet
+		TextView colnJocketWallet = createColumn(currentItem.getJocketWallet(), tblHeader, TableOrder.colnJocketWallet);
+		this.addView(colnJocketWallet);
+		// colnCashVoucher
+		TextView colnCashVoucher = createColumn(currentItem.getCashVoucher(), tblHeader, TableOrder.colnCashVoucher);
+		this.addView(colnCashVoucher);
+		// colnDiscountVoucher
+		TextView colnDiscountVoucher = createColumn(currentItem.getDiscountVoucher(), tblHeader, TableOrder.colnDiscountVoucher);
+		this.addView(colnDiscountVoucher);
+		// colnDiscountMember
+		TextView colnDiscountMember = createColumn(currentItem.getDiscountMember(), tblHeader, TableOrder.colnDiscountMember);
+		this.addView(colnDiscountMember);
+		// colnType
+		TextView colnType = createColumn(currentItem.getItemCode(), tblHeader, TableOrder.colnType);
+		this.addView(colnType);
+		// colnSegNo
+		TextView colnSegNo = createColumn(currentItem.getSegNo(), tblHeader, TableOrder.colnSegNo);
+		this.addView(colnSegNo);
 	}
 
 	private TextView createColumn(String item, TableHeader tblHeader, String columnName) {

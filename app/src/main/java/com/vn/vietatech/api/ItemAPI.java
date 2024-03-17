@@ -48,7 +48,7 @@ public class ItemAPI extends AbstractAPI {
         setMethod(METHOD_GET_ITEM);
 
         HashMap<String, String> params = new HashMap<String, String>();
-        params.put("currSubItem", currSubItem);
+        params.put("currSubItem", "RA80005");
         params.put("priceLevel", priceLevel);
         params.put("qty", qty);
 
@@ -82,11 +82,11 @@ public class ItemAPI extends AbstractAPI {
                     item.setEndDate(tableObject.getProperty("EndDate").toString());
                     item.setMinQty(tableObject.getProperty("MinSellQty").toString());
                     item.setMaxQty(tableObject.getProperty("MaxSellQty").toString());
-                    item.setPkgPrice(tableObject.getProperty("PkgPrice").toString());
+//                    item.setPkgPrice(tableObject.getProperty("PkgPrice").toString());
                     item.setPkgQty(tableObject.getProperty("PkgQty").toString());
                     item.setPkgQty1(tableObject.getProperty("PkgQty1").toString());
                     item.setPkgItems(tableObject.getProperty("PkgItems").toString());
-                    item.setBlanket(tableObject.getProperty("Blanket").toString());
+//                    item.setBlanket(tableObject.getProperty("Blanket").toString());
 
                     item.setReCurr(tableObject.getProperty("ReCurr").toString());
                     item.setMinTrxAmt(tableObject.getProperty("MinTrxAmt").toString());
@@ -106,6 +106,8 @@ public class ItemAPI extends AbstractAPI {
                 item.setSptax(tableObject.getProperty("SpTax").toString());
                 item.setDiscountable(tableObject.getProperty("Discountable").toString());
                 item.setTax(tableObject.getProperty("Tax").toString());
+                item.setBrand(tableObject.getProperty("Brand").toString());
+
 
                 items.add(item);
             }

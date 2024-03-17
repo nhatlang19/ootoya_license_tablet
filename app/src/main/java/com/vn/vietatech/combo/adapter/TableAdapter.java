@@ -92,16 +92,16 @@ public class TableAdapter extends BaseAdapter {
                     Table tableRepeat = tablesRepeat.get(position);
                     //String openBy = table.getOpenBy().trim();
                     String openBy = tableRepeat.getOpenBy().trim();
-                    //switch (table.getStatus())
                     switch (tableRepeat.getStatus()) {
                         case "A":
                         case "B":
                             if (openBy.length() == 0) {
                                 try {
-                                    boolean result = new TableAPI(mContext)
-                                            .updateTableStatus(Table.STATUS_OPEN,
-                                                    cashier.getId(),
-                                                    table.getTableNo());
+//                                    boolean result = new TableAPI(mContext)
+//                                            .updateTableStatus(Table.STATUS_OPEN,
+//                                                    cashier.getId(),
+//                                                    table.getTableNo());
+                                    boolean result = true;
                                     if (!result) {
                                         Toast.makeText(mContext, "Không thể cập nhật trạng thái bàn",
                                                 Toast.LENGTH_LONG).show();
@@ -121,10 +121,11 @@ public class TableAdapter extends BaseAdapter {
                         case "O":
                             if (openBy.length() == 0) {
                                 try {
-                                    boolean result = new TableAPI(mContext)
-                                            .updateTableStatus(Table.STATUS_OPEN,
-                                                    cashier.getId(),
-                                                    table.getTableNo());
+//                                    boolean result = new TableAPI(mContext)
+//                                            .updateTableStatus(Table.STATUS_OPEN,
+//                                                    cashier.getId(),
+//                                                    table.getTableNo());
+                                    boolean result = true;
                                     if (!result) {
                                         Toast.makeText(mContext,
                                                 "Không thể cập nhật trạng thái bàn", Toast.LENGTH_LONG).show();

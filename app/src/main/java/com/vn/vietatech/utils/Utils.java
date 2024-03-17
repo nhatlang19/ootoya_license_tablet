@@ -30,6 +30,14 @@ public class Utils {
 				.getActiveNetworkInfo() != null;
 	}
 
+	public static double taxAmtCalculate(boolean taxInclude, int taxRate, double total) {
+		if (taxInclude) {
+			return total * taxRate * 0.01 / (1 + taxRate + 0.01);
+		}
+
+		return total * taxRate * 0.01;
+	}
+
 	public static String getSerialNumber(ContentResolver contentResolver) {
 		String serialNumber = Build.SERIAL != Build.UNKNOWN ? Build.SERIAL : Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID);
 
