@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.vn.vietatech.combo.databinding.FragmentMembersBinding;
 import com.vn.vietatech.combo.view.tab.FragmenTab;
+import com.vn.vietatech.model.Member;
 import com.vn.vietatech.utils.Utils;
 
 public class MemberFragment extends DialogFragment {
@@ -47,11 +48,17 @@ public class MemberFragment extends DialogFragment {
 
     private void registerEvents() {
         btnCloseMember.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
+                insertMember();
                 dismiss();
             }
         });
+    }
+
+    private void insertMember()
+    {
+        POSMenuActivity activity = (POSMenuActivity) this.getActivity();
+        activity.insertMember(new Member("AAA", "AAA"));
     }
 }

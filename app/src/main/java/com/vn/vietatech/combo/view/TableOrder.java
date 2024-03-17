@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.vn.vietatech.combo.view.table.DataTable;
 import com.vn.vietatech.combo.view.table.MyTable;
 import com.vn.vietatech.model.Item;
+import com.vn.vietatech.model.Member;
 import com.vn.vietatech.model.Remark;
 import com.vn.vietatech.model.Table;
 import com.vn.vietatech.utils.Utils;
@@ -398,6 +399,21 @@ public class TableOrder extends TableLayout
             txtInstruction.setText(instruction);
             getCurrentRow().getCurrentItem().setInstruction(instruction);
         }
+    }
+
+    public void insertMember(Member member)
+    {
+//        TextView txtStatus = (TextView) getColumnCurrentRow(colnP);
+//        if (txtStatus != null && !txtStatus.getText().equals(Item.STATUS_OLD)
+//                && !txtStatus.getText().equals(Item.STATUS_CANCEL))
+//        {
+            TextView txtMemberId = (TextView) getColumnCurrentRow(colnMemberId);
+            txtMemberId.setText(member.memberId);
+            TextView txtMemberName = (TextView) getColumnCurrentRow(colnMemberName);
+            txtMemberName.setText(member.memberName);
+            getCurrentRow().getCurrentItem().setMemberId(member.memberId);
+            getCurrentRow().getCurrentItem().setMemberName(member.memberName);
+//        }
     }
 
     public Object getColumnCurrentRow(String name)

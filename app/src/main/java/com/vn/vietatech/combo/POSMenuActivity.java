@@ -47,6 +47,7 @@ import com.vn.vietatech.combo.view.ItemRow;
 import com.vn.vietatech.combo.view.TableOrder;
 import com.vn.vietatech.combo.view.tab.FragmentDialog;
 import com.vn.vietatech.model.Item;
+import com.vn.vietatech.model.Member;
 import com.vn.vietatech.model.PosMenu;
 import com.vn.vietatech.model.Promotion;
 import com.vn.vietatech.model.Remark;
@@ -66,11 +67,10 @@ public class POSMenuActivity extends AppCompatActivity {
     LinearLayout ll_main, MTLayout, parentView;
     ScrollView vBody;
     TableOrder tblOrder;
-    public Button btnIPlus, btnIx, btnISub;
+    public Button btnIPlus, btnIx, btnISub, btnMemRemark;
     Button btnIR;
     Button btnMT;
 
-    Button btnMemRemark;
     Button btnSend;
     Button btnX;
     EditText txtPeople;
@@ -457,6 +457,9 @@ public class POSMenuActivity extends AppCompatActivity {
 
             btnMT.setEnabled(false);
             btnMT.setTextColor(Color.GRAY);
+
+            btnMemRemark.setEnabled(false);
+            btnMemRemark.setTextColor(Color.GRAY);
         }
     }
 
@@ -725,5 +728,10 @@ public class POSMenuActivity extends AppCompatActivity {
 
     public TableOrder getTableOrder() {
         return tblOrder;
+    }
+
+    public void insertMember(Member member)
+    {
+        tblOrder.insertMember(member);
     }
 }
