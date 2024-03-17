@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.vn.vietatech.combo.POSMenuActivity;
 import com.vn.vietatech.model.Item;
 import com.vn.vietatech.combo.R;
-import com.vn.vietatech.combo.view.TableOrder;
 import com.vn.vietatech.utils.Utils;
 
 import android.app.Dialog;
@@ -18,11 +17,9 @@ import androidx.viewpager.widget.PagerTitleStrip;
 import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 /**

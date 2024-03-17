@@ -69,6 +69,8 @@ public class POSMenuActivity extends AppCompatActivity {
     public Button btnIPlus, btnIx, btnISub;
     Button btnIR;
     Button btnMT;
+
+    Button btnMemRemark;
     Button btnSend;
     Button btnX;
     EditText txtPeople;
@@ -159,6 +161,7 @@ public class POSMenuActivity extends AppCompatActivity {
         btnISub = (Button) findViewById(R.id.btnISub);
         btnIx = (Button) findViewById(R.id.btnIx);
         btnMT = (Button) findViewById(R.id.btnMT);
+        btnMemRemark = (Button) findViewById(R.id.btnMemRemark);
         btnSend = (Button) findViewById(R.id.btnSend);
         btnIR = (Button) findViewById(R.id.btnIR);
         btnX = (Button) findViewById(R.id.btnX);
@@ -252,6 +255,15 @@ public class POSMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loadMoveTableForm();
+            }
+
+        });
+
+        btnMemRemark.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                onOpenDialogMembers();
             }
 
         });
@@ -703,6 +715,12 @@ public class POSMenuActivity extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
         FragmentPromotion promotion = new FragmentPromotion(promotions, items, numberClick);
         promotion.show(fm, "FragmentPromotion");
+    }
+
+    public void onOpenDialogMembers() {
+        FragmentManager fm = getSupportFragmentManager();
+        MemberFragment member = new MemberFragment();
+        member.show(fm, "MemberFragment");
     }
 
     public TableOrder getTableOrder() {

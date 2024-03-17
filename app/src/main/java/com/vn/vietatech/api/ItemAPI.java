@@ -48,7 +48,7 @@ public class ItemAPI extends AbstractAPI {
         setMethod(METHOD_GET_ITEM);
 
         HashMap<String, String> params = new HashMap<String, String>();
-        params.put("currSubItem", "RA80005");
+        params.put("currSubItem", currSubItem);
         params.put("priceLevel", priceLevel);
         params.put("qty", qty);
 
