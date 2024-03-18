@@ -13,8 +13,10 @@ import com.vn.vietatech.model.Item;
 import com.vn.vietatech.model.Member;
 import com.vn.vietatech.model.Remark;
 import com.vn.vietatech.model.Table;
+import com.vn.vietatech.utils.SettingUtil;
 import com.vn.vietatech.utils.Utils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TableOrder extends TableLayout
@@ -152,9 +154,13 @@ public class TableOrder extends TableLayout
     };
     private MyTable table;
 
+    private Context mContext = null;
+
     public TableOrder(Context context, LinearLayout parent)
     {
         super(context);
+
+        this.mContext = context;
 
         setLayoutParams(parent.getLayoutParams());
         table = new MyTable(context, initDataTable());
@@ -208,7 +214,13 @@ public class TableOrder extends TableLayout
 
     public boolean createNewRow(Item item)
     {
-        item.autoCalculate();
+        try {
+            double serviceTax = Double.parseDouble(SettingUtil.read(mContext).getServiceTax());
+            item.autoCalculate(serviceTax);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         ArrayList<ItemRow> listRow = table.getBody().getAllRows();
         int index = -1;
         if (!item.getItemType().equals("C") && !item.getItemType().equals("M"))

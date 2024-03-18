@@ -25,6 +25,7 @@ public class SettingActivity extends AppCompatActivity {
     private EditText txtPosId;
     private EditText txtVAT;
     private EditText txtType;
+    private EditText txtServiceTax;
     private Button btnSaveConfig;
     private Button btnTestConnect;
     private Button btnCloseSetting;
@@ -44,6 +45,7 @@ public class SettingActivity extends AppCompatActivity {
         txtPosId = findViewById(R.id.txtPosId);
         txtVAT = findViewById(R.id.txtVAT);
         txtType = findViewById(R.id.txtType);
+        txtServiceTax = findViewById(R.id.txtServiceTax);
 
         btnSaveConfig = findViewById(R.id.btnSaveConfig);
         btnCloseSetting = findViewById(R.id.btnCloseSetting);
@@ -69,6 +71,8 @@ public class SettingActivity extends AppCompatActivity {
                 setting.setPosId(txtPosId.getText().toString());
                 setting.setVat(txtVAT.getText().toString());
                 setting.setType(txtType.getText().toString());
+                setting.setType(txtType.getText().toString());
+                setting.setServiceTax(txtServiceTax.getText().toString());
 
                 try {
                     SettingUtil.write(setting, getApplicationContext());

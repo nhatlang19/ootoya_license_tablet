@@ -696,10 +696,11 @@ public class POSMenuActivity extends AppCompatActivity {
             String salesCode = tableStatus.equals(Table.ACTION_EDIT) ? currentSalesCode
                     : selectedSalesCode;
             String cashierID = globalVariable.getCashier().getId();
+            String memberID = "111";
 
             boolean ketqua = new PosMenuAPI(context).sendOrder(dataTableString,
                     sendNewOrder, reSendOrder, typeLoad, posNo, orderNo, extNo, splited,
-                    currTable, POSBizDate, currTableGroup, noOfPerson, salesCode, cashierID);
+                    currTable, POSBizDate, currTableGroup, noOfPerson, salesCode, memberID, cashierID.trim());
 
             return String.valueOf(ketqua);
 

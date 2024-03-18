@@ -114,7 +114,7 @@ public class PosMenuAPI extends AbstractAPI {
                              String reSendOrder, String typeLoad, String posNo, String orderNo,
                              String extNo, String splited, String currTable, String POSBizDate,
                              String currTableGroup, String noOfPerson,
-                             String salesCode, String cashierID) throws Exception {
+                             String salesCode, String memberID, String cashierID) throws Exception {
         setMethod(METHOD_SEND_ORDER);
 
         HashMap<String, String> params = new HashMap<String, String>();
@@ -131,7 +131,8 @@ public class PosMenuAPI extends AbstractAPI {
         params.put("currTableGroup", currTableGroup.trim());
         params.put("noOfPerson", noOfPerson.trim());
         params.put("salesCode", salesCode.trim());
-        params.put("cashierID", cashierID.trim());
+        params.put("memberId", memberID.trim());
+        params.put("cashierId", cashierID.trim());
 
         return Boolean.parseBoolean(callService(params).toString());
     }

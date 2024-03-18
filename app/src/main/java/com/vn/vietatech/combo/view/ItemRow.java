@@ -77,11 +77,14 @@ public class ItemRow extends TableRow {
 		// tax
 		TextView txtTax = createColumn(currentItem.getTax(), tblHeader, TableOrder.colnTax);
 		this.addView(txtTax);
+		// SPAmt
+		TextView txtTaxAmt = createColumn(currentItem.getTaxAmt(), tblHeader, TableOrder.colnTaxAmt);
+		this.addView(txtTaxAmt);
 		// SPTax
 		TextView txtSPTax = createColumn(currentItem.getSptax(), tblHeader, TableOrder.colnSPTax);
 		this.addView(txtSPTax);
 		// SPAmt
-		TextView txtSPAmt = createColumn(currentItem.getSpTaxAmt(), tblHeader, TableOrder.colnSPAmt);
+		TextView txtSPAmt = createColumn(currentItem.getTaxAmt(), tblHeader, TableOrder.colnSPAmt);
 		this.addView(txtSPAmt);
 		// ServAmt
 		TextView txtServAmt = createColumn(currentItem.getServeTaxAmt(), tblHeader, TableOrder.colnServAmt);
@@ -114,8 +117,15 @@ public class ItemRow extends TableRow {
 		TextView colnType = createColumn(currentItem.getItemCode(), tblHeader, TableOrder.colnType);
 		this.addView(colnType);
 		// colnSegNo
-		TextView colnSegNo = createColumn(currentItem.getSegNo(), tblHeader, TableOrder.colnSegNo);
-		this.addView(colnSegNo);
+		int segNoItem = Integer.parseInt(currentItem.getSegNo());
+		TextView txtSegNo = null;
+		if(segNoItem == 0) {
+			txtSegNo = createColumn(String.valueOf(segNo), tblHeader, TableOrder.colnSegNo);
+			currentItem.setSegNo(String.valueOf(segNo));
+		} else {
+			txtSegNo = createColumn(currentItem.getSegNo(), tblHeader, TableOrder.colnSegNo);
+		}
+		this.addView(txtSegNo);
 	}
 
 	private TextView createColumn(String item, TableHeader tblHeader, String columnName) {
