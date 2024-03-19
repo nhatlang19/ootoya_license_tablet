@@ -70,10 +70,16 @@ public class ItemAPI extends AbstractAPI {
                 item.setItemCode(tableObject.getProperty("ItemCode").toString());
                 item.setItemName(tableObject.getProperty("RecptDesc").toString());
                 item.setOrgPrice(tableObject.getProperty("UnitSellPrice").toString());
+                item.setPromoPrice(tableObject.getProperty("PromoPrice").toString());
                 item.setComboPack(tableObject.getProperty("ComboPack").toString());
+                item.setWeightItem(tableObject.getProperty("WeightItem").toString());
+                item.setDiscountable(tableObject.getProperty("Discountable").toString());
+                item.setBrand(tableObject.getProperty("Brand").toString());
+                item.setSubcatg(tableObject.getProperty("SubCatg").toString());
+                item.setTax(tableObject.getProperty("Tax").toString());
+                item.setSptax(tableObject.getProperty("SpTax").toString());
                 item.setOnPromotion(tableObject.getProperty("OnPromotion").toString());
                 if (item.getOnPromotion().equals("Y")) {
-                    item.setPromoPrice(tableObject.getProperty("PromoPrice").toString());
                     item.setPromoItem(tableObject.getProperty("PromoItem").toString());
                     item.setPromoCode(tableObject.getProperty("PromoCode").toString());
                     item.setPromoDesc(tableObject.getProperty("PromoDesc").toString());
@@ -101,13 +107,9 @@ public class ItemAPI extends AbstractAPI {
                     item.setSun(tableObject.getProperty("SUN").toString());
                 }
 
-                item.setWeightItem(tableObject.getProperty("WeightItem").toString());
-                item.setSubcatg(tableObject.getProperty("SubCatg").toString());
-                item.setSptax(tableObject.getProperty("SpTax").toString());
-                item.setDiscountable(tableObject.getProperty("Discountable").toString());
-                item.setTax(tableObject.getProperty("Tax").toString());
-                item.setBrand(tableObject.getProperty("Brand").toString());
-
+                if (tableObject.hasProperty("Modifier")) {
+                    item.setModifier(tableObject.getProperty("Modifier").toString());
+                }
 
                 items.add(item);
             }

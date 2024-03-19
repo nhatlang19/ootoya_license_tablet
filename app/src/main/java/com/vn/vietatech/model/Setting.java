@@ -13,7 +13,7 @@ public class Setting {
         _serverIP = "";
         _vat = "1";
         type = "1";
-        _serviceTax = "0.07";
+        _serviceTax = "7";
     }
 
     public String getServiceTax() {

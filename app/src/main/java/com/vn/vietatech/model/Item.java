@@ -20,6 +20,16 @@ public class Item {
     private String modifierInt;
     private String masterCode;
     private String comboPack;
+
+    public String getComboClass() {
+        return comboClass;
+    }
+
+    public void setComboClass(String comboClass) {
+        this.comboClass = comboClass;
+    }
+
+    private String comboClass;
     private String weightItem;
     private String hidden;
     private String instruction;
@@ -69,6 +79,7 @@ public class Item {
     private String discountMember;
     private String distAmt;
     private String subTotal;
+    private String serveTax;
     private String serveTaxAmt;
     private String spTaxAmt;
     private ArrayList<ItemCombo> itemCombo;
@@ -86,15 +97,16 @@ public class Item {
         itemType = " ";
         itemCode = " ";
         modifierInt = "0";
-        masterCode = " ";
-        comboPack = " ";
+        masterCode = "";
+        comboPack = "N";
+        comboClass = "";
         hidden = " ";
-        instruction = " ";
+        instruction = "";
         onPromotion = "N";
         setRemarks(new ArrayList<Remark>());
         setItemCombo(new ArrayList<ItemCombo>());
         setItemModifiers(new ArrayList<ItemModifier>());
-        promoCode = "";
+        promoCode = "0";
         promoPrice = "0";
         promoDesc = "0";
         promoQty = "0";
@@ -121,6 +133,15 @@ public class Item {
         proInstruct = "";
         discType = "";
         discId = "";
+    }
+
+    public String getServeTax() {
+        return serveTax;
+    }
+
+    public void setServeTax(String serveTax) {
+        float tmp = Float.parseFloat(serveTax);
+        this.serveTax = String.valueOf((int) tmp);
     }
 
     public String getProInstruct() {
@@ -160,7 +181,8 @@ public class Item {
     }
 
     public void setDistAmt(String distAmt) {
-        this.distAmt = distAmt;
+        float tmp = Float.parseFloat(distAmt);
+        this.distAmt = String.valueOf((int) tmp);
     }
 
     public String getId() {
@@ -321,6 +343,9 @@ public class Item {
     }
 
     public void setPromoCode(String promoCode) {
+        if (promoCode.contains("anyType{}")) {
+            promoCode = "";
+        }
         this.promoCode = promoCode;
     }
 
@@ -425,7 +450,8 @@ public class Item {
     }
 
     public void setTaxAmt(String taxAmt) {
-        this.taxAmt = taxAmt;
+        float tmp = Float.parseFloat(taxAmt);
+        this.taxAmt = String.valueOf((int) tmp);
     }
 
     public ArrayList<ItemCombo> getItemCombo() {
@@ -461,47 +487,7 @@ public class Item {
         this.pkgPrice = String.valueOf((int) ipkgPrice);
     }
 
-    @Override
-    public String toString() {
-        String result = "";
-        result += qty + SEPARATE;
-        result += printStatus + SEPARATE;
-        result += itemName + SEPARATE;
-        result += promoPrice + SEPARATE;
-        result += orgPrice + SEPARATE;
-        result += distAmt + SEPARATE;
-        result += itemType + SEPARATE;
-        result += itemCode + SEPARATE;
-        result += modifierInt + SEPARATE;
-        result += masterCode + SEPARATE;
-        result += comboPack + SEPARATE;
-        result += instruction + SEPARATE;
-        result += segNo + SEPARATE;
-        result += promoCode + SEPARATE;
-        result += promoClass + SEPARATE;
-        result += promoQty + SEPARATE;
-        result += pkgQty + SEPARATE;
-        result += pkgItems + SEPARATE;
-        result += proInstruct + SEPARATE;
-        result += discType + SEPARATE;
-        result += discId + SEPARATE;
-        result += total + SEPARATE;
-        result += tax + SEPARATE;
-        result += taxAmt + SEPARATE;
-        result += sptax + SEPARATE;
-        result += spTaxAmt + SEPARATE;
-        result += serveTaxAmt + SEPARATE;
-        result += subcatg + SEPARATE;
-        result += brand + SEPARATE;
-        result += memberId + SEPARATE;
-        result += memberName + SEPARATE;
-        result += jocketWallet + SEPARATE; // jocker
-        result += cashVoucher + SEPARATE; // voucherCash
-        result += discountVoucher + SEPARATE;
-        result += discountMember;
 
-        return result;
-    }
 
     public String getWeightItem() {
         return weightItem;
@@ -662,60 +648,14 @@ public class Item {
         return this.onPromotion.equals("Y");
     }
 
-    public void autoCalculate(double serviceTax) {
-        String promoCode = this.hasPromotion() ? this.getPromoCode() : "";
-        int promoClass = this.hasPromotion() ? Integer.valueOf(this.getPromoClass()) : 0;
-        int pkgQty = this.hasPromotion() ? Integer.valueOf(this.getPkgQty()) : 0;
-        int pkgItems = this.hasPromotion() ? Integer.valueOf(this.getPkgItems()) : 0;
-        String promoDesc = this.hasPromotion() ? this.getPromoDesc() : "";
-        int unitPromoPrice = (int) (this.hasPromotion() ? Math.round(Double.valueOf(this.getPromoPrice())) : Math.round(Double.valueOf(this.getOrgPrice())));
-
-        int soLuong = 0;
-        int promoQty = 0;
-        if (promoClass == (int) PromoClass.MuaMtangN) {
-            promoQty = numberClick * pkgItems;
-            soLuong = numberClick * (pkgItems + pkgQty);
-        } else {
-            soLuong = numberClick;
-        }
-
-        String comboPack = getComboPack();
-        int taxRate = Integer.valueOf(getTax());
-        int spTaxRate = Integer.valueOf(getSptax());
-        int unitSellPrice = (int) Math.round(Double.valueOf(getOrgPrice()));
-
-        int distAmt = 0;
-        if (this.hasPromotion() && promoClass == PromoClass.MuaMtangN) {
-            distAmt = (unitSellPrice - unitPromoPrice) * promoQty;
-        } else {
-            distAmt = soLuong * (unitSellPrice - unitPromoPrice);
-        }
-
-        double subTotal = soLuong * unitSellPrice - distAmt;
-        double serveTaxAmt = subTotal * serviceTax * 0.01;
-        double spTaxAmt = (subTotal + serveTaxAmt) * spTaxRate * 0.01;
-        double total = subTotal + spTaxAmt + serveTaxAmt;
-        boolean taxInclude = true;
-        double taxAmt = Utils.taxAmtCalculate(taxInclude, taxRate, total);
-
-        setPromoQty(String.valueOf(promoQty));
-        setSubTotal(String.valueOf(subTotal));
-        setServeTaxAmt(String.valueOf(serveTaxAmt));
-        setSpTaxAmt(String.valueOf(spTaxAmt));
-        setTotal(String.valueOf(total));
-        setTaxAmt(String.valueOf(taxAmt));
-        setDistAmt(String.valueOf(distAmt));
-
-        setQty(String.valueOf(soLuong));
-    }
-
 
     public String getSubTotal() {
         return subTotal;
     }
 
     public void setSubTotal(String subTotal) {
-        this.subTotal = subTotal;
+        float tmp = Float.parseFloat(subTotal);
+        this.subTotal = String.valueOf((int) tmp);
     }
 
     public String getServeTaxAmt() {
@@ -723,7 +663,8 @@ public class Item {
     }
 
     public void setServeTaxAmt(String serveTaxAmt) {
-        this.serveTaxAmt = serveTaxAmt;
+        float tmp = Float.parseFloat(serveTaxAmt);
+        this.serveTaxAmt = String.valueOf((int) tmp);
     }
 
     public String getSpTaxAmt() {
@@ -731,7 +672,8 @@ public class Item {
     }
 
     public void setSpTaxAmt(String spTaxAmt) {
-        this.spTaxAmt = spTaxAmt;
+        float tmp = Float.parseFloat(spTaxAmt);
+        this.spTaxAmt = String.valueOf((int) tmp);
     }
 
     public String getBrand() {
@@ -740,7 +682,7 @@ public class Item {
 
     public void setBrand(String brand) {
         if (brand.contains("anyType{}")) {
-            brand = " ";
+            brand = "";
         }
         this.brand = brand;
     }
@@ -791,5 +733,99 @@ public class Item {
 
     public void setDiscountMember(String discountMember) {
         this.discountMember = discountMember;
+    }
+
+    public void autoCalculate(double serviceTax) {
+        String promoCode = this.hasPromotion() ? this.getPromoCode() : "";
+        int promoClass = this.hasPromotion() ? Integer.valueOf(this.getPromoClass()) : 0;
+        int pkgQty = this.hasPromotion() ? Integer.valueOf(this.getPkgQty()) : 0;
+        int pkgItems = this.hasPromotion() ? Integer.valueOf(this.getPkgItems()) : 0;
+        String promoDesc = this.hasPromotion() ? this.getPromoDesc() : "";
+        int unitPromoPrice = (int) (this.hasPromotion() ? Math.round(Double.valueOf(this.getPromoPrice())) : Math.round(Double.valueOf(this.getOrgPrice())));
+
+        int soLuong = 0;
+        int promoQty = 0;
+        if (promoClass == (int) PromoClass.MuaMtangN) {
+            promoQty = numberClick * pkgItems;
+            soLuong = numberClick * (pkgItems + pkgQty);
+        } else {
+            soLuong = numberClick;
+        }
+
+        String comboClass = ""; // Cái combo class bình thường = 'emtyp nhé'
+        int taxRate = Integer.valueOf(getTax());
+        int spTaxRate = Integer.valueOf(getSptax());
+        int unitSellPrice = (int) Math.round(Double.valueOf(getOrgPrice()));
+
+        int distAmt = 0;
+        if (this.hasPromotion() && promoClass == PromoClass.MuaMtangN) {
+            distAmt = (unitSellPrice - unitPromoPrice) * promoQty;
+        } else {
+            distAmt = soLuong * (unitSellPrice - unitPromoPrice);
+        }
+
+        double subTotal = soLuong * unitSellPrice - distAmt;
+        double serveTaxAmt = subTotal * serviceTax * 0.01;
+        double spTaxAmt = (subTotal + serveTaxAmt) * spTaxRate * 0.01;
+        double total = subTotal + spTaxAmt + serveTaxAmt;
+        boolean taxInclude = false;
+        double taxAmt = Utils.taxAmtCalculate(taxInclude, taxRate, total);
+
+        setComboClass(comboClass);
+        setPromoCode(promoCode);
+        setPromoQty(String.valueOf(promoQty));
+        setSubTotal(String.valueOf((int) subTotal));
+        setServeTaxAmt(String.valueOf((int) serveTaxAmt));
+        setSpTaxAmt(String.valueOf((int) spTaxAmt));
+        setTotal(String.valueOf((int) total));
+        setTaxAmt(String.valueOf((int) taxAmt));
+        setDistAmt(String.valueOf((int) distAmt));
+        setServeTax(String.valueOf((int) serviceTax));
+
+        setQty(String.valueOf(soLuong));
+    }
+
+    @Override
+    public String toString() {
+        String result = "";
+        result += qty + SEPARATE;
+        result += printStatus.trim() + SEPARATE;
+        result += itemName + SEPARATE;
+        result += promoPrice + SEPARATE;
+        result += orgPrice + SEPARATE;
+        result += distAmt + SEPARATE;
+        result += subTotal + SEPARATE;
+        result += itemType + SEPARATE;
+        result += itemCode + SEPARATE;
+        result += modifierInt + SEPARATE;
+        result += masterCode + SEPARATE;
+        result += comboClass + SEPARATE;
+        result += instruction + SEPARATE;
+        result += segNo + SEPARATE;
+        result += promoCode + SEPARATE;
+        result += promoClass + SEPARATE;
+        result += promoQty + SEPARATE;
+        result += pkgQty + SEPARATE;
+        result += pkgItems + SEPARATE;
+        result += proInstruct + SEPARATE;
+        result += discType + SEPARATE;
+        result += discId + SEPARATE;
+        result += total + SEPARATE;
+        result += tax + SEPARATE;
+        result += taxAmt + SEPARATE;
+        result += sptax + SEPARATE;
+        result += spTaxAmt + SEPARATE;
+        result += serveTax + SEPARATE;
+        result += serveTaxAmt + SEPARATE;
+        result += subcatg + SEPARATE;
+        result += brand.trim() + SEPARATE;
+        result += memberId.trim() + SEPARATE;
+        result += memberName.trim() + SEPARATE;
+        result += jocketWallet.trim() + SEPARATE; // jocker
+        result += cashVoucher.trim() + SEPARATE; // voucherCash
+        result += discountVoucher.trim() + SEPARATE;
+        result += discountMember.trim();
+
+        return result;
     }
 }

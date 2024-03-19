@@ -53,28 +53,37 @@ public class OrderAPI extends AbstractAPI {
                 item.setQty(tableObject.getProperty("Qty").toString());
                 item.setSplited(tableObject.getProperty("Splited").toString());
                 item.setPrintStatus(tableObject.getProperty("Status").toString());
-                item.setItemName(tableObject.getProperty("RecptDesc").toString());
                 item.setOrgPrice(tableObject.getProperty("OrgPrice").toString());
+                item.setPromoPrice(tableObject.getProperty("PromoPrice").toString());
+                item.setDistAmt(tableObject.getProperty("DiscountAmt").toString());
+                item.setSubTotal(tableObject.getProperty("SubTotal").toString());
+                if (tableObject.hasProperty("Instruction")) {
+                    item.setInstruction(tableObject.getProperty("Instruction").toString());
+                }
+                item.setPromoCode(tableObject.getProperty("PromoCode").toString());
+                item.setPromoClass(tableObject.getProperty("PromoClass").toString());
+//                item.setPkgPrice(tableObject.getProperty("PkgPrice").toString());
+                item.setPkgQty(tableObject.getProperty("PkgQty").toString());
+                item.setTotal(tableObject.getProperty("TotAmt").toString());
+                item.setTax(tableObject.getProperty("Tax").toString());
+                item.setTaxAmt(tableObject.getProperty("TaxAmt").toString());
+                item.setSptax(tableObject.getProperty("SPTax").toString());
+                item.setSpTaxAmt(tableObject.getProperty("SPTaxAmt").toString());
+                item.setServeTax(tableObject.getProperty("ServTax").toString());
+                item.setServeTaxAmt(tableObject.getProperty("ServTaxAmt").toString());
+                item.setSubcatg(tableObject.getProperty("SubCatg").toString());
+
+                item.setPrintStatus(tableObject.getProperty("Status").toString());
+                item.setItemName(tableObject.getProperty("RecptDesc").toString());
                 item.setItemType(tableObject.getProperty("ItemType").toString());
                 item.setItemCode(tableObject.getProperty("ItemCode").toString());
                 item.setModifier(tableObject.getProperty("Modifier").toString());
                 item.setMasterCode(tableObject.getProperty("MasterCode").toString());
-                item.setComboPack(tableObject.getProperty("ComboClass").toString());
-                item.setHidden(tableObject.getProperty("Hidden").toString());
-                if (tableObject.hasProperty("Instruction")) {
-                    item.setInstruction(tableObject.getProperty("Instruction").toString());
-                }
-                item.setPromoPrice(tableObject.getProperty("DiscountAmt").toString());
-                item.setTotal(tableObject.getProperty("TotAmt").toString());
                 item.setSegNo(tableObject.getProperty("SeqNo").toString());
-                item.setPromoCode(tableObject.getProperty("PromoCode").toString());
-                item.setPromoClass(tableObject.getProperty("PromoClass").toString());
-                item.setPkgPrice(tableObject.getProperty("PkgPrice").toString());
-                item.setPkgQty(tableObject.getProperty("PkgQty").toString());
                 item.setPkgItems(tableObject.getProperty("PkgItems").toString());
-                item.setBlanket(tableObject.getProperty("Blanket").toString());
-                item.setTax(tableObject.getProperty("Tax").toString());
-                item.setTaxAmt(tableObject.getProperty("TaxAmt").toString());
+                item.setBrand(tableObject.getProperty("Brand").toString());
+
+
                 items.add(item);
             }
         }

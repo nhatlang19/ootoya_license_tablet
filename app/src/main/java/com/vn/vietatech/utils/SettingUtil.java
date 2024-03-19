@@ -56,7 +56,7 @@ public class SettingUtil {
 			setting.setPosId(props.getProperty("POSId"));
 			setting.setVat(props.getProperty("VAT"));
 			setting.setType(props.getProperty("Type"));
-			setting.setType(props.getProperty("ServiceTax"));
+			setting.setServiceTax(props.getProperty("ServiceTax"));
 			reader.close();
 			return setting;
 		}

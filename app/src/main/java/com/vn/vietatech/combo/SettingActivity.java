@@ -71,7 +71,6 @@ public class SettingActivity extends AppCompatActivity {
                 setting.setPosId(txtPosId.getText().toString());
                 setting.setVat(txtVAT.getText().toString());
                 setting.setType(txtType.getText().toString());
-                setting.setType(txtType.getText().toString());
                 setting.setServiceTax(txtServiceTax.getText().toString());
 
                 try {

@@ -212,14 +212,16 @@ public class TableOrder extends TableLayout
         return table.getBody().getRowIndex(index);
     }
 
-    public boolean createNewRow(Item item)
+    public boolean createNewRow(Item item, boolean skipCal)
     {
-        try {
-            double serviceTax = Double.parseDouble(SettingUtil.read(mContext).getServiceTax());
-            item.autoCalculate(serviceTax);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        if (skipCal) {
+            try {
+                double serviceTax = Double.parseDouble(SettingUtil.read(mContext).getServiceTax());
+                item.autoCalculate(serviceTax);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
         ArrayList<ItemRow> listRow = table.getBody().getAllRows();
         int index = -1;
