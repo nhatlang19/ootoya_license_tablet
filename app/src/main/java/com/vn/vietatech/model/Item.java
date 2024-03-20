@@ -121,6 +121,9 @@ public class Item {
         blanket = "";
         tax = "0";
         taxAmt = "0";
+        sptax = "0";
+        subcatg = "";
+        brand = "";
 
         setNumberClick(0);
         segNo = "0";
@@ -510,6 +513,9 @@ public class Item {
     }
 
     public void setSptax(String sptax) {
+        if (sptax == null) {
+            sptax = "0";
+        }
         this.sptax = sptax;
     }
 

@@ -38,12 +38,12 @@ public class ItemRow extends TableRow {
 		// name
 		TextView txtName = createColumn(currentItem.getItemName(), tblHeader, TableOrder.colnItemName);
 		this.addView(txtName);
-		// O.price
-		TextView txtOPrice = createColumn(currentItem.getOrgPrice(), tblHeader, TableOrder.colnGiaGoc);
-		this.addView(txtOPrice);
 		// P.price
 		TextView txtPPrice = createColumn(currentItem.getPromoPrice(), tblHeader, TableOrder.colnGiaKM);
 		this.addView(txtPPrice);
+		// O.price
+		TextView txtOPrice = createColumn(currentItem.getOrgPrice(), tblHeader, TableOrder.colnGiaGoc);
+		this.addView(txtOPrice);
 		// disc
 		TextView txtDisc = createColumn(currentItem.getDistAmt(), tblHeader,TableOrder.colnDisc);
 		this.addView(txtDisc);
@@ -53,9 +53,6 @@ public class ItemRow extends TableRow {
 		// Instruction
 		TextView txtInstruction = createColumn(currentItem.getInstruction(), tblHeader, TableOrder.colnInstruction);
 		this.addView(txtInstruction);
-		// TT
-		TextView txtTT = createColumn("", tblHeader, TableOrder.colnTT);
-		this.addView(txtTT);
 		// pCode
 		TextView txtCode = createColumn(currentItem.getPromoCode(), tblHeader, TableOrder.colnPCode);
 		this.addView(txtCode);
@@ -114,7 +111,7 @@ public class ItemRow extends TableRow {
 		TextView colnDiscountMember = createColumn(currentItem.getDiscountMember(), tblHeader, TableOrder.colnDiscountMember);
 		this.addView(colnDiscountMember);
 		// colnType
-		TextView colnType = createColumn(currentItem.getItemCode(), tblHeader, TableOrder.colnType);
+		TextView colnType = createColumn(currentItem.getItemType(), tblHeader, TableOrder.colnType);
 		this.addView(colnType);
 		// colnSegNo
 		int segNoItem = Integer.parseInt(currentItem.getSegNo());

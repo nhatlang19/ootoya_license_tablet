@@ -32,6 +32,7 @@ public class SettingUtil {
 		props.setProperty("VAT", setting.getVat());
 		props.setProperty("Type", setting.getType());
 		props.setProperty("ServiceTax", setting.getServiceTax());
+		props.setProperty("Section", setting.getSection());
 
 		FileWriter writer = new FileWriter(file);
 		props.store(writer, "config");
@@ -57,6 +58,7 @@ public class SettingUtil {
 			setting.setVat(props.getProperty("VAT"));
 			setting.setType(props.getProperty("Type"));
 			setting.setServiceTax(props.getProperty("ServiceTax"));
+			setting.setSection(props.getProperty("Section"));
 			reader.close();
 			return setting;
 		}

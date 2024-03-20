@@ -27,8 +27,8 @@ public class TableOrder extends TableLayout
     public static final String colnSegNo = "SegNo";
 
     public static final String colnItemName = "Item#";
-    public static final String colnGiaKM = "Giá KM";
-    public static final String colnGiaGoc = "Giá gốc";
+    public static final String colnGiaKM = "Promo Price";
+    public static final String colnGiaGoc = "Org Price";
     public static final String colnDisc = "Disc";
     public static final String colnSubTotal = "SubTotal";
     public static final String colnInstruction = "Instruction";
@@ -65,7 +65,6 @@ public class TableOrder extends TableLayout
             colnDisc,
             colnSubTotal,
             colnInstruction,
-            colnTT,
             colnPCode,
             colnPClass,
             colnPQty,
@@ -89,12 +88,11 @@ public class TableOrder extends TableLayout
             colnSegNo
     };
     private Integer[] headerWidth = new Integer[]{
-            80,
+            100,
             80,
             420,
             200,
-            200,
-            200,
+            250,
             200,
             200,
             200,
@@ -121,7 +119,6 @@ public class TableOrder extends TableLayout
             200
     };
     private Integer[] headerGravity = new Integer[]{
-            Gravity.CENTER,
             Gravity.CENTER,
             Gravity.CENTER,
             Gravity.CENTER,
@@ -214,7 +211,7 @@ public class TableOrder extends TableLayout
 
     public boolean createNewRow(Item item, boolean skipCal)
     {
-        if (skipCal) {
+        if (!skipCal) {
             try {
                 double serviceTax = Double.parseDouble(SettingUtil.read(mContext).getServiceTax());
                 item.autoCalculate(serviceTax);

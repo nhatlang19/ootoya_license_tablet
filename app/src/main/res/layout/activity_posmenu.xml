@@ -167,6 +167,50 @@
             android:text="IR" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:weightSum="8"
+        android:layout_height="40dp">
+
+        <Button
+            android:id="@+id/btnMember"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:background="@drawable/button_blue"
+            android:text="Member" />
+
+        <EditText
+            android:id="@+id/txtMember"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3.5"
+            android:background="@drawable/textview_money"
+            android:focusable="false"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/txtJocker"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3.5"
+            android:background="@drawable/textview_money"
+            android:focusable="false"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:singleLine="true" />
+
+
+    </LinearLayout>
+
     <GridView
         android:id="@+id/gridMainMenu"
         android:layout_width="match_parent"

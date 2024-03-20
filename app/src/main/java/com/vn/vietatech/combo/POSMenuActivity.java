@@ -409,7 +409,7 @@ public class POSMenuActivity extends AppCompatActivity {
 
     public void addItem(Item item) {
         try {
-            if (tblOrder.createNewRow(item, true)) {
+            if (tblOrder.createNewRow(item, false)) {
                 vBody.post(new Runnable() {
                     @Override
                     public void run() {
@@ -645,7 +645,7 @@ public class POSMenuActivity extends AppCompatActivity {
         ArrayList<Item> items = new OrderAPI(context).getEditOrderNumberByPOS(
                 currentOrderNo, currentPosNo, currentExtNo);
         for (Item item : items) {
-            tblOrder.createNewRow(item, false);
+            tblOrder.createNewRow(item, true);
             // get splited params
             splited = item.getSplited();
         }

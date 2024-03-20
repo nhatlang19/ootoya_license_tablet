@@ -8,12 +8,22 @@ public class Setting {
     private String _vat;
     private String type;
     private String _serviceTax;
+    private String section;
 
     public Setting() {
         _serverIP = "";
         _vat = "1";
         type = "1";
         _serviceTax = "7";
+        section = "";
+    }
+
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
     }
 
     public String getServiceTax() {
