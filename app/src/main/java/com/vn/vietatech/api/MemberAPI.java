@@ -2,6 +2,7 @@ package com.vn.vietatech.api;
 
 import android.content.Context;
 
+import com.vn.vietatech.model.Member;
 import com.vn.vietatech.model.Section;
 
 import org.ksoap2.serialization.SoapObject;
@@ -9,18 +10,18 @@ import org.ksoap2.serialization.SoapObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class SectionAPI extends AbstractAPI {
+public class MemberAPI extends AbstractAPI {
 
-    public SectionAPI(Context context) throws Exception {
+    public MemberAPI(Context context) throws Exception {
         super(context);
     }
 
-    public ArrayList<Section> getSection(String s) throws Exception {
-        setMethod(METHOD_GET_SECTION);
-        ArrayList<Section> sections = new ArrayList<Section>();
+    public ArrayList<Member> getMembers(String keyword) throws Exception {
+        setMethod(METHOD_GET_MEMBER);
+        ArrayList<Member> members = new ArrayList<Member>();
 
         HashMap<String, String> params = new HashMap<String, String>();
-        params.put("section", s);
+        params.put("keySearch", keyword);
 
         SoapObject response = (SoapObject) this.callService(params);
         SoapObject soapObject = (SoapObject) ((SoapObject) response).getProperty("diffgram");
@@ -31,14 +32,13 @@ public class SectionAPI extends AbstractAPI {
                 SoapObject table = (SoapObject) webServiceResponse
                         .getProperty(i);
 
-                Section section = new Section();
-                section.setId(table.getProperty("Section").toString());
-                section.setName(table.getProperty("Description1").toString());
-                section.setFloorPlan(table.getProperty("FloorPlan").toString());
+                Member member = new Member();
+                member.memberId = (table.getProperty("MemberId").toString());
+                member.memberName = (table.getProperty("MemberName").toString());
 
-                sections.add(section);
+                members.add(member);
             }
         }
-        return sections;
+        return members;
     }
 }

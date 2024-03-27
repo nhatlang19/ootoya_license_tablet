@@ -113,15 +113,15 @@ public class TableOrder extends TableLayout
             200,
             200,
             200,
-            200,
-            200,
-            200,
-            200
+            220,
+            220,
+            100,
+            100
     };
     private Integer[] headerGravity = new Integer[]{
             Gravity.CENTER,
             Gravity.CENTER,
-            Gravity.CENTER,
+            Gravity.LEFT,
             Gravity.CENTER,
             Gravity.CENTER,
             Gravity.CENTER,
@@ -437,6 +437,50 @@ public class TableOrder extends TableLayout
         return table.getBody().getColumnByRow(index, name);
     }
 
+    public String getALlTotalStr()
+    {
+        ArrayList<ItemRow> listRow = table.getBody().getAllRows();
+
+        int total = 0;
+        int subTotal = 0;
+        int ser = 0;
+        int sptax = 0;
+        int vat = 0;
+        int disc = 0;;
+        for (int i = listRow.size() - 1; i >= 0; i--)
+        {
+            TextView txtSubtotal = (TextView) getColumnByRow(i, colnSubTotal);
+            TextView txtServAmt = (TextView) getColumnByRow(i, colnServAmt);
+            TextView txtSPTax = (TextView) getColumnByRow(i, colnSPTax);
+            TextView txtTaxAmt = (TextView) getColumnByRow(i, colnTaxAmt);
+            TextView txtDisc = (TextView) getColumnByRow(i, colnDisc);
+            int subtotalItem = Integer.parseInt(txtSubtotal.getText().toString());
+            int servAmtItem = Integer.parseInt(txtServAmt.getText().toString());
+            int SPTaxItem = Integer.parseInt(txtSPTax.getText().toString());
+            int taxAmtItem = Integer.parseInt(txtTaxAmt.getText().toString());
+            int discItem = Integer.parseInt(txtDisc.getText().toString());
+
+            subTotal += subtotalItem;
+            ser += servAmtItem;
+            sptax += SPTaxItem;
+            vat += taxAmtItem;
+            disc += discItem;
+            total += subtotalItem + servAmtItem + SPTaxItem + taxAmtItem + discItem;
+        }
+
+        return String
+                .format("SubTotal:\t\t %s VND\n"
+                                + "Ser:\t\t %s VND \t\t\t\t SPTax:\t\t %s VND\n"
+                                + "VAT:\t\t %s VND \t\t\t\t Disc:\t\t %s VND\n"
+                                + "\t\t\t----------------------------\n"
+                                + "Tổng:\t\t %s VND",
+                        Utils.formatPrice(subTotal),
+                        Utils.formatPrice(ser),
+                        Utils.formatPrice(sptax),
+                        Utils.formatPrice(vat),
+                        Utils.formatPrice(disc),  Utils.formatPrice(total));
+    }
+
     public String getAllTotal()
     {
         ArrayList<ItemRow> listRow = table.getBody().getAllRows();
@@ -444,35 +488,18 @@ public class TableOrder extends TableLayout
         int total = 0;
         for (int i = listRow.size() - 1; i >= 0; i--)
         {
-            ItemRow itemRow = listRow.get(i);
-            Item itemData = itemRow.getCurrentItem();
+            TextView txtSubtotal = (TextView) getColumnByRow(i, colnSubTotal);
+            TextView txtServAmt = (TextView) getColumnByRow(i, colnServAmt);
+            TextView txtSPTax = (TextView) getColumnByRow(i, colnSPTax);
+            TextView txtTaxAmt = (TextView) getColumnByRow(i, colnTaxAmt);
+            TextView txtDisc = (TextView) getColumnByRow(i, colnDisc);
+            int subtotalItem = Integer.parseInt(txtSubtotal.getText().toString());
+            int servAmtItem = Integer.parseInt(txtServAmt.getText().toString());
+            int SPTaxItem = Integer.parseInt(txtSPTax.getText().toString());
+            int taxAmtItem = Integer.parseInt(txtTaxAmt.getText().toString());
+            int discItem = Integer.parseInt(txtDisc.getText().toString());
 
-//            TextView txtQ = (TextView) getColumnByRow(i, colQ);
-//            int q = Integer.parseInt(txtQ.getText().toString());
-//            String promotion = itemData.getOnPromotion();
-//            TextView txtPrice = (TextView) getColumnByRow(i, colnPrice);
-//            TextView txtDiscount = (TextView) getColumnByRow(i, colDisc);
-            TextView txtTotal = (TextView) getColumnByRow(i, colnTotal);
-//            TextView txtTax = (TextView) getColumnByRow(i, colTax);
-//            TextView txtTaxAmt = (TextView) getColumnByRow(i, colTaxAmt);
-//            TextView txtStatus = (TextView) getColumnByRow(i, colnP);
-
-//            String stat = txtStatus.getText().toString();
-
-            int totAmt = Integer.parseInt(txtTotal.getText().toString());
-//            int taxAmt = Integer.parseInt(txtTax.getText().toString());
-
-//            if (stat.equals(""))
-//            {
-//                totAmt = Integer.parseInt(txtPrice.getText().toString()) * q - Integer.parseInt(txtDiscount.getText().toString());
-//                taxAmt = totAmt * Integer.parseInt(txtTax.getText().toString()) / 100;
-//                txtTotal.setText(String.valueOf(totAmt));
-//                txtTaxAmt.setText(String.valueOf(taxAmt));
-//            }
-//            getRowIndex(i).getCurrentItem().setTotal(String.valueOf(totAmt));
-//            getRowIndex(i).getCurrentItem().setTaxAmt(String.valueOf(taxAmt));
-            //int t = Integer.parseInt(txtTotal.getText().toString());
-            total += totAmt;
+            total += subtotalItem + servAmtItem + SPTaxItem + taxAmtItem + discItem;
         }
         return Utils.formatPrice(total);
     }

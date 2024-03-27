@@ -4,6 +4,8 @@ public class Section {
 	private String _id;
 	private String _name;
 	private String _revCtr;
+
+	private String floorPlan;
 	
 	public Section() {}
 	
@@ -34,5 +36,16 @@ public class Section {
 	
 	public String getRevCtr() {
 		return this._revCtr;
+	}
+
+	public String getFloorPlan() {
+		return floorPlan;
+	}
+
+	public void setFloorPlan(String floorPlan) {
+		if (floorPlan.contains("anyType{}")) {
+			floorPlan = " ";
+		}
+		this.floorPlan = floorPlan;
 	}
 }

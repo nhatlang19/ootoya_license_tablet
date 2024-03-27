@@ -35,7 +35,7 @@ public class TableHeader extends TableLayout {
 			textView.setBackgroundResource(R.drawable.order_table_header);
 			textView.setText(header.getColName());
 			textView.setGravity(header.getColGravity());
-			textView.setTextSize(11);
+			textView.setTextSize(14);
 			textView.setTextColor(Color.BLACK);
 			tblHeader.addView(textView);
 			

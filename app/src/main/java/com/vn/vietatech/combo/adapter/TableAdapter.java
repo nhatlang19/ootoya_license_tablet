@@ -38,7 +38,7 @@ public class TableAdapter extends BaseAdapter {
     private Section section;
     ArrayList<Table> tables;
     ArrayList<Table> tablesRepeat;
-    private Table tableGroup = null;
+    private Cashier tableGroup = null;
     private Order selectOrder = null;
     private SalesCode selectedSalesCode = null;
     private boolean isClick = false;
@@ -190,6 +190,7 @@ public class TableAdapter extends BaseAdapter {
         final Spinner spinGroup = (Spinner) promptView
                 .findViewById(R.id.spinGroup);
         final TableListAdapter tableListAdapter;
+        final CashierListAdapter cashierListAdapter;
 
         final Spinner spinSalesCode = (Spinner) promptView
                 .findViewById(R.id.spinSalesCode);
@@ -198,8 +199,8 @@ public class TableAdapter extends BaseAdapter {
         String title = "Table: " + table.getTableNo().trim() + " => ";
         if (table.isAddNew()) {
             title += "New Order";
-            btnSave.setEnabled(false);
-            btnSave.setTextColor(Color.GRAY);
+//            btnSave.setEnabled(false);
+//            btnSave.setTextColor(Color.GRAY);
         } else {
             title += "Edit Order";
         }
@@ -208,12 +209,15 @@ public class TableAdapter extends BaseAdapter {
         final MyApplication globalVariable = (MyApplication) mContext
                 .getApplicationContext();
         ArrayList<Table> tableList = globalVariable.getTables();
+        ArrayList<Cashier> cashiers = globalVariable.getCashiers();
         ArrayList<SalesCode> salesCodes = globalVariable.getSalesCode();
         final Cashier cashier = globalVariable.getCashier();
         if (tableList != null) {
-            tableListAdapter = new TableListAdapter(mContext,
-                    android.R.layout.simple_spinner_item, tableList);
-            spinGroup.setAdapter(tableListAdapter);
+//            tableListAdapter = new TableListAdapter(mContext,
+//                    android.R.layout.simple_spinner_item, tableList);
+            cashierListAdapter = new CashierListAdapter(mContext,
+                    android.R.layout.simple_spinner_item, cashiers);
+            spinGroup.setAdapter(cashierListAdapter);
 
             salesCodeAdapter = new SalesCodeAdapter(mContext,
                     android.R.layout.simple_spinner_item, salesCodes);
@@ -227,7 +231,7 @@ public class TableAdapter extends BaseAdapter {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view,
                                            int position, long id) {
-                    tableGroup = tableListAdapter.getItem(position);
+                    tableGroup = cashierListAdapter.getItem(position);
                 }
 
                 @Override
@@ -252,8 +256,8 @@ public class TableAdapter extends BaseAdapter {
 
             String tblGroup = table.getDescription2().trim();
             if (tblGroup.length() != 0) {
-                for (int i = 0; i < tableListAdapter.getCount(); i++) {
-                    String findTable = tableListAdapter.getItem(i).getTableNo()
+                for (int i = 0; i < cashierListAdapter.getCount(); i++) {
+                    String findTable = cashierListAdapter.getItem(i).getId()
                             .trim();
                     if (findTable.equals(tblGroup)) {
                         spinGroup.setSelection(i);

@@ -20,9 +20,11 @@ public class AbstractAPI extends AsyncTask<String, String, String> {
     protected SoapObject request;
 
     protected static String METHOD_GET_SECTION = "GetSection";
+    protected static String METHOD_GET_MEMBER = "GetMember";
     protected static String METHOD_GET_TABLELIST = "GetTableListAllSection";
     protected static String METHOD_GET_TABLE_BY_SECTION = "GetTableListBySection";
     protected static String METHOD_GET_USER = "GetUser";
+    protected static String METHOD_GET_USER_LIST = "GetUserList";
     protected static String METHOD_UPDATE_TABLE_STATUS = "UpdateTableStatus";
     protected static String METHOD_GET_POS_MENU = "GetPOSMenu";
     protected static String METHOD_GET_SUB_MENU = "GetSubMenu";

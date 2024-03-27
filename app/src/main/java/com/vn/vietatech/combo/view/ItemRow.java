@@ -133,7 +133,7 @@ public class ItemRow extends TableRow {
 		textView.setPadding(20, 5, 20, 5);
 		textView.setGravity(data.getColGravity());
 		textView.setText(item.trim());
-		textView.setTextSize(12);
+		textView.setTextSize(14);
 		textView.setTextColor(Color.BLACK);
 
 		return textView;

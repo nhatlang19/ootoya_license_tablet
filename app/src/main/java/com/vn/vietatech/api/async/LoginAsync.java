@@ -56,6 +56,7 @@ public class LoginAsync extends AsyncTask<String, String, Cashier> {
             try {
                 UserUtil.write(cashier, mContext);
                 new TableAPI(mContext.getApplicationContext()).execute();
+                new UserApi(mContext.getApplicationContext()).execute();
                 new PosMenuAPI(mContext.getApplicationContext()).execute();
                 new SaleCodeAPI(mContext.getApplicationContext()).execute();
 

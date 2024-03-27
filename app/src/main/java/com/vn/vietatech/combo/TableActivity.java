@@ -22,14 +22,18 @@ import android.widget.Toast;
 
 import com.vn.vietatech.api.SectionAPI;
 import com.vn.vietatech.api.TableAPI;
+import com.vn.vietatech.api.UserApi;
 import com.vn.vietatech.combo.adapter.SectionAdapter;
 import com.vn.vietatech.combo.adapter.TableAdapter;
 import com.vn.vietatech.model.Cashier;
 import com.vn.vietatech.model.Order;
 import com.vn.vietatech.model.SalesCode;
 import com.vn.vietatech.model.Section;
+import com.vn.vietatech.model.Setting;
 import com.vn.vietatech.model.Table;
+import com.vn.vietatech.utils.SettingUtil;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TableActivity extends AppCompatActivity implements
@@ -42,6 +46,7 @@ public class TableActivity extends AppCompatActivity implements
     public static final String KEY_REFRESH_CODE = "refresh_code";
     public static final String KEY_STATUS = "statusTable";
     public static final String KEY_TABLE_GROUP = "tableGroup";
+    public static final String KEY_TABLE_GROUP_NAME = "tableGroupName";
 
     public static final String KEY_ORD = "ord";
     public static final String KEY_EXT = "ext";
@@ -146,16 +151,16 @@ public class TableActivity extends AppCompatActivity implements
      */
     private void loadSections() {
         spin.setOnItemSelectedListener(this);
-
-        sections = globalVariable.getSections();
-        if (sections == null) {
-            try {
-                sections = new SectionAPI(getApplicationContext()).getSection();
-                globalVariable.setSections(sections);
-            } catch (Exception e) {
-                Toast.makeText(getApplicationContext(), e.getMessage(),
-                        Toast.LENGTH_LONG).show();
+        try {
+            Setting setting = SettingUtil.read(this);
+            sections = globalVariable.getSections(setting.getSection());
+            if (sections == null) {
+                sections = new SectionAPI(getApplicationContext()).getSection(setting.getSection());
+                globalVariable.setSections(setting.getSection(), sections);
             }
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), e.getMessage(),
+                    Toast.LENGTH_LONG).show();
         }
 
         sectionAdapter = new SectionAdapter(this,
@@ -170,23 +175,23 @@ public class TableActivity extends AppCompatActivity implements
     /**
      * Open New/Edit form
      *
-     * @param selectedTable
-     * @param isAddNew
      */
-    public void startNewActivity(Table selectedTable, Table tableGroup, SalesCode salesCode) {
+    public void startNewActivity(Table selectedTable, Cashier tableGroup, SalesCode salesCode) {
         Intent myIntent = new Intent(this, POSMenuActivity.class);
         myIntent.putExtra(KEY_SELECTED_TABLE, selectedTable.getTableNo());
         myIntent.putExtra(KEY_SELECTED_SCODE, salesCode.getCode());
         myIntent.putExtra(KEY_PRICE_LEVEL, salesCode.getPriceLevel());
-        myIntent.putExtra(KEY_TABLE_GROUP, tableGroup.getTableNo());
+        myIntent.putExtra(KEY_TABLE_GROUP, tableGroup.getId());
+        myIntent.putExtra(KEY_TABLE_GROUP_NAME, tableGroup.getName());
         myIntent.putExtra(KEY_STATUS, Table.ACTION_ADD);
         startActivityForResult(myIntent, REFRESH_TABLE);
     }
 
-    public void startEditActivity(Table selectedTable, Table tableGroup, Order order, SalesCode salesCode) {
+    public void startEditActivity(Table selectedTable, Cashier tableGroup, Order order, SalesCode salesCode) {
         Intent myIntent = new Intent(this, POSMenuActivity.class);
         myIntent.putExtra(KEY_SELECTED_TABLE, selectedTable.getTableNo());
-        myIntent.putExtra(KEY_TABLE_GROUP, tableGroup.getTableNo());
+        myIntent.putExtra(KEY_TABLE_GROUP, tableGroup.getId());
+        myIntent.putExtra(KEY_TABLE_GROUP_NAME, tableGroup.getName());
         myIntent.putExtra(KEY_SELECTED_SCODE, salesCode.getCode());
         myIntent.putExtra(KEY_PRICE_LEVEL, salesCode.getPriceLevel());
         myIntent.putExtra(KEY_STATUS, Table.ACTION_EDIT);
@@ -236,11 +241,11 @@ public class TableActivity extends AppCompatActivity implements
     /**
      * group table
      */
-    public void groupTable(Table table, Table tableGroup) {
+    public void groupTable(Table table, Cashier tableGroup) {
         try {
             final Cashier cashier = globalVariable.getCashier();
             new TableAPI(context).updateTableStatus(Table.STATUS_CLOSE, cashier.getId(), table.getTableNo());
-            new TableAPI(context).groupTable(table.getTableNo(), tableGroup.getTableNo());
+            new TableAPI(context).groupTable(table.getTableNo(), tableGroup.getId());
         } catch (Exception e) {
         }
         refresh();

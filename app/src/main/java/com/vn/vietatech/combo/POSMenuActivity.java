@@ -67,13 +67,15 @@ public class POSMenuActivity extends AppCompatActivity {
     LinearLayout ll_main, MTLayout, parentView;
     ScrollView vBody;
     TableOrder tblOrder;
-    public Button btnIPlus, btnIx, btnISub, btnMemRemark;
+    public Button btnIPlus, btnIx, btnISub, btnMemRemark, btnMember;
     Button btnIR;
     Button btnMT;
 
     Button btnSend;
     Button btnX;
     EditText txtPeople;
+
+    EditText txtMember;
     EditText txtMoney;
     GridView gridMainMenu;
     MainMenuAdapter posMnuAdapter = null;
@@ -83,6 +85,7 @@ public class POSMenuActivity extends AppCompatActivity {
     String tableStatus;
     String selectedSalesCode, priceLevel;
     String tableGroupNo = "";
+    String tableGroupName = "";
     Spinner spinRemark;
     EditText txtRemark;
     String currentOrderNo = "";
@@ -147,6 +150,8 @@ public class POSMenuActivity extends AppCompatActivity {
                 TableActivity.KEY_STATUS);
         tableGroupNo = getIntent().getExtras().getString(
                 TableActivity.KEY_TABLE_GROUP);
+        tableGroupName = getIntent().getExtras().getString(
+                TableActivity.KEY_TABLE_GROUP_NAME);
         selectedSalesCode = getIntent().getExtras().getString(
                 TableActivity.KEY_SELECTED_SCODE);
         priceLevel = getIntent().getExtras().getString(
@@ -162,12 +167,14 @@ public class POSMenuActivity extends AppCompatActivity {
         btnIx = (Button) findViewById(R.id.btnIx);
         btnMT = (Button) findViewById(R.id.btnMT);
         btnMemRemark = (Button) findViewById(R.id.btnMemRemark);
+        btnMember = (Button) findViewById(R.id.btnMember);
         btnSend = (Button) findViewById(R.id.btnSend);
         btnIR = (Button) findViewById(R.id.btnIR);
         btnX = (Button) findViewById(R.id.btnX);
         btnX.setWidth(btnIPlus.getWidth());
         txtPeople = (EditText) findViewById(R.id.txtPeople);
         txtMoney = (EditText) findViewById(R.id.txtMoney);
+        txtMember = (EditText) findViewById(R.id.txtMember);
         gridMainMenu = (GridView) findViewById(R.id.gridMainMenu);
         gridSubMenu = (GridView) findViewById(R.id.gridSubMenu);
         spinRemark = (Spinner) findViewById(R.id.spinRemark);
@@ -207,7 +214,7 @@ public class POSMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 tblOrder.plus();
-                txtMoney.setText(tblOrder.getAllTotal());
+                calSum();
             }
         });
 
@@ -217,7 +224,7 @@ public class POSMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 boolean delete = tblOrder.sub();
-                txtMoney.setText(tblOrder.getAllTotal());
+                calSum();
                 if (delete) {
                     updateTitle();
                 }
@@ -230,7 +237,7 @@ public class POSMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 tblOrder.removeRow();
-                txtMoney.setText(tblOrder.getAllTotal());
+                calSum();
                 updateTitle();
             }
         });
@@ -260,6 +267,15 @@ public class POSMenuActivity extends AppCompatActivity {
         });
 
         btnMemRemark.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                onOpenDialogMembers();
+            }
+
+        });
+
+        btnMember.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -373,30 +389,11 @@ public class POSMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    int VAT = Integer.parseInt(SettingUtil.read(context)
-                            .getVat());
-                    int price = Utils.parseStringToInt(txtMoney.getText()
-                            .toString());
-                    int priceVAT = (int) (price * (float) (VAT / 100.0));
-                    int newPrice = price + priceVAT;
-                    String truePrice = String.valueOf(Utils
-                            .formatPrice(newPrice));
-                    String text = String
-                            .format("Tiền:\t\t %s VND\n"
-                                            + "VAT:\t\t\t\t %s VND\n"
-                                            + "\t\t\t----------------------------\n"
-                                            + "Tổng:\t\t %s VND",
-                                    txtMoney.getText().toString(),
-                                    Utils.formatPrice(priceVAT), truePrice);
-                    Utils.showAlert(context, text);
+                    Utils.showAlert(context, tblOrder.getALlTotalStr());
                 } catch (NumberFormatException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
                 }
-
             }
         });
 
@@ -429,7 +426,7 @@ public class POSMenuActivity extends AppCompatActivity {
                 });
             }
             updateTitle();
-            txtMoney.setText(tblOrder.getAllTotal());
+            calSum();
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
@@ -468,8 +465,8 @@ public class POSMenuActivity extends AppCompatActivity {
      */
     public void updateTitle() {
         String table = tableNo.trim();
-        if (tableGroupNo.trim().length() != 0) {
-            table += "/" + tableGroupNo.trim();
+        if (tableGroupName.trim().length() != 0) {
+            table += "/" + tableGroupName.trim();
         }
         setTitle(table + " (" + tblOrder.getAllRows().size() + ")-"
                 + globalVariable.getCashier().getName());
@@ -651,7 +648,7 @@ public class POSMenuActivity extends AppCompatActivity {
         }
         vBody.fullScroll(ScrollView.FOCUS_DOWN);
 
-        txtMoney.setText(tblOrder.getAllTotal());
+        calSum();
         txtPeople.setText(currentPerNo);
 
         // update title
@@ -666,6 +663,11 @@ public class POSMenuActivity extends AppCompatActivity {
                 .setBackgroundResource(R.drawable.spinner_background_remark_with_data);
 
         txtRemark.setText(item.getInstruction());
+    }
+
+    public void calSum()
+    {
+        txtMoney.setText(tblOrder.getAllTotal());
     }
 
     public String sendOrder(String sendNewOrder, String reSendOrder)
@@ -731,8 +733,13 @@ public class POSMenuActivity extends AppCompatActivity {
         return tblOrder;
     }
 
-    public void insertMember(Member member)
+    public void insertMemberRemake(Member member)
     {
         tblOrder.insertMember(member);
+    }
+
+    public void insertMember(Member member)
+    {
+        txtMember.setText("Member: " + member.memberName);
     }
 }

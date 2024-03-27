@@ -1,28 +1,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:minWidth="1000dp"
+    android:minHeight="500dp"
+    android:orientation="vertical">
 
 
     <TableLayout
         android:id="@+id/TableLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#f4e335" >
+        android:background="#f4e335">
 
         <TableRow
             android:id="@+id/tableRow1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp" >
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/lbTitleMember"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:paddingBottom="10dp"
                 android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:text="Title"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -42,7 +44,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/txtMemberSearch"
+            android:id="@+id/txtMemberKeyword"
             android:layout_width="wrap_content"
             android:layout_height="64dp"
             android:layout_weight="4"
@@ -60,11 +62,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="1000dp"
         android:orientation="vertical">
+
         <ListView
+            android:id="@+id/lstMembers"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:clickable="true"
+            android:divider="@color/dark_gray_press"
+            android:dividerHeight="1px" />
     </LinearLayout>
 
 </LinearLayout>

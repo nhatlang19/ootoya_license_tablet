@@ -19,7 +19,7 @@ public class Setting {
     }
 
     public String getSection() {
-        return section;
+        return section == null ? "" : section;
     }
 
     public void setSection(String section) {
