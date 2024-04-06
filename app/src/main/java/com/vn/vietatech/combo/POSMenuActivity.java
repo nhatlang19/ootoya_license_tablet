@@ -56,6 +56,7 @@ import com.vn.vietatech.utils.SettingUtil;
 import com.vn.vietatech.utils.Utils;
 
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -82,6 +83,8 @@ public class POSMenuActivity extends AppCompatActivity {
     GridView gridSubMenu;
     SubMenuAdapter subMnuAdapter = null;
     String tableNo;
+    String sectionID;
+    String sectionName;
     String tableStatus;
     String selectedSalesCode, priceLevel;
     String tableGroupNo = "";
@@ -96,6 +99,8 @@ public class POSMenuActivity extends AppCompatActivity {
     String splited = "0";
     Spinner spinTableListMT;
     Remark selectedRemark;
+
+    Member globalMember = null;
 
     public boolean izSendingOrder = false;
 
@@ -146,6 +151,10 @@ public class POSMenuActivity extends AppCompatActivity {
         // get table infor
         tableNo = getIntent().getExtras().getString(
                 TableActivity.KEY_SELECTED_TABLE);
+        sectionID = getIntent().getExtras().getString(
+                TableActivity.KEY_SECTION_ID);
+        sectionName = getIntent().getExtras().getString(
+                TableActivity.KEY_SECTION_NAME);
         tableStatus = getIntent().getExtras().getString(
                 TableActivity.KEY_STATUS);
         tableGroupNo = getIntent().getExtras().getString(
@@ -279,7 +288,7 @@ public class POSMenuActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                onOpenDialogMembers();
+                onOpenDialogMembersGlobal();
             }
 
         });
@@ -698,10 +707,10 @@ public class POSMenuActivity extends AppCompatActivity {
             String salesCode = tableStatus.equals(Table.ACTION_EDIT) ? currentSalesCode
                     : selectedSalesCode;
             String cashierID = globalVariable.getCashier().getId();
-            String memberID = "111";
+            String memberID = globalMember != null ? globalMember.memberId : "";
 
             boolean ketqua = new PosMenuAPI(context).sendOrder(dataTableString,
-                    sendNewOrder, reSendOrder, typeLoad, posNo, orderNo, extNo, splited,
+                    sendNewOrder, reSendOrder, typeLoad, posNo, orderNo, extNo, splited, sectionID, sectionName,
                     currTable, POSBizDate, currTableGroup, noOfPerson, salesCode, memberID, cashierID.trim());
 
             return String.valueOf(ketqua);
@@ -729,17 +738,25 @@ public class POSMenuActivity extends AppCompatActivity {
         member.show(fm, "MemberFragment");
     }
 
+    public void onOpenDialogMembersGlobal() {
+        FragmentManager fm = getSupportFragmentManager();
+        MemberFragment member = new MemberFragment(true);
+        member.show(fm, "MemberFragment");
+    }
+
     public TableOrder getTableOrder() {
         return tblOrder;
     }
 
     public void insertMemberRemake(Member member)
     {
+        this.globalMember = member;
         tblOrder.insertMember(member);
     }
 
     public void insertMember(Member member)
     {
-        txtMember.setText("Member: " + member.memberName);
+        this.globalMember = member;
+        txtMember.setText(MessageFormat.format("Member: {0}", member.memberName));
     }
 }

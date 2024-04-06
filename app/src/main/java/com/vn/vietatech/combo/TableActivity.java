@@ -41,6 +41,8 @@ public class TableActivity extends AppCompatActivity implements
     public static final int REFRESH_TABLE = 1;
 
     public static final String KEY_SELECTED_TABLE = "selectedTable";
+    public static final String KEY_SECTION_ID = "sectionID";
+    public static final String KEY_SECTION_NAME = "sectionName";
     public static final String KEY_SELECTED_SCODE = "selectedSalesCode";
     public static final String KEY_PRICE_LEVEL = "priceLevel";
     public static final String KEY_REFRESH_CODE = "refresh_code";
@@ -179,6 +181,8 @@ public class TableActivity extends AppCompatActivity implements
     public void startNewActivity(Table selectedTable, Cashier tableGroup, SalesCode salesCode) {
         Intent myIntent = new Intent(this, POSMenuActivity.class);
         myIntent.putExtra(KEY_SELECTED_TABLE, selectedTable.getTableNo());
+        myIntent.putExtra(KEY_SECTION_ID, selectedSection.getId());
+        myIntent.putExtra(KEY_SECTION_NAME, selectedSection.getName());
         myIntent.putExtra(KEY_SELECTED_SCODE, salesCode.getCode());
         myIntent.putExtra(KEY_PRICE_LEVEL, salesCode.getPriceLevel());
         myIntent.putExtra(KEY_TABLE_GROUP, tableGroup.getId());
@@ -190,6 +194,8 @@ public class TableActivity extends AppCompatActivity implements
     public void startEditActivity(Table selectedTable, Cashier tableGroup, Order order, SalesCode salesCode) {
         Intent myIntent = new Intent(this, POSMenuActivity.class);
         myIntent.putExtra(KEY_SELECTED_TABLE, selectedTable.getTableNo());
+        myIntent.putExtra(KEY_SECTION_ID, selectedSection.getId());
+        myIntent.putExtra(KEY_SECTION_NAME, selectedSection.getName());
         myIntent.putExtra(KEY_TABLE_GROUP, tableGroup.getId());
         myIntent.putExtra(KEY_TABLE_GROUP_NAME, tableGroup.getName());
         myIntent.putExtra(KEY_SELECTED_SCODE, salesCode.getCode());

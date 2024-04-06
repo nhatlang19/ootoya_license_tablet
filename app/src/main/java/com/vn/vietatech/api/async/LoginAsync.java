@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.vn.vietatech.api.MemClassAPI;
+import com.vn.vietatech.api.MemGradeAPI;
+import com.vn.vietatech.api.NationalityAPI;
 import com.vn.vietatech.api.PosMenuAPI;
 import com.vn.vietatech.api.SaleCodeAPI;
 import com.vn.vietatech.api.TableAPI;
@@ -59,6 +62,9 @@ public class LoginAsync extends AsyncTask<String, String, Cashier> {
                 new UserApi(mContext.getApplicationContext()).execute();
                 new PosMenuAPI(mContext.getApplicationContext()).execute();
                 new SaleCodeAPI(mContext.getApplicationContext()).execute();
+                new NationalityAPI(mContext.getApplicationContext()).execute();
+                new MemClassAPI(mContext.getApplicationContext()).execute();
+                new MemGradeAPI(mContext.getApplicationContext()).execute();
 
                 MainActivity act = (MainActivity) mContext;
                 Intent myIntent = new Intent(mContext, TableActivity.class);

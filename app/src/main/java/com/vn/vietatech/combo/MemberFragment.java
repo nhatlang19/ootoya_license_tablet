@@ -1,40 +1,32 @@
 package com.vn.vietatech.combo;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import android.app.Activity;
-import android.content.Context;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.view.Display;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.vn.vietatech.api.MemberAPI;
+import com.vn.vietatech.combo.adapter.MemClassAdapter;
+import com.vn.vietatech.combo.adapter.MemGradeAdapter;
 import com.vn.vietatech.combo.adapter.MemberListAdapter;
-import com.vn.vietatech.combo.view.tab.FragmenTab;
+import com.vn.vietatech.combo.adapter.NationalityAdapter;
 import com.vn.vietatech.model.Member;
-import com.vn.vietatech.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
 public class MemberFragment extends DialogFragment {
@@ -49,6 +41,37 @@ public class MemberFragment extends DialogFragment {
     Context mContext;
 
     MemberListAdapter memberListAdapter;
+
+    Member selectedMember;
+
+    LinearLayout lnSearch;
+    LinearLayout lnList;
+    LinearLayout lnFormAdd;
+    Button btnAddMember;
+    Button btnCloseFormAdd;
+    Button btnSaveFormAdd;
+
+    Spinner spinMemberNationality;
+    Spinner spinMemberType;
+    Spinner spinMemberGrade;
+    MemClassAdapter memClassAdapter;
+    MemGradeAdapter memGradeAdapter;
+    NationalityAdapter nationalityAdapter;
+
+
+    boolean isGlobal;
+
+    public MemberFragment() {
+        super();
+        this.isGlobal = false;
+        this.selectedMember = null;
+    }
+
+    public MemberFragment(boolean isGLobal) {
+        this.isGlobal = isGLobal;
+        this.selectedMember = null;
+    }
+
     @SuppressLint("SetTextI18n")
     @Nullable
     @Override
@@ -67,6 +90,28 @@ public class MemberFragment extends DialogFragment {
 
         txtMemberKeyword = (EditText) view.findViewById(R.id.txtMemberKeyword);
         lstMembers = (ListView) view.findViewById(R.id.lstMembers);
+        lnSearch = (LinearLayout) view.findViewById(R.id.lnSearch);
+        lnList = (LinearLayout) view.findViewById(R.id.lnList);
+        lnFormAdd = (LinearLayout) view.findViewById(R.id.lnFormAdd);
+        btnAddMember = (Button) view.findViewById(R.id.btnAddMember);
+        btnSaveFormAdd = (Button) view.findViewById(R.id.btnSaveFormAdd);
+        btnCloseFormAdd = (Button) view.findViewById(R.id.btnCloseFormAdd);
+        spinMemberNationality = (Spinner) view.findViewById(R.id.spinMemberNationality);
+        spinMemberType = (Spinner) view.findViewById(R.id.spinMemberType);
+        spinMemberGrade = (Spinner) view.findViewById(R.id.spinMemberGrade);
+
+        final MyApplication globalVariable = (MyApplication) mContext
+                .getApplicationContext();
+
+        memClassAdapter = new MemClassAdapter(mContext,
+                android.R.layout.simple_spinner_item, globalVariable.getMemClasses());
+        spinMemberType.setAdapter(memClassAdapter);
+        memGradeAdapter = new MemGradeAdapter(mContext,
+                android.R.layout.simple_spinner_item, globalVariable.getMemGrades());
+        spinMemberGrade.setAdapter(memGradeAdapter);
+        nationalityAdapter = new NationalityAdapter(mContext,
+                android.R.layout.simple_spinner_item, globalVariable.getNationalities());
+        spinMemberNationality.setAdapter(nationalityAdapter);
 
 
         registerEvents();
@@ -88,8 +133,12 @@ public class MemberFragment extends DialogFragment {
         btnCloseMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                insertMemberRemake();
-                insertMember();
+                if (isGlobal) {
+                    insertMember();
+                } else {
+                    insertMemberRemake();
+                }
+
                 dismiss();
             }
         });
@@ -110,21 +159,54 @@ public class MemberFragment extends DialogFragment {
             }
         });
 
+        btnAddMember.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lnSearch.setVisibility(View.GONE);
+                lnList.setVisibility(View.GONE);
+
+                lnFormAdd.setVisibility(View.VISIBLE);
+            }
+        });
+
+        btnCloseFormAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lnSearch.setVisibility(View.VISIBLE);
+                lnList.setVisibility(View.VISIBLE);
+
+                lnFormAdd.setVisibility(View.GONE);
+            }
+        });
+
+        btnSaveFormAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         lstMembers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 memberListAdapter.disableAll();
+
+                selectedMember = memberListAdapter.getItem(position);
+
                 Objects.requireNonNull(memberListAdapter.getItem(position)).checked = true;
-                memberListAdapter.notifyDataSetChanged();;
+                memberListAdapter.notifyDataSetChanged();
+                ;
             }
         });
     }
 
-    private void insertMemberRemake()
-    {
+    private void insertMemberRemake() {
         try {
-            POSMenuActivity activity = (POSMenuActivity) this.getActivity();
-            activity.insertMemberRemake(new Member("AAA", "AAA"));
+            if (this.selectedMember != null) {
+                POSMenuActivity activity = (POSMenuActivity) this.getActivity();
+                assert activity != null;
+                activity.insertMemberRemake(selectedMember);
+            }
         } catch (Exception ex) {
             System.out.println("messages:" + ex.getMessage());
             Toast.makeText(mContext,
@@ -132,11 +214,13 @@ public class MemberFragment extends DialogFragment {
         }
     }
 
-    private void insertMember()
-    {
+    private void insertMember() {
         try {
-            POSMenuActivity activity = (POSMenuActivity) this.getActivity();
-            activity.insertMember(new Member("AAA", "AAA"));
+            if (this.selectedMember != null) {
+                POSMenuActivity activity = (POSMenuActivity) this.getActivity();
+                assert activity != null;
+                activity.insertMember(selectedMember);
+            }
         } catch (Exception ex) {
             System.out.println("messages:" + ex.getMessage());
             Toast.makeText(mContext,

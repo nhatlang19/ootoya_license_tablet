@@ -112,23 +112,25 @@ public class PosMenuAPI extends AbstractAPI {
 
     public boolean sendOrder(String dataTableString, String sendNewOrder,
                              String reSendOrder, String typeLoad, String posNo, String orderNo,
-                             String extNo, String splited, String currTable, String POSBizDate,
+                             String extNo, String splited, String sectionID, String sectionName, String currTable, String POSBizDate,
                              String currTableGroup, String noOfPerson,
                              String salesCode, String memberID, String cashierID) throws Exception {
         setMethod(METHOD_SEND_ORDER);
 
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("dataTableString", dataTableString.trim());
-        params.put("SendNewOrder", sendNewOrder.trim());
-        params.put("ReSendOrder", reSendOrder.trim());
+        params.put("sendNewOrder", sendNewOrder.trim());
+        params.put("reSendOrder", reSendOrder.trim());
         params.put("typeLoad", typeLoad.trim());
+        params.put("posBizDate", POSBizDate.trim());
         params.put("posNo", posNo.trim());
         params.put("orderNo", orderNo.trim());
         params.put("extNo", extNo.trim());
         params.put("splited", splited.trim());
+        params.put("sectionId", sectionID.trim());
+        params.put("sectionName", sectionName.trim());
         params.put("currTable", currTable.trim());
-        params.put("POSBizDate", POSBizDate.trim());
-        params.put("currTableGroup", currTableGroup.trim());
+        params.put("currTable_Cashier", currTableGroup.trim());
         params.put("noOfPerson", noOfPerson.trim());
         params.put("salesCode", salesCode.trim());
         params.put("memberId", memberID.trim());

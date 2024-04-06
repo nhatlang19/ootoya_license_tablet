@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.vn.vietatech.model.Cashier;
+import com.vn.vietatech.model.MemClass;
+import com.vn.vietatech.model.MemGrade;
+import com.vn.vietatech.model.Nationality;
 import com.vn.vietatech.model.PosMenu;
 import com.vn.vietatech.model.SalesCode;
 import com.vn.vietatech.model.Section;
@@ -21,6 +24,11 @@ public class MyApplication extends Application {
     private ArrayList<Table> _tables = null;
     private ArrayList<PosMenu> _listPosMenu = null;
     private ArrayList<SalesCode> _salesCode = null;
+
+    private ArrayList<Nationality> nationalities = null;
+    private ArrayList<MemClass> memClasses = null;
+    private ArrayList<MemGrade> memGrades = null;
+
 
     public ArrayList<PosMenu> getListPosMenu() {
         return _listPosMenu;
@@ -72,4 +80,27 @@ public class MyApplication extends Application {
         this.cashiers = cashiers;
     }
 
+    public ArrayList<Nationality> getNationalities() {
+        return nationalities;
+    }
+
+    public void setNationalities(ArrayList<Nationality> nationalities) {
+        this.nationalities = nationalities;
+    }
+
+    public ArrayList<MemClass> getMemClasses() {
+        return memClasses;
+    }
+
+    public void setMemClasses(ArrayList<MemClass> memClasses) {
+        this.memClasses = memClasses;
+    }
+
+    public ArrayList<MemGrade> getMemGrades() {
+        return memGrades;
+    }
+
+    public void setMemGrades(ArrayList<MemGrade> memGrades) {
+        this.memGrades = memGrades;
+    }
 }
