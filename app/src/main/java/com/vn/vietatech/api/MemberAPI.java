@@ -41,4 +41,22 @@ public class MemberAPI extends AbstractAPI {
         }
         return members;
     }
+
+    public String setMember(Member member) throws Exception {
+        setMethod(METHOD_SET_MEMBER);
+
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("memberName", member.memberName.trim());
+        params.put("mobilePhone", member.mobile.trim());
+        params.put("email", member.email.trim());
+        params.put("nationality", member.nationality);
+        params.put("dob", member.dob.length() > 0 ? member.dob.replaceAll("-", "").trim() : "");
+        params.put("memberClass", member.memberClass);
+        params.put("memberGrade", member.memberGrade);
+        params.put("taxCode", member.taxCode.length() > 0 ? member.taxCode.trim() : "");
+        params.put("company", member.company.length() > 0 ? member.company.trim() : "");
+        params.put("companyAdr", member.companyAdr.length() > 0 ? member.companyAdr.trim() : "");
+
+        return callService(params).toString();
+    }
 }

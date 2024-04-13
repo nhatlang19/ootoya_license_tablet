@@ -1,6 +1,7 @@
 package com.vn.vietatech.combo;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -20,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.vn.vietatech.api.MemberAPI;
+import com.vn.vietatech.api.PosMenuAPI;
 import com.vn.vietatech.combo.adapter.MemClassAdapter;
 import com.vn.vietatech.combo.adapter.MemGradeAdapter;
 import com.vn.vietatech.combo.adapter.MemberListAdapter;
@@ -27,6 +30,7 @@ import com.vn.vietatech.combo.adapter.NationalityAdapter;
 import com.vn.vietatech.model.Member;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Objects;
 
 public class MemberFragment extends DialogFragment {
@@ -57,6 +61,15 @@ public class MemberFragment extends DialogFragment {
     MemClassAdapter memClassAdapter;
     MemGradeAdapter memGradeAdapter;
     NationalityAdapter nationalityAdapter;
+
+    EditText txtMemberName;
+    EditText txtMemberMobile;
+    EditText txtMemberEmail;
+    EditText txtMemberBirth;
+    EditText txtMemberTax;
+    EditText txtMemberCompanyName;
+    EditText txtMemberCompanyAddress;
+
 
 
     boolean isGlobal;
@@ -99,6 +112,13 @@ public class MemberFragment extends DialogFragment {
         spinMemberNationality = (Spinner) view.findViewById(R.id.spinMemberNationality);
         spinMemberType = (Spinner) view.findViewById(R.id.spinMemberType);
         spinMemberGrade = (Spinner) view.findViewById(R.id.spinMemberGrade);
+        txtMemberName = (EditText) view.findViewById(R.id.txtMemberName);
+        txtMemberMobile = (EditText) view.findViewById(R.id.txtMemberMobile);
+        txtMemberEmail = (EditText) view.findViewById(R.id.txtMemberEmail);
+        txtMemberBirth = (EditText) view.findViewById(R.id.txtMemberBirth);
+        txtMemberTax = (EditText) view.findViewById(R.id.txtMemberTax);
+        txtMemberCompanyName = (EditText) view.findViewById(R.id.txtMemberCompanyName);
+        txtMemberCompanyAddress = (EditText) view.findViewById(R.id.txtMemberCompanyAddress);
 
         final MyApplication globalVariable = (MyApplication) mContext
                 .getApplicationContext();
@@ -106,13 +126,14 @@ public class MemberFragment extends DialogFragment {
         memClassAdapter = new MemClassAdapter(mContext,
                 android.R.layout.simple_spinner_item, globalVariable.getMemClasses());
         spinMemberType.setAdapter(memClassAdapter);
+
         memGradeAdapter = new MemGradeAdapter(mContext,
                 android.R.layout.simple_spinner_item, globalVariable.getMemGrades());
         spinMemberGrade.setAdapter(memGradeAdapter);
+
         nationalityAdapter = new NationalityAdapter(mContext,
                 android.R.layout.simple_spinner_item, globalVariable.getNationalities());
         spinMemberNationality.setAdapter(nationalityAdapter);
-
 
         registerEvents();
 
@@ -130,6 +151,31 @@ public class MemberFragment extends DialogFragment {
     }
 
     private void registerEvents() {
+        spinMemberType.setSelection(0, true);
+        spinMemberGrade.setSelection(0, true);
+        spinMemberNationality.setSelection(0, true);
+
+        txtMemberBirth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR);
+                int mMonth = c.get(Calendar.MONTH);
+                int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(mContext,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                txtMemberBirth.setText(new StringBuilder().append(year).append("-").append(month + 1).append("-").append(dayOfMonth).toString());
+                            }
+
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+            }
+        });
+
         btnCloseMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -182,7 +228,24 @@ public class MemberFragment extends DialogFragment {
         btnSaveFormAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Member member = new Member();
+                member.memberName = txtMemberName.getText().toString();
+                member.mobile = txtMemberMobile.getText().toString();
+                member.email = txtMemberEmail.getText().toString();
+                member.dob = txtMemberBirth.getText().toString();
+                member.taxCode = txtMemberTax.getText().toString();
+                member.company = txtMemberCompanyName.getText().toString();
+                member.companyAdr = txtMemberCompanyAddress.getText().toString();
+                member.nationality = nationalityAdapter.getItem(spinMemberNationality.getSelectedItemPosition()).getCode();
+                member.memberClass = memClassAdapter.getItem(spinMemberType.getSelectedItemPosition()).getCode();
+                member.memberGrade = memGradeAdapter.getItem(spinMemberGrade.getSelectedItemPosition()).getCode();
+                try {
+                    String ketqua = new MemberAPI(mContext).setMember(member);
+                    Toast.makeText(mContext, ketqua, Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    System.out.println("messages:" + e.getMessage());
+                    Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
             }
         });
 

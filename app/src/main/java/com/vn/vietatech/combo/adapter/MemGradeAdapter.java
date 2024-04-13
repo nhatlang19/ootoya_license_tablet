@@ -59,7 +59,7 @@ public class MemGradeAdapter extends ArrayAdapter<MemGrade> {
         }
 
         label.setTextColor(Color.BLACK);
-        label.setTextSize(16);
+        label.setTextSize(20);
         label.setTypeface(Typeface.DEFAULT_BOLD);
         label.setText(values.get(position).getDescription());
         return label;

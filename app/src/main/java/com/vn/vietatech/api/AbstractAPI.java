@@ -21,6 +21,7 @@ public class AbstractAPI extends AsyncTask<String, String, String> {
 
     protected static String METHOD_GET_SECTION = "GetSection";
     protected static String METHOD_GET_MEMBER = "GetMember";
+    protected static String METHOD_SET_MEMBER = "SetMember";
     protected static String METHOD_GET_TABLELIST = "GetTableListAllSection";
     protected static String METHOD_GET_TABLE_BY_SECTION = "GetTableListBySection";
     protected static String METHOD_GET_USER = "GetUser";
