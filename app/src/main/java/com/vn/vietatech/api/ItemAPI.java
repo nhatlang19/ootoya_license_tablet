@@ -80,7 +80,9 @@ public class ItemAPI extends AbstractAPI {
                 item.setSptax(tableObject.getProperty("SpTax").toString());
                 item.setOnPromotion(tableObject.getProperty("OnPromotion").toString());
                 if (item.getOnPromotion().equals("Y")) {
-                    item.setPromoItem(tableObject.getProperty("PromoItem").toString());
+                    if (tableObject.hasProperty("PromoItem")) {
+                        item.setPromoItem(tableObject.getProperty("PromoItem").toString());
+                    }
                     item.setPromoCode(tableObject.getProperty("PromoCode").toString());
                     item.setPromoDesc(tableObject.getProperty("PromoDesc").toString());
                     item.setPromoClass(tableObject.getProperty("PromoClass").toString());
