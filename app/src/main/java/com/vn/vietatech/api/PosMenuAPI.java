@@ -23,13 +23,11 @@ public class PosMenuAPI extends AbstractAPI {
     protected String doInBackground(String... params) {
         final MyApplication globalVariable = (MyApplication) mContext;
         ArrayList<PosMenu> list = globalVariable.getListPosMenu();
-        if (list == null) {
-            try {
-                Setting setting = SettingUtil.read(mContext);
-                globalVariable
-                        .setListPosMenu(getPOSMenuD(setting.getPosGroup()));
-            } catch (Exception e) {
-            }
+        try {
+            Setting setting = SettingUtil.read(mContext);
+            globalVariable
+                    .setListPosMenu(getPOSMenuD(setting.getPosGroup()));
+        } catch (Exception e) {
         }
 
         return super.doInBackground(params);
@@ -37,7 +35,7 @@ public class PosMenuAPI extends AbstractAPI {
 
     public ArrayList<PosMenu> getPOSMenuD(String POSGroup) throws Exception {
         if (POSGroup.length() == 0) {
-            POSGroup = "1";
+            POSGroup = "FA";
         }
 
         setMethod(METHOD_GET_POS_MENU);

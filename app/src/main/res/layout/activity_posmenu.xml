@@ -217,7 +217,7 @@
         android:layout_height="200dp"
         android:columnWidth="45dp"
         android:horizontalSpacing="1dp"
-        android:numColumns="5"
+        android:numColumns="4"
         android:paddingLeft="1dp"
         android:paddingTop="1dp"
         android:paddingRight="1dp"

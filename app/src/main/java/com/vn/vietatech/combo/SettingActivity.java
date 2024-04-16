@@ -116,6 +116,7 @@ public class SettingActivity extends AppCompatActivity {
                 txtPosId.setText(setting.getPosId());
                 txtVAT.setText(setting.getVat());
                 txtType.setText(setting.getType());
+                txtSection.setText(setting.getSection());
             }
         } catch (IOException e) {
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
