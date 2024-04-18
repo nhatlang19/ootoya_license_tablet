@@ -84,7 +84,9 @@ public class ItemAPI extends AbstractAPI {
                         item.setPromoItem(tableObject.getProperty("PromoItem").toString());
                     }
                     item.setPromoCode(tableObject.getProperty("PromoCode").toString());
-                    item.setPromoDesc(tableObject.getProperty("PromoDesc").toString());
+                    if (tableObject.hasProperty("PromoDesc")) {
+                        item.setPromoDesc(tableObject.getProperty("PromoDesc").toString());
+                    }
                     item.setPromoClass(tableObject.getProperty("PromoClass").toString());
                     item.setStartDate(tableObject.getProperty("StartDate").toString());
                     item.setEndDate(tableObject.getProperty("EndDate").toString());

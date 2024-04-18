@@ -138,7 +138,8 @@ public class MemberFragment extends DialogFragment {
         registerEvents();
 
         try {
-            ArrayList<Member> members = new MemberAPI(mContext).getMembers(txtMemberKeyword.getText().toString().trim());
+//            ArrayList<Member> members = new MemberAPI(mContext).getMembers(txtMemberKeyword.getText().toString().trim());
+            ArrayList<Member> members = new ArrayList<>();
             memberListAdapter = new MemberListAdapter(view.getContext(), members);
             lstMembers.setAdapter(memberListAdapter);
 
@@ -193,7 +194,7 @@ public class MemberFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 try {
-                    ArrayList<Member> members = new MemberAPI(mContext).getMembers(txtMemberKeyword.getText().toString().trim());
+                    ArrayList<Member> members = new MemberAPI(mContext).searchMembers(txtMemberKeyword.getText().toString().trim());
                     memberListAdapter.clear();
                     memberListAdapter.addAll(members);
                     memberListAdapter.notifyDataSetChanged();

@@ -30,6 +30,10 @@ public class MyApplication extends Application {
     private ArrayList<MemGrade> memGrades = null;
 
 
+
+    private String posBizDate = null;
+
+
     public ArrayList<PosMenu> getListPosMenu() {
         return _listPosMenu;
     }
@@ -102,5 +106,13 @@ public class MyApplication extends Application {
 
     public void setMemGrades(ArrayList<MemGrade> memGrades) {
         this.memGrades = memGrades;
+    }
+
+    public String getPosBizDate() {
+        return posBizDate;
+    }
+
+    public void setPosBizDate(String posBizDate) {
+        this.posBizDate = posBizDate;
     }
 }

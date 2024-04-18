@@ -251,7 +251,7 @@ public class TableActivity extends AppCompatActivity implements
         try {
             final Cashier cashier = globalVariable.getCashier();
             new TableAPI(context).updateTableStatus(Table.STATUS_CLOSE, cashier.getId(), table.getTableNo());
-            new TableAPI(context).groupTable(table.getTableNo(), tableGroup.getId());
+            new TableAPI(context).groupTable(table.getTableNo(), tableGroup.getName());
         } catch (Exception e) {
         }
         refresh();

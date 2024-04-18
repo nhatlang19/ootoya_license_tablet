@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.vn.vietatech.model.Item;
 import com.vn.vietatech.model.Order;
+import com.vn.vietatech.model.dto.MemberRemarkDTO;
 
 import org.ksoap2.serialization.SoapObject;
 
@@ -62,6 +63,9 @@ public class OrderAPI extends AbstractAPI {
                 }
                 item.setPromoCode(tableObject.getProperty("PromoCode").toString());
                 item.setPromoClass(tableObject.getProperty("PromoClass").toString());
+                if (tableObject.hasProperty("ProInstruct")) {
+                    item.setPromoDesc(tableObject.getProperty("ProInstruct").toString());
+                }
 //                item.setPkgPrice(tableObject.getProperty("PkgPrice").toString());
                 item.setPkgQty(tableObject.getProperty("PkgQty").toString());
                 item.setTotal(tableObject.getProperty("TotAmt").toString());
@@ -82,7 +86,8 @@ public class OrderAPI extends AbstractAPI {
                 item.setSegNo(tableObject.getProperty("SeqNo").toString());
                 item.setPkgItems(tableObject.getProperty("PkgItems").toString());
                 item.setBrand(tableObject.getProperty("Brand").toString());
-
+                item.setMemberId(tableObject.getProperty("MemberId").toString());
+                item.setMemberName(tableObject.getProperty("MemberName").toString());
 
                 items.add(item);
             }
@@ -117,5 +122,22 @@ public class OrderAPI extends AbstractAPI {
             }
         }
         return orders;
+    }
+
+    public String updateMemberRemark(MemberRemarkDTO dto)
+            throws NumberFormatException, Exception {
+        setMethod(METHOD_UPDATE_MEMBER_REMARK);
+
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("posBizDate", dto.posBizDate);
+        params.put("posNo", dto.posNo);
+        params.put("orderNo", dto.orderNo);
+        params.put("extNo", dto.extNo);
+        params.put("splited", dto.splited);
+        params.put("memberId", dto.memberId);
+        params.put("memberName", dto.memberName);
+        params.put("seqNo", dto.segNo);
+
+        return callService(params).toString();
     }
 }

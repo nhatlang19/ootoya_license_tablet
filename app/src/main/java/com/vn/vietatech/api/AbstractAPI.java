@@ -21,6 +21,8 @@ public class AbstractAPI extends AsyncTask<String, String, String> {
 
     protected static String METHOD_GET_SECTION = "GetSection";
     protected static String METHOD_GET_MEMBER = "GetMember";
+    protected static String METHOD_SEARCH_MEMBER = "SearchMember";
+
     protected static String METHOD_SET_MEMBER = "SetMember";
     protected static String METHOD_GET_TABLELIST = "GetTableListAllSection";
     protected static String METHOD_GET_TABLE_BY_SECTION = "GetTableListBySection";
@@ -39,6 +41,9 @@ public class AbstractAPI extends AsyncTask<String, String, String> {
     protected static String METHOD_GET_ORDER_EDIT_TYPE = "GetOrderEditType";
     protected static String METHOD_GET_NEW_ORDER_BY_POS = "GetNewOrderNumberByPOS";
     protected static String METHOD_GET_EDIT_ORDER_BY_POS = "GetEditOrderNumberByPOS";
+    protected static String METHOD_GET_EDIT_ORDER_BY_POS_HEADER = "GetEditOrderNumberByPOS_Header";
+    protected static String METHOD_UPDATE_MEMBER_REMARK = "UpdateMemberRemark";
+    protected static String METHOD_GET_POS_BIZ_DATE = "GetPOSBizDate";
     protected static String METHOD_GET_REMARK_BY_ITEM = "GetRemarkByItem";
     protected static String METHOD_GET_STATUS_MOVE_TABLE = "GetStatusOfMoveTable";
     protected static String METHOD_MOVE_TABLE = "MoveTable";
@@ -183,5 +188,13 @@ public class AbstractAPI extends AsyncTask<String, String, String> {
     public String isValidBizDate() throws Exception {
         setMethod(METHOD_IS_VALID_BIZDATE);
         return callService().toString();
+    }
+
+    public String getPOSBizDate(String posNo) throws Exception {
+        setMethod(METHOD_GET_POS_BIZ_DATE);
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("posNo", posNo);
+
+        return this.callService(params).toString();
     }
 }

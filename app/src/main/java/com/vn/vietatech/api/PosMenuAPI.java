@@ -74,7 +74,7 @@ public class PosMenuAPI extends AbstractAPI {
     public ArrayList<SubMenu> getSubMenu(String selectedPOSMenu, String POSGroup)
             throws Exception {
         if (POSGroup.length() == 0) {
-            POSGroup = "1";
+            POSGroup = "FA";
         }
 
         setMethod(METHOD_GET_SUB_MENU);
@@ -100,6 +100,11 @@ public class PosMenuAPI extends AbstractAPI {
                         .toString());
                 subMenu.setSeqNum(tableObject.getProperty("SeqNum").toString());
                 subMenu.setDefaultValue(tableObject.getProperty("DefaultValue")
+                        .toString());
+
+                subMenu.setBtnColor(tableObject.getProperty("BtnColor")
+                        .toString());
+                subMenu.setFontColor(tableObject.getProperty("FontColor")
                         .toString());
 
                 subMenuList.add(subMenu);

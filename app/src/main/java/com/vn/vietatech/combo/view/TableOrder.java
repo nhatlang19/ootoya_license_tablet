@@ -7,12 +7,14 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.vn.vietatech.api.OrderAPI;
 import com.vn.vietatech.combo.view.table.DataTable;
 import com.vn.vietatech.combo.view.table.MyTable;
 import com.vn.vietatech.model.Item;
 import com.vn.vietatech.model.Member;
 import com.vn.vietatech.model.Remark;
 import com.vn.vietatech.model.Table;
+import com.vn.vietatech.model.dto.MemberRemarkDTO;
 import com.vn.vietatech.utils.SettingUtil;
 import com.vn.vietatech.utils.Utils;
 
@@ -95,6 +97,12 @@ public class TableOrder extends TableLayout
             250,
             200,
             200,
+            300, // colnInstruction
+            100,
+            100,
+            100,
+            400, // khuyen mai
+            150,
             200,
             200,
             200,
@@ -103,14 +111,8 @@ public class TableOrder extends TableLayout
             200,
             200,
             200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
+            200, // memberId
+            400, // memberName
             200,
             200,
             220,
@@ -412,18 +414,27 @@ public class TableOrder extends TableLayout
         }
     }
 
-    public void insertMember(Member member)
+    public void insertMember(Member member, MemberRemarkDTO dto)
     {
 //        TextView txtStatus = (TextView) getColumnCurrentRow(colnP);
 //        if (txtStatus != null && !txtStatus.getText().equals(Item.STATUS_OLD)
 //                && !txtStatus.getText().equals(Item.STATUS_CANCEL))
 //        {
-            TextView txtMemberId = (TextView) getColumnCurrentRow(colnMemberId);
-            txtMemberId.setText(member.memberId);
-            TextView txtMemberName = (TextView) getColumnCurrentRow(colnMemberName);
-            txtMemberName.setText(member.memberName);
-            getCurrentRow().getCurrentItem().setMemberId(member.memberId);
-            getCurrentRow().getCurrentItem().setMemberName(member.memberName);
+        TextView txtMemberId = (TextView) getColumnCurrentRow(colnMemberId);
+        txtMemberId.setText(member.memberId);
+        TextView txtMemberName = (TextView) getColumnCurrentRow(colnMemberName);
+        txtMemberName.setText(member.memberName);
+        getCurrentRow().getCurrentItem().setMemberId(member.memberId);
+        getCurrentRow().getCurrentItem().setMemberName(member.memberName);
+
+        if (getCurrentRow().getCurrentItem().getPrintStatus().equals("#")) {
+            try {
+                dto.segNo = getCurrentRow().getCurrentItem().getSegNo();
+                String ketqua = new OrderAPI(this.mContext).updateMemberRemark(dto);
+            } catch (Exception ex) {
+
+            }
+        }
 //        }
     }
 

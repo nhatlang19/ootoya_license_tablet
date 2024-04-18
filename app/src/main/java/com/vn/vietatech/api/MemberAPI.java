@@ -16,8 +16,8 @@ public class MemberAPI extends AbstractAPI {
         super(context);
     }
 
-    public ArrayList<Member> getMembers(String keyword) throws Exception {
-        setMethod(METHOD_GET_MEMBER);
+    public ArrayList<Member> searchMembers(String keyword) throws Exception {
+        setMethod(METHOD_SEARCH_MEMBER);
         ArrayList<Member> members = new ArrayList<Member>();
 
         HashMap<String, String> params = new HashMap<String, String>();
@@ -28,18 +28,42 @@ public class MemberAPI extends AbstractAPI {
         if (soapObject != null) {
             SoapObject webServiceResponse = (SoapObject) soapObject
                     .getProperty("NewDataSet");
-            for (int i = 0; i < webServiceResponse.getPropertyCount(); i++) {
-                SoapObject table = (SoapObject) webServiceResponse
-                        .getProperty(i);
+            if (webServiceResponse != null) {
+                for (int i = 0; i < webServiceResponse.getPropertyCount(); i++) {
+                    SoapObject table = (SoapObject) webServiceResponse
+                            .getProperty(i);
 
-                Member member = new Member();
-                member.memberId = (table.getProperty("MemberId").toString());
-                member.memberName = (table.getProperty("MemberName").toString());
+                    Member member = new Member();
+                    member.memberId = (table.getProperty("MemberId").toString());
+                    member.memberName = (table.getProperty("MemberName").toString());
 
-                members.add(member);
+                    members.add(member);
+                }
             }
         }
         return members;
+    }
+
+    public Member getMember(String keyword) throws Exception {
+        setMethod(METHOD_GET_MEMBER);
+
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("keySearch", keyword);
+
+        SoapObject response = (SoapObject) this.callService(params);
+        SoapObject soapObject = (SoapObject) ((SoapObject) response).getProperty("diffgram");
+
+        Member member = new Member();
+        if (soapObject != null) {
+            SoapObject webServiceResponse = (SoapObject) soapObject
+                    .getProperty("NewDataSet");
+            SoapObject tableObject = (SoapObject) webServiceResponse
+                    .getProperty("Table");
+            member.memberId = (tableObject.getProperty("MemberId").toString());
+            member.memberName = (tableObject.getProperty("MemberName").toString());
+
+        }
+        return member;
     }
 
     public String setMember(Member member) throws Exception {

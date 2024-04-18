@@ -9,7 +9,7 @@
     <HorizontalScrollView
         android:id="@+id/horizontalView"
         android:layout_width="wrap_content"
-        android:layout_height="400dp"
+        android:layout_height="380dp"
         android:scrollbars="horizontal|vertical">
 
         <LinearLayout
@@ -92,7 +92,7 @@
             android:layout_weight="1.3"
             android:textStyle="bold"
             android:background="@drawable/button_yellow"
-            android:text="O.S" />
+            android:text="Send Order" />
 
         <EditText
             android:id="@+id/txtPeople"
@@ -214,7 +214,7 @@
     <GridView
         android:id="@+id/gridMainMenu"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         android:columnWidth="45dp"
         android:horizontalSpacing="1dp"
         android:numColumns="4"

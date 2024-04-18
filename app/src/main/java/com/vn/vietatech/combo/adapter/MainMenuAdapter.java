@@ -62,12 +62,12 @@ public class MainMenuAdapter extends BaseAdapter {
             drawable.setStroke(2, Color.BLACK);
             drawable.setColor(Utils.parseColor(posMenu.getBtnColor()));
             btn.setBackgroundDrawable(drawable);
-            btn.setTextSize(11);
+            btn.setTextSize(14);
             btn.setTypeface(Typeface.DEFAULT_BOLD);
             btn.setTextColor(Utils.parseColor(posMenu.getFontColor()));
             btn.setText(posMenu.getDescription());
             btn.setLines(2);
-            btn.setPadding(0, 0, 0, 0);
+//            btn.setPadding(0, 0, 0, 0);
             btn.setMinWidth(0);
             btn.setOnClickListener(new OnClickListener() {
 

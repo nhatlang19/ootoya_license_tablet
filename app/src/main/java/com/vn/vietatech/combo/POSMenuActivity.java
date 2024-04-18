@@ -33,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vn.vietatech.api.AbstractAPI;
+import com.vn.vietatech.api.MemberAPI;
 import com.vn.vietatech.api.OrderAPI;
 import com.vn.vietatech.api.PosMenuAPI;
 import com.vn.vietatech.api.TableAPI;
@@ -48,10 +49,12 @@ import com.vn.vietatech.combo.view.TableOrder;
 import com.vn.vietatech.combo.view.tab.FragmentDialog;
 import com.vn.vietatech.model.Item;
 import com.vn.vietatech.model.Member;
+import com.vn.vietatech.model.Order;
 import com.vn.vietatech.model.PosMenu;
 import com.vn.vietatech.model.Promotion;
 import com.vn.vietatech.model.Remark;
 import com.vn.vietatech.model.Table;
+import com.vn.vietatech.model.dto.MemberRemarkDTO;
 import com.vn.vietatech.utils.SettingUtil;
 import com.vn.vietatech.utils.Utils;
 
@@ -464,8 +467,8 @@ public class POSMenuActivity extends AppCompatActivity {
             btnMT.setEnabled(false);
             btnMT.setTextColor(Color.GRAY);
 
-            btnMemRemark.setEnabled(false);
-            btnMemRemark.setTextColor(Color.GRAY);
+//            btnMemRemark.setEnabled(false);
+//            btnMemRemark.setTextColor(Color.GRAY);
         }
     }
 
@@ -701,8 +704,8 @@ public class POSMenuActivity extends AppCompatActivity {
             String orderNo = currentOrderNo;
             String extNo = currentExtNo;
             String currTable = tableNo;
-            String POSBizDate = Utils.getCurrentDate("yyyyMMdd");
-            String currTableGroup = tableGroupNo;
+            String POSBizDate = globalVariable.getPosBizDate();
+            String currTableGroup = tableGroupName;
             String noOfPerson = txtPeople.getText().toString();
             String salesCode = tableStatus.equals(Table.ACTION_EDIT) ? currentSalesCode
                     : selectedSalesCode;
@@ -751,7 +754,18 @@ public class POSMenuActivity extends AppCompatActivity {
     public void insertMemberRemake(Member member)
     {
         this.globalMember = member;
-        tblOrder.insertMember(member);
+        String posNo = currentPosNo;
+        String orderNo = currentOrderNo;
+        String extNo = currentExtNo;
+        String POSBizDate = globalVariable.getPosBizDate();
+        String memberId = globalMember != null ? globalMember.memberId : "";
+        String memberName = globalMember != null ? globalMember.memberName : "";
+        String segNo = "0";
+
+        MemberRemarkDTO dto = new MemberRemarkDTO(POSBizDate, posNo,  orderNo,  extNo,
+                 splited,  memberId,  memberName,  segNo);
+
+        tblOrder.insertMember(member, dto);
     }
 
     public void insertMember(Member member)

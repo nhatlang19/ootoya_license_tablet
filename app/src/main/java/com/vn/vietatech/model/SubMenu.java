@@ -5,6 +5,9 @@ public class SubMenu {
 	private String description;
 	private String defaultValue;
 	private PosMenu posMenu;
+
+	private String btnColor;
+	private String fontColor;
 	private Item item;
 	
 	public SubMenu() {
@@ -54,6 +57,22 @@ public class SubMenu {
 
 	public void setItem(Item item) {
 		this.item = item;
+	}
+
+	public String getBtnColor() {
+		return btnColor;
+	}
+
+	public void setBtnColor(String btnColor) {
+		this.btnColor = btnColor;
+	}
+
+	public String getFontColor() {
+		return fontColor;
+	}
+
+	public void setFontColor(String fontColor) {
+		this.fontColor = fontColor;
 	}
 
 }

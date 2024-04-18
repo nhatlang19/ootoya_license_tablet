@@ -365,6 +365,9 @@ public class Item {
     }
 
     public void setPromoDesc(String promoDesc) {
+        if (promoDesc.contains("anyType{}")) {
+            promoDesc = "";
+        }
         this.promoDesc = promoDesc;
     }
 
@@ -698,6 +701,9 @@ public class Item {
     }
 
     public void setMemberId(String memberId) {
+        if (memberId.contains("anyType{}")) {
+            memberId = "";
+        }
         this.memberId = memberId;
     }
 
@@ -706,6 +712,9 @@ public class Item {
     }
 
     public void setMemberName(String memberName) {
+        if (memberName.contains("anyType{}")) {
+            memberName = "";
+        }
         this.memberName = memberName;
     }
 
@@ -752,7 +761,7 @@ public class Item {
         int soLuong = 0;
         int promoQty = 0;
         if (promoClass == (int) PromoClass.MuaMtangN) {
-            promoQty = numberClick * pkgItems;
+            promoQty = numberClick * pkgQty;
             soLuong = numberClick * (pkgItems + pkgQty);
         } else {
             soLuong = numberClick;

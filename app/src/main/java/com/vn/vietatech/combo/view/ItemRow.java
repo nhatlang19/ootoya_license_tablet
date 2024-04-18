@@ -63,10 +63,10 @@ public class ItemRow extends TableRow {
 		TextView txtPQty = createColumn(currentItem.getPkgQty(), tblHeader, TableOrder.colnPQty);
 		this.addView(txtPQty);
 		// colnKhuyenMai
-		TextView txtKM = createColumn("", tblHeader, TableOrder.colnKhuyenMai);
+		TextView txtKM = createColumn(currentItem.getPromoDesc(), tblHeader, TableOrder.colnKhuyenMai);
 		this.addView(txtKM);
 		// colnDiscId
-		TextView txtDiscId = createColumn("", tblHeader, TableOrder.colnDiscId);
+		TextView txtDiscId = createColumn(currentItem.getDiscId(), tblHeader, TableOrder.colnDiscId);
 		this.addView(txtDiscId);
 		// total
 		TextView txtTotal = createColumn(currentItem.getTotal(), tblHeader,TableOrder.colnTotal);
@@ -133,7 +133,7 @@ public class ItemRow extends TableRow {
 		textView.setPadding(20, 5, 20, 5);
 		textView.setGravity(data.getColGravity());
 		textView.setText(item.trim());
-		textView.setTextSize(14);
+		textView.setTextSize(16);
 		textView.setTextColor(Color.BLACK);
 
 		return textView;

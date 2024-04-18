@@ -109,10 +109,14 @@ public class FragmentPromotion extends DialogFragment {
 
     private void addItem()
     {
-        int index = selectedIndex > 0 ? selectedIndex - 1 : 0;
-        Item item = items.get(index);
-        if (selectedIndex == 0) {
+        int index = selectedIndex;
+
+        Item item = new Item();
+        if (selectedIndex >= promotions.size() - 1) {
+            item = items.get(0);
             item.setOnPromotion("N");
+        } else {
+            item = items.get(index);
         }
         item.setNumberClick(numberClick);
         POSMenuActivity activity = (POSMenuActivity) this.getActivity();

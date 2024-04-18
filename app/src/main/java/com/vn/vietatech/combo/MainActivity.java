@@ -27,6 +27,8 @@ import android.widget.Toast;
 
 import com.vn.vietatech.api.AbstractAPI;
 import com.vn.vietatech.api.async.LoginAsync;
+import com.vn.vietatech.model.Setting;
+import com.vn.vietatech.utils.SettingUtil;
 import com.vn.vietatech.utils.Utils;
 
 import java.util.Calendar;
@@ -208,18 +210,20 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        String izValidBizDate = null;
+        String posBizDate = null;
         try {
-            izValidBizDate = new AbstractAPI(context).isValidBizDate();
+            Setting setting = SettingUtil.read(context);
+            posBizDate = new AbstractAPI(context).getPOSBizDate(setting.getPosId());
+            globalVariable.setPosBizDate(posBizDate);
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
         }
-//        if (!izValidBizDate.equals("1")) {
-//            Utils.playAlarm(context);
-//            Utils.showAlert(context, "Vui lòng kết ngày trước khi Order");
-//            return;
-//        }
+        if (posBizDate == null) {
+            Utils.playAlarm(context);
+            Utils.showAlert(context, "Vui lòng kết ngày trước khi Order");
+            return;
+        }
         //new UpdateTimeAsync(context).execute();
         new LoginAsync(context, getApplication()).execute(username, password);
     }

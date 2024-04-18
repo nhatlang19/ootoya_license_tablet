@@ -291,7 +291,7 @@ public class TableAdapter extends BaseAdapter {
                     tableActivity.startNewActivity(table, tableGroup,
                             selectedSalesCode);
                 } else {
-                    String POSBizDate = Utils.getCurrentDate("yyyyMMdd");
+                    String POSBizDate = globalVariable.getPosBizDate();
                     try {
                         ArrayList<Order> orders = new OrderAPI(mContext)
                                 .getOrderEditType(POSBizDate,
