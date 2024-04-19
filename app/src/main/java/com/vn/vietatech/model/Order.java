@@ -3,10 +3,15 @@ package com.vn.vietatech.model;
 public class Order {
 	private String ordExt;
 	private String posPerScode;
+
+	private String memberId;
+	private String memberName;
 	
 	public Order() {
 		setOrdExt("0_0");
 		setPosPerScode("0_0_0");
+		memberId = "";
+		memberName = "";
 	}
 
 	public String getOrd() {
@@ -53,5 +58,20 @@ public class Order {
 		this.posPerScode = posPerScode;
 	}
 
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
 
 }

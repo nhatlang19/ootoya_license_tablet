@@ -50,7 +50,6 @@ public class MainMenuAdapter extends BaseAdapter {
         final Button btn;
         final PosMenu posMenu = listPosMenu.get(position);
 
-        if (convertView == null) {
             btn = new Button(mContext);
 			/*btn.setLayoutParams(new GridView.LayoutParams(
 					LayoutParams.MATCH_PARENT, 84)); //J3 ASUS*/
@@ -85,9 +84,8 @@ public class MainMenuAdapter extends BaseAdapter {
             });
 
             listButtonMenu.add(btn);
-        } else {
-            btn = (Button) convertView;
-        }
+            //convertView.setTag(btn);
+
 
         return btn;
     }

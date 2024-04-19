@@ -60,7 +60,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.0"
-                android:inputType=""
+                android:inputType="number"
                 android:singleLine="true"
                 android:textSize="20sp">
 
@@ -76,7 +76,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.0"
-                android:inputType="textPassword"
+                android:inputType="numberPassword"
                 android:singleLine="true"
                 android:textSize="20sp">
 

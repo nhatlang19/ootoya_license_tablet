@@ -225,8 +225,12 @@ public class POSMenuActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                tblOrder.plus();
-                calSum();
+                try {
+                    tblOrder.plus(Double.parseDouble(SettingUtil.read(context).getServiceTax()));
+                    calSum();
+                } catch(Exception ex) {
+
+                }
             }
         });
 
@@ -235,10 +239,14 @@ public class POSMenuActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                boolean delete = tblOrder.sub();
-                calSum();
-                if (delete) {
-                    updateTitle();
+                try {
+                    boolean delete = tblOrder.sub(Double.parseDouble(SettingUtil.read(context).getServiceTax()));
+                    calSum();
+                    if (delete) {
+                        updateTitle();
+                    }
+                } catch(Exception ex) {
+
                 }
             }
         });
@@ -665,6 +673,17 @@ public class POSMenuActivity extends AppCompatActivity {
 
         // update title
         updateTitle();
+
+        loadMember();
+    }
+
+    public void loadMember() throws Exception {
+        Order order = new OrderAPI(context).GetEditOrderNumberByPOSHeader(
+                currentOrderNo, currentPosNo, currentExtNo);
+        if (order.getMemberId().isEmpty()) {
+            Member member = new Member(order.getMemberId(), order.getMemberName());
+            this.insertMember(member);
+        }
     }
 
     public void loadRemarks(Item item) {

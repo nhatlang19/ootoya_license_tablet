@@ -95,6 +95,32 @@ public class OrderAPI extends AbstractAPI {
         return items;
     }
 
+    public Order GetEditOrderNumberByPOSHeader(String orderNo, String posNo,
+                                                          String extNo) throws Exception {
+        setMethod(METHOD_GET_EDIT_ORDER_BY_POS_HEADER);
+
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("orderNo", orderNo);
+        params.put("posNo", posNo);
+        params.put("extNo", extNo);
+
+        SoapObject response = (SoapObject) this.callService(params);
+        SoapObject soapObject = (SoapObject) response.getProperty("diffgram");
+        Order order = new Order();
+        if (soapObject.getPropertyCount() != 0) {
+            SoapObject webServiceResponse = (SoapObject) soapObject
+                    .getProperty("NewDataSet");
+            SoapObject tableObject = (SoapObject) webServiceResponse
+                    .getProperty("Table");
+
+            order.setMemberId(tableObject.getProperty("MemberId").toString());
+            if (tableObject.hasProperty("MemberName")) {
+                order.setMemberName(tableObject.getProperty("MemberName").toString());
+            }
+        }
+        return order;
+    }
+
     public ArrayList<Order> getOrderEditType(String POSBizDate,
                                              String currentTable) throws Exception {
         setMethod(METHOD_GET_ORDER_EDIT_TYPE);

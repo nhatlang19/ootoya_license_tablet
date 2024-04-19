@@ -94,7 +94,6 @@ public class TableAdapter extends BaseAdapter {
                     String openBy = tableRepeat.getOpenBy().trim();
                     switch (tableRepeat.getStatus()) {
                         case "A":
-                        case "B":
                             if (openBy.length() == 0) {
                                 try {
 //                                    boolean result = new TableAPI(mContext)
@@ -118,6 +117,7 @@ public class TableAdapter extends BaseAdapter {
                                                 .getOpenBy().trim()));
                             }
                             break;
+                        case "B":
                         case "O":
                             if (openBy.length() == 0) {
                                 try {
