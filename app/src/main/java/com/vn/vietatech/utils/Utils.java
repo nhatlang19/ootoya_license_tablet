@@ -178,4 +178,10 @@ public class Utils {
 		String POSBizDate = sdf.format(new Date());
 		return POSBizDate;
 	}
+
+	public static String getVersion() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd.HHmm");
+		String curDate = sdf.format(new Date());
+		return "build." + curDate + ".MK";
+	}
 }

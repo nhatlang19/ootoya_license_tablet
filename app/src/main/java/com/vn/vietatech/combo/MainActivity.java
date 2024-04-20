@@ -23,6 +23,7 @@ import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vn.vietatech.api.AbstractAPI;
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     EditText txtPassword;
     EditText txtLicense;
     EditText txtPasscode;
+
+    TextView tvVersion;
     LinearLayout linearLayoutLicense;
     LinearLayout linearLayoutLogin;
     MyApplication globalVariable;
@@ -102,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
         txtLicense = findViewById(R.id.txtLicense);
         txtPasscode = findViewById(R.id.txtPasscode);
 
+        tvVersion = findViewById(R.id.tvVersion);
+        tvVersion.setText(Utils.getVersion());
 
         //licenseUtils = LicenseUtils.getInstance(context);
 
