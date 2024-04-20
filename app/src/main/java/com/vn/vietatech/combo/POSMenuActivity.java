@@ -728,7 +728,7 @@ public class POSMenuActivity extends AppCompatActivity {
             String noOfPerson = txtPeople.getText().toString();
             String salesCode = tableStatus.equals(Table.ACTION_EDIT) ? currentSalesCode
                     : selectedSalesCode;
-            String cashierID = globalVariable.getCashier().getId();
+            String cashierID = globalVariable.getCashier().getId().trim();
             String memberID = globalMember != null ? globalMember.memberId : "";
 
             boolean ketqua = new PosMenuAPI(context).sendOrder(dataTableString,

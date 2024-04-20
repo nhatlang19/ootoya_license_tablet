@@ -87,20 +87,20 @@ public class TableAdapter extends BaseAdapter {
                     try {
                         tablesRepeat = new TableAPI(mContext).getTableBySection(section);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Toast.makeText(mContext, e.getMessage(),
+                                Toast.LENGTH_LONG).show();
                     }
                     Table tableRepeat = tablesRepeat.get(position);
                     //String openBy = table.getOpenBy().trim();
                     String openBy = tableRepeat.getOpenBy().trim();
                     switch (tableRepeat.getStatus()) {
                         case "A":
-                            if (openBy.length() == 0) {
+                            if (openBy.isEmpty()) {
                                 try {
-//                                    boolean result = new TableAPI(mContext)
-//                                            .updateTableStatus(Table.STATUS_OPEN,
-//                                                    cashier.getId(),
-//                                                    table.getTableNo());
-                                    boolean result = true;
+                                    boolean result = new TableAPI(mContext)
+                                            .updateTableStatus(Table.STATUS_OPEN,
+                                                    cashier.getId(),
+                                                    table.getTableNo());
                                     if (!result) {
                                         Toast.makeText(mContext, "Không thể cập nhật trạng thái bàn",
                                                 Toast.LENGTH_LONG).show();
@@ -119,13 +119,12 @@ public class TableAdapter extends BaseAdapter {
                             break;
                         case "B":
                         case "O":
-                            if (openBy.length() == 0) {
+                            if (openBy.isEmpty()) {
                                 try {
-//                                    boolean result = new TableAPI(mContext)
-//                                            .updateTableStatus(Table.STATUS_OPEN,
-//                                                    cashier.getId(),
-//                                                    table.getTableNo());
-                                    boolean result = true;
+                                    boolean result = new TableAPI(mContext)
+                                            .updateTableStatus(Table.STATUS_OPEN,
+                                                    cashier.getId(),
+                                                    table.getTableNo());
                                     if (!result) {
                                         Toast.makeText(mContext,
                                                 "Không thể cập nhật trạng thái bàn", Toast.LENGTH_LONG).show();
@@ -156,7 +155,7 @@ public class TableAdapter extends BaseAdapter {
         });
 
         String title = table.getTableNo().trim();
-        if (table.getDescription2().length() != 0) {
+        if (!table.getDescription2().isEmpty()) {
             title += "/" + table.getDescription2().trim();
         }
         btn.setText(title);

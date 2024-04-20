@@ -131,6 +131,8 @@ public class FragmentDialog extends DialogFragment {
 				itemChild.setSegNo(String.valueOf(segNo));
 				itemChild.setTax(item.getTax());
 				itemChild.setNumberClick(1);
+				itemChild.setSubcatg(item.getSubcatg());
+				itemChild.setBrand(item.getBrand());
 				activity.addItem(itemChild);
 				//Tăng child item bên trong cho đồng bộ với PC
 				segNo = segNo + 1;
