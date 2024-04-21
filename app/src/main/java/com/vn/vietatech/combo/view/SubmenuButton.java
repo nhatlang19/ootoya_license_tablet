@@ -77,7 +77,8 @@ public class SubmenuButton extends Button {
                     ArrayList<Item> items = new ItemAPI(mContext).getItemBySubMenuSelected(subMenu.getDefaultValue(), activity.getPriceLevel(), String.valueOf(numberClick));
                     for (int i = 0; i < items.size(); i++) {
                         Item item = items.get(i);
-                        if (item.getOnPromotion().equals("Y")) {
+                        int promoClass1 = Integer.parseInt(item.getPromoClass());
+                        if (item.getOnPromotion().equals("Y") && promoClass1 == PromoClass.MuaMtangN) {
                             // Xử lý thêm đon giá
                             double ratio = Double.parseDouble(item.getRatio());
                             if (ratio > 0) {
@@ -117,7 +118,8 @@ public class SubmenuButton extends Button {
                         // Nếu có 2 line thì chac chan la se co khuyen mai thi cho chon lua
                         for (int i = items.size() - 1; i >= 0; i--) {
                             Item item = items.get(i);
-                            if (item.getOnPromotion().equals("Y")) {
+                            int promoClass = Integer.parseInt(item.getPromoClass());
+                            if (item.getOnPromotion().equals("Y") && promoClass == PromoClass.MuaMtangN) {
                                 Promotion promotion = new Promotion(item.getPromoCode(), item.getPromoDesc());
                                 dtKM.add(promotion);
                             }
@@ -125,12 +127,11 @@ public class SubmenuButton extends Button {
                         }
                     }
 
-                    if (dtKM.size() > 0) {
-                        int promoClass = Integer.parseInt(newItems.get(0).getPromoClass());
-                        if (promoClass == PromoClass.MuaMtangN) {
-                            dtKM.add(new Promotion("NoKM", "Không nhận khuyến mãi"));
-                            activity.onOpenDialogPromotion(dtKM, newItems, numberClick);
-                        }
+                    int promoClass = Integer.parseInt(newItems.get(0).getPromoClass());
+                    if (!dtKM.isEmpty() && promoClass == PromoClass.MuaMtangN) {
+
+                        dtKM.add(new Promotion("NoKM", "Không nhận khuyến mãi"));
+                        activity.onOpenDialogPromotion(dtKM, newItems, numberClick);
                     } else {
                         Item item = newItems.get(0);
                         String comboPack = item.getComboPack();

@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         txtPasscode = findViewById(R.id.txtPasscode);
 
         tvVersion = findViewById(R.id.tvVersion);
-        tvVersion.setText(Utils.getVersion());
+//        tvVersion.setText(Utils.getVersion());
 
         //licenseUtils = LicenseUtils.getInstance(context);
 

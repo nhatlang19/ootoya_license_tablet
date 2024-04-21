@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.vn.vietatech.combo.adapter.PromotionAdapter;
@@ -30,6 +31,7 @@ public class FragmentPromotion extends DialogFragment {
     private Button btnPromoOk;
     private Button btnPromoCancel;
     private Spinner spinPromotion;
+    private EditText txtProQuantity;
     private PromotionAdapter promotionAdapter;
     private Promotion selectedPromo = null;
 
@@ -63,6 +65,7 @@ public class FragmentPromotion extends DialogFragment {
         btnPromoOk = (Button) view.findViewById(R.id.btnPromoOk);
         btnPromoCancel = (Button) view.findViewById(R.id.btnPromoCancel);
         spinPromotion = (Spinner) view.findViewById(R.id.spinPromotion);
+        txtProQuantity = (EditText) view.findViewById(R.id.txtProQuantity);
 
         promotionAdapter = new PromotionAdapter(view.getContext(),
                 android.R.layout.simple_spinner_item, this.promotions);
@@ -118,7 +121,11 @@ public class FragmentPromotion extends DialogFragment {
         } else {
             item = items.get(index);
         }
-        item.setNumberClick(numberClick);
+        int numClick = numberClick;
+        if (txtProQuantity.getText().length() > 0) {
+            numClick = Integer.valueOf(txtProQuantity.getText().toString());
+        }
+        item.setNumberClick(numClick);
         POSMenuActivity activity = (POSMenuActivity) this.getActivity();
         activity.addItem(item);
     }

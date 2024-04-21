@@ -513,12 +513,16 @@ public class TableOrder extends TableLayout
             int taxAmtItem = Integer.parseInt(item.getTaxAmt());
             int discItem = Integer.parseInt(item.getDistAmt());
 
+            discItem = 0;
+
+            int SPTAX = (int) ((subtotalItem + servAmtItem) * SPTaxItem * 0.01);
+
             subTotal += subtotalItem;
             ser += servAmtItem;
-            sptax += SPTaxItem;
+            sptax += SPTAX;
             vat += taxAmtItem;
             disc += discItem;
-            total += subtotalItem + servAmtItem + SPTaxItem + taxAmtItem + discItem;
+            total += subtotalItem + servAmtItem + SPTAX + taxAmtItem + discItem;
         }
 
         return String
@@ -544,9 +548,10 @@ public class TableOrder extends TableLayout
             Item item = listRow.get(i).getCurrentItem();
             int subtotalItem = Integer.parseInt(item.getSubTotal());
             int servAmtItem = Integer.parseInt(item.getServeTaxAmt());
-            int SPTaxItem = Integer.parseInt(item.getSptax());
+            int SPTaxItem = (int) ((subtotalItem + servAmtItem) * Integer.parseInt(item.getSptax()) * 0.01);
             int taxAmtItem = Integer.parseInt(item.getTaxAmt());
             int discItem = Integer.parseInt(item.getDistAmt());
+            discItem = 0;
 
             total += subtotalItem + servAmtItem + SPTaxItem + taxAmtItem + discItem;
         }
