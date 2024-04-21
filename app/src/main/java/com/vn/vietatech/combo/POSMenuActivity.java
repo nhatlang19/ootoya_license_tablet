@@ -680,7 +680,7 @@ public class POSMenuActivity extends AppCompatActivity {
     public void loadMember() throws Exception {
         Order order = new OrderAPI(context).GetEditOrderNumberByPOSHeader(
                 currentOrderNo, currentPosNo, currentExtNo);
-        if (order.getMemberId().isEmpty()) {
+        if (!order.getMemberId().isEmpty()) {
             Member member = new Member(order.getMemberId(), order.getMemberName());
             this.insertMember(member);
         }

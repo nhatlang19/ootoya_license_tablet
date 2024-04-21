@@ -80,7 +80,7 @@ public class SubmenuButton extends Button {
                         int promoClass1 = Integer.parseInt(item.getPromoClass());
                         if (item.getOnPromotion().equals("Y") && promoClass1 == PromoClass.MuaMtangN) {
                             // Xử lý thêm đon giá
-                            double ratio = Double.parseDouble(item.getRatio());
+                            double ratio = Double.parseDouble(item.getRatio()) * 0.01;
                             if (ratio > 0) {
                                 double price = (1 - ratio) * Double.parseDouble(item.getOrgPrice());
                                 items.get(i).setPromoPrice(String.valueOf(price));

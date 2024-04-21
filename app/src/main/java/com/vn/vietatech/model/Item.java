@@ -793,7 +793,7 @@ public class Item {
         setServeTaxAmt(String.valueOf((int) serveTaxAmt));
         setSpTaxAmt(String.valueOf((int) spTaxAmt));
         setTotal(String.valueOf((int) total));
-        setTaxAmt(String.valueOf((int) taxAmt));
+        setTaxAmt(String.valueOf((int)  Math.ceil(taxAmt)));
         setDistAmt(String.valueOf((int) distAmt));
         setServeTax(String.valueOf((int) serviceTax));
 
