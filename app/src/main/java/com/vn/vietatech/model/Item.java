@@ -180,6 +180,9 @@ public class Item {
     }
 
     public String getDistAmt() {
+        if (distAmt == null) {
+            distAmt = "";
+        }
         return distAmt;
     }
 
@@ -659,6 +662,7 @@ public class Item {
 
 
     public String getSubTotal() {
+        if (subTotal == null ) return "0";
         return subTotal;
     }
 
@@ -668,6 +672,7 @@ public class Item {
     }
 
     public String getServeTaxAmt() {
+        if (serveTaxAmt == null ) return "0";
         return serveTaxAmt;
     }
 

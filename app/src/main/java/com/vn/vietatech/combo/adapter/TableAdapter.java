@@ -158,6 +158,7 @@ public class TableAdapter extends BaseAdapter {
         if (!table.getDescription2().isEmpty()) {
             title += "/" + table.getDescription2().trim();
         }
+        btn.setPadding(0, 40, 0, 40);
         btn.setText(title);
         return btn;
     }
@@ -217,6 +218,8 @@ public class TableAdapter extends BaseAdapter {
             cashierListAdapter = new CashierListAdapter(mContext,
                     android.R.layout.simple_spinner_item, cashiers);
             spinGroup.setAdapter(cashierListAdapter);
+            int position = cashierListAdapter.findByGroupName(table.getDescription2());
+            spinGroup.setSelection(position);
 
             salesCodeAdapter = new SalesCodeAdapter(mContext,
                     android.R.layout.simple_spinner_item, salesCodes);

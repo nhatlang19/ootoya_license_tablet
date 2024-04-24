@@ -62,11 +62,11 @@
             android:layout_height="match_parent"
             android:columnWidth="90dp"
             android:gravity="center"
-            android:horizontalSpacing="10dp"
+            android:horizontalSpacing="20dp"
             android:numColumns="3"
             android:paddingTop="10dp"
             android:stretchMode="columnWidth"
-            android:verticalSpacing="10dp" />
+            android:verticalSpacing="20dp" />
 
         <LinearLayout
             android:id="@+id/screenWaitId"
@@ -81,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/waiting_mk" />
+                android:src="@drawable/table_logo" />
 
         </LinearLayout>
     </LinearLayout>

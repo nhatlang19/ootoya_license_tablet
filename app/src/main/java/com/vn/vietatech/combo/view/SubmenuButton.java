@@ -77,8 +77,8 @@ public class SubmenuButton extends Button {
                     ArrayList<Item> items = new ItemAPI(mContext).getItemBySubMenuSelected(subMenu.getDefaultValue(), activity.getPriceLevel(), String.valueOf(numberClick));
                     for (int i = 0; i < items.size(); i++) {
                         Item item = items.get(i);
-                        int promoClass1 = Integer.parseInt(item.getPromoClass());
-                        if (item.getOnPromotion().equals("Y") && promoClass1 == PromoClass.MuaMtangN) {
+//                        int promoClass1 = Integer.parseInt(item.getPromoClass());
+                        if (item.getOnPromotion().equals("Y")) {
                             // Xử lý thêm đon giá
                             double ratio = Double.parseDouble(item.getRatio()) * 0.01;
                             if (ratio > 0) {
@@ -119,7 +119,7 @@ public class SubmenuButton extends Button {
                         for (int i = items.size() - 1; i >= 0; i--) {
                             Item item = items.get(i);
                             int promoClass = Integer.parseInt(item.getPromoClass());
-                            if (item.getOnPromotion().equals("Y") && promoClass == PromoClass.MuaMtangN) {
+                            if (item.getOnPromotion().equals("Y")) {
                                 Promotion promotion = new Promotion(item.getPromoCode(), item.getPromoDesc());
                                 dtKM.add(promotion);
                             }
@@ -128,8 +128,7 @@ public class SubmenuButton extends Button {
                     }
 
                     int promoClass = Integer.parseInt(newItems.get(0).getPromoClass());
-                    if (!dtKM.isEmpty() && promoClass == PromoClass.MuaMtangN) {
-
+                    if (promoClass == PromoClass.MuaMtangN || dtKM.size() > 1) {
                         dtKM.add(new Promotion("NoKM", "Không nhận khuyến mãi"));
                         activity.onOpenDialogPromotion(dtKM, newItems, numberClick);
                     } else {
@@ -139,7 +138,7 @@ public class SubmenuButton extends Button {
                         item.setNumberClick(numberClick);
                         if (comboPack.equals("N") || comboPack.equals("R")) {
                             item.setQty(String.valueOf(item.getNumberClick()));
-                            activity.addItem(item);
+                            activity.addItem(item, false);
                         } else if (comboPack.equals("C")) {
                             ArrayList<ItemCombo> itemComboList = new ItemComboAPI(mContext).getItemComboComboBySubMenuSelected(item.getItemCode());
                             item.setItemCombo(itemComboList);

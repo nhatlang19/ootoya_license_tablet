@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.vn.vietatech.model.Cashier;
+import com.vn.vietatech.model.SalesCode;
 import com.vn.vietatech.model.Table;
 
 import java.util.ArrayList;
@@ -36,6 +37,16 @@ public class CashierListAdapter extends ArrayAdapter<Cashier> {
 
     public long getItemId(int position) {
         return position;
+    }
+
+    public int findByGroupName(String group) {
+        for (int i = 0; i < getCount(); i++) {
+            Cashier tmp = getItem(i);
+            if (tmp.getName().equals(group)) {
+                return i;
+            }
+        }
+        return 0;
     }
 
     @Override

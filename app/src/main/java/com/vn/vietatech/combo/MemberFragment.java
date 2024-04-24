@@ -28,6 +28,7 @@ import com.vn.vietatech.combo.adapter.MemGradeAdapter;
 import com.vn.vietatech.combo.adapter.MemberListAdapter;
 import com.vn.vietatech.combo.adapter.NationalityAdapter;
 import com.vn.vietatech.model.Member;
+import com.vn.vietatech.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -54,6 +55,7 @@ public class MemberFragment extends DialogFragment {
     Button btnAddMember;
     Button btnCloseFormAdd;
     Button btnSaveFormAdd;
+    Button btnCheckDuplicate;
 
     Spinner spinMemberNationality;
     Spinner spinMemberType;
@@ -109,6 +111,7 @@ public class MemberFragment extends DialogFragment {
         btnAddMember = (Button) view.findViewById(R.id.btnAddMember);
         btnSaveFormAdd = (Button) view.findViewById(R.id.btnSaveFormAdd);
         btnCloseFormAdd = (Button) view.findViewById(R.id.btnCloseFormAdd);
+        btnCheckDuplicate = (Button) view.findViewById(R.id.btnCheckDuplicate);
         spinMemberNationality = (Spinner) view.findViewById(R.id.spinMemberNationality);
         spinMemberType = (Spinner) view.findViewById(R.id.spinMemberType);
         spinMemberGrade = (Spinner) view.findViewById(R.id.spinMemberGrade);
@@ -199,9 +202,10 @@ public class MemberFragment extends DialogFragment {
                     memberListAdapter.addAll(members);
                     memberListAdapter.notifyDataSetChanged();
                 } catch (Exception ex) {
-                    System.out.println("messages:" + ex.getMessage());
-                    Toast.makeText(mContext,
-                            ex.getMessage(), Toast.LENGTH_SHORT).show();
+                    ArrayList<Member> members = new ArrayList<>();
+                    memberListAdapter.clear();
+                    memberListAdapter.addAll(members);
+                    memberListAdapter.notifyDataSetChanged();
                 }
             }
         });
@@ -211,8 +215,13 @@ public class MemberFragment extends DialogFragment {
             public void onClick(View v) {
                 lnSearch.setVisibility(View.GONE);
                 lnList.setVisibility(View.GONE);
+                btnAddMember.setVisibility(View.GONE);
+                btnCloseMember.setVisibility(View.GONE);
 
                 lnFormAdd.setVisibility(View.VISIBLE);
+                btnCloseFormAdd.setVisibility(View.VISIBLE);
+                btnSaveFormAdd.setVisibility(View.VISIBLE);
+                btnCheckDuplicate.setVisibility(View.VISIBLE);
             }
         });
 
@@ -221,8 +230,34 @@ public class MemberFragment extends DialogFragment {
             public void onClick(View v) {
                 lnSearch.setVisibility(View.VISIBLE);
                 lnList.setVisibility(View.VISIBLE);
+                btnAddMember.setVisibility(View.VISIBLE);
+                btnCloseMember.setVisibility(View.VISIBLE);
 
                 lnFormAdd.setVisibility(View.GONE);
+                btnCloseFormAdd.setVisibility(View.GONE);
+                btnSaveFormAdd.setVisibility(View.GONE);
+                btnCheckDuplicate.setVisibility(View.GONE);
+            }
+        });
+
+        btnCheckDuplicate.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                try {
+                    String memberName = txtMemberName.getText().toString();
+                    if (!memberName.isEmpty()) {
+                        ArrayList<Member> members = new MemberAPI(mContext).checkDuplicateName(memberName);
+                        StringBuilder result = new StringBuilder();
+                        for (int i = 0; i < members.size(); i++) {
+                            result.append(members.get(i).memberName).append("\n");
+                        }
+                        Utils.showAlert(mContext, result.toString());
+                    }
+                } catch (Exception e) {
+                    System.out.println("messages:" + e.getMessage());
+                    Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
             }
         });
 

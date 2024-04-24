@@ -54,6 +54,8 @@ public class AbstractAPI extends AsyncTask<String, String, String> {
     protected static String METHOD_GET_NATIONALITY = "GetNationality";
     protected static String METHOD_GET_MEMCLASS = "GetMemClass";
     protected static String METHOD_GET_MEMGRADE = "GetMemGrade";
+    protected static String METHOD_GET_PROMOTION_LIST = "GetPromotionList";
+    protected static String METHOD_CHECK_MEMBER_TRUNG_TEN = "CheckMemberTrungTen";
 
     protected static String NAMESPACE;
     protected static String SERVER_IP;

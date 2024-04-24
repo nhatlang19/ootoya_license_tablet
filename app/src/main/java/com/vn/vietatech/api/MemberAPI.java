@@ -44,6 +44,33 @@ public class MemberAPI extends AbstractAPI {
         return members;
     }
 
+    public ArrayList<Member> checkDuplicateName(String memberName) throws Exception {
+        setMethod(METHOD_CHECK_MEMBER_TRUNG_TEN);
+        ArrayList<Member> members = new ArrayList<Member>();
+
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("memberName", memberName);
+
+        SoapObject response = (SoapObject) this.callService(params);
+        SoapObject soapObject = (SoapObject) ((SoapObject) response).getProperty("diffgram");
+        if (soapObject != null) {
+            SoapObject webServiceResponse = (SoapObject) soapObject
+                    .getProperty("NewDataSet");
+            if (webServiceResponse != null) {
+                for (int i = 0; i < webServiceResponse.getPropertyCount(); i++) {
+                    SoapObject table = (SoapObject) webServiceResponse
+                            .getProperty(i);
+
+                    Member member = new Member();
+                    member.memberName = (table.getProperty("FullName").toString());
+
+                    members.add(member);
+                }
+            }
+        }
+        return members;
+    }
+
     public Member getMember(String keyword) throws Exception {
         setMethod(METHOD_GET_MEMBER);
 

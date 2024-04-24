@@ -44,6 +44,35 @@
                 android:layout_gravity="right"
                 android:background="@drawable/button_grey"
                 android:text="OK" />
+
+            <Button
+                android:visibility="gone"
+                android:id="@+id/btnCloseFormAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:background="@drawable/button_grey"
+                android:text="Close" />
+
+            <Button
+                android:visibility="gone"
+                android:id="@+id/btnCheckDuplicate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@drawable/button_grey"
+                android:text="Kiểm tra trùng tên" />
+
+            <Button
+                android:visibility="gone"
+                android:id="@+id/btnSaveFormAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:background="@drawable/button_grey"
+                android:text="Save" />
         </TableRow>
     </TableLayout>
 
@@ -273,26 +302,6 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:singleLine="true"
                 android:textAlignment="textEnd" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="2">
-
-            <Button
-                android:id="@+id/btnCloseFormAdd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textStyle="bold"
-                android:text="Close" />
-            <Button
-                android:id="@+id/btnSaveFormAdd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textStyle="bold"
-                android:text="Save" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

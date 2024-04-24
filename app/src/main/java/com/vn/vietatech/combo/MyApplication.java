@@ -9,6 +9,7 @@ import com.vn.vietatech.model.MemClass;
 import com.vn.vietatech.model.MemGrade;
 import com.vn.vietatech.model.Nationality;
 import com.vn.vietatech.model.PosMenu;
+import com.vn.vietatech.model.Promo;
 import com.vn.vietatech.model.SalesCode;
 import com.vn.vietatech.model.Section;
 import com.vn.vietatech.model.Table;
@@ -28,6 +29,7 @@ public class MyApplication extends Application {
     private ArrayList<Nationality> nationalities = null;
     private ArrayList<MemClass> memClasses = null;
     private ArrayList<MemGrade> memGrades = null;
+    private ArrayList<Promo> promos = null;
 
 
 
@@ -114,5 +116,13 @@ public class MyApplication extends Application {
 
     public void setPosBizDate(String posBizDate) {
         this.posBizDate = posBizDate;
+    }
+
+    public ArrayList<Promo> getPromos() {
+        return promos;
+    }
+
+    public void setPromos(ArrayList<Promo> promos) {
+        this.promos = promos;
     }
 }

@@ -51,6 +51,7 @@ import com.vn.vietatech.model.Item;
 import com.vn.vietatech.model.Member;
 import com.vn.vietatech.model.Order;
 import com.vn.vietatech.model.PosMenu;
+import com.vn.vietatech.model.Promo;
 import com.vn.vietatech.model.Promotion;
 import com.vn.vietatech.model.Remark;
 import com.vn.vietatech.model.Table;
@@ -409,7 +410,13 @@ public class POSMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    Utils.showAlert(context, tblOrder.getALlTotalStr());
+                    ArrayList<Promo> promos = globalVariable.getPromos();
+                    StringBuilder result = new StringBuilder();
+                    result.append("Tất cả các promotion: \n");
+                    for(int i = 0; i< promos.size();i++) {
+                        result.append(promos.get(i).getDescription()).append("\n");
+                    }
+                    Utils.showAlert(context, tblOrder.getALlTotalStr() + "\n\n\n" + result);
                 } catch (NumberFormatException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -424,9 +431,9 @@ public class POSMenuActivity extends AppCompatActivity {
         gridSubMenu.setAdapter(subMnuAdapter);
     }
 
-    public void addItem(Item item) {
+    public void addItem(Item item, boolean skipCal) {
         try {
-            if (tblOrder.createNewRow(item, false)) {
+            if (tblOrder.createNewRow(item, skipCal)) {
                 vBody.post(new Runnable() {
                     @Override
                     public void run() {

@@ -122,7 +122,7 @@ public class FragmentDialog extends DialogFragment {
 
 	private void addItem() {
 		POSMenuActivity activity = (POSMenuActivity) this.getActivity();
-		activity.addItem(item);
+		activity.addItem(item, false);
 		
 		int segNo = activity.getTableOrder().getSegNo();
 		for (FragmenTab fragmenTab : tabs) {
@@ -130,10 +130,10 @@ public class FragmentDialog extends DialogFragment {
 			for (Item itemChild : items) {
 				itemChild.setSegNo(String.valueOf(segNo));
 				itemChild.setTax(item.getTax());
-				itemChild.setNumberClick(1);
+//				itemChild.setNumberClick(1);
 				itemChild.setSubcatg(item.getSubcatg());
 				itemChild.setBrand(item.getBrand());
-				activity.addItem(itemChild);
+				activity.addItem(itemChild, true);
 				//Tăng child item bên trong cho đồng bộ với PC
 				segNo = segNo + 1;
 			}

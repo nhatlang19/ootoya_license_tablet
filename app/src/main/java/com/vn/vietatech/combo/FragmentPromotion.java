@@ -127,6 +127,6 @@ public class FragmentPromotion extends DialogFragment {
         }
         item.setNumberClick(numClick);
         POSMenuActivity activity = (POSMenuActivity) this.getActivity();
-        activity.addItem(item);
+        activity.addItem(item, false);
     }
 }

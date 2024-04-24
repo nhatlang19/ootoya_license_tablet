@@ -10,6 +10,7 @@ import com.vn.vietatech.api.MemClassAPI;
 import com.vn.vietatech.api.MemGradeAPI;
 import com.vn.vietatech.api.NationalityAPI;
 import com.vn.vietatech.api.PosMenuAPI;
+import com.vn.vietatech.api.PromoAPI;
 import com.vn.vietatech.api.SaleCodeAPI;
 import com.vn.vietatech.api.TableAPI;
 import com.vn.vietatech.api.UserApi;
@@ -65,6 +66,7 @@ public class LoginAsync extends AsyncTask<String, String, Cashier> {
                 new NationalityAPI(mContext.getApplicationContext()).execute();
                 new MemClassAPI(mContext.getApplicationContext()).execute();
                 new MemGradeAPI(mContext.getApplicationContext()).execute();
+                new PromoAPI(mContext.getApplicationContext()).execute();
 
                 MainActivity act = (MainActivity) mContext;
                 Intent myIntent = new Intent(mContext, TableActivity.class);
