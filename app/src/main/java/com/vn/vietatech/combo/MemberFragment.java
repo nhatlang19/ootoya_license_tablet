@@ -253,10 +253,12 @@ public class MemberFragment extends DialogFragment {
                             result.append(members.get(i).memberName).append("\n");
                         }
                         Utils.showAlert(mContext, result.toString());
+                    } else {
+                        Utils.showAlert(mContext, "Không có tên trùng");
                     }
                 } catch (Exception e) {
                     System.out.println("messages:" + e.getMessage());
-                    Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_LONG).show();
+                    Utils.showAlert(mContext, "Không có tên trùng");
                 }
             }
         });
@@ -276,11 +278,23 @@ public class MemberFragment extends DialogFragment {
                 member.memberClass = memClassAdapter.getItem(spinMemberType.getSelectedItemPosition()).getCode();
                 member.memberGrade = memGradeAdapter.getItem(spinMemberGrade.getSelectedItemPosition()).getCode();
                 try {
-                    String ketqua = new MemberAPI(mContext).setMember(member);
-                    Toast.makeText(mContext, ketqua, Toast.LENGTH_LONG).show();
+                    if (!member.memberName.isEmpty()) {
+                        String ketqua = new MemberAPI(mContext).setMember(member);
+                        Utils.showAlert(mContext, ketqua);
+                        txtMemberName.setText("");
+                        txtMemberMobile.setText("");
+                        txtMemberEmail.setText("");
+                        txtMemberBirth.setText("");
+                        txtMemberTax.setText("");
+                        txtMemberCompanyName.setText("");
+                        txtMemberCompanyAddress.setText("");
+                    } else {
+                        Utils.showAlert(mContext, "MemberName không thể rỗng");
+                    }
                 } catch (Exception e) {
                     System.out.println("messages:" + e.getMessage());
-                    Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_LONG).show();
+                    Utils.showAlert(mContext, "Khổng thể save");
                 }
             }
         });

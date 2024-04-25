@@ -156,9 +156,12 @@ public class TableAdapter extends BaseAdapter {
 
         String title = table.getTableNo().trim();
         if (!table.getDescription2().isEmpty()) {
-            title += "/" + table.getDescription2().trim();
+            title += "\n" + table.getDescription2().trim();
+            btn.setPadding(0, 26, 0, 26);
+        } else {
+            btn.setPadding(0, 40, 0, 40);
         }
-        btn.setPadding(0, 40, 0, 40);
+
         btn.setText(title);
         return btn;
     }

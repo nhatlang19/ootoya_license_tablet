@@ -224,7 +224,9 @@ public class TableOrder extends TableLayout
         }
         ArrayList<ItemRow> listRow = table.getBody().getAllRows();
         int index = -1;
-        if (!item.getItemType().equals("C") && !item.getItemType().equals("M"))
+        if (!item.getPromoDesc().isEmpty() && !item.getPromoDesc().equals("0")) {
+            index = -1;
+        } else if (!item.getItemType().equals("C") && !item.getItemType().equals("M"))
         {
             for (int i = listRow.size() - 1; i >= 0; i--)
             {
@@ -236,6 +238,7 @@ public class TableOrder extends TableLayout
                 }
             }
         }
+
         if (index != -1)
         {
             // update quality
@@ -255,6 +258,13 @@ public class TableOrder extends TableLayout
                 txtQ.setText(String.valueOf(q));
 
                 getCurrentRow().getCurrentItem().setQty(String.valueOf(q));
+                try {
+                    double serviceTax = Double.parseDouble(SettingUtil.read(mContext).getServiceTax());
+                    reUpdateRow(q, serviceTax);
+                } catch (IOException e) {
+
+                }
+
                 return false;
             }
             else

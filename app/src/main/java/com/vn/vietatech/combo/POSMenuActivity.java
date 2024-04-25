@@ -257,9 +257,14 @@ public class POSMenuActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                tblOrder.removeRow();
-                calSum();
-                updateTitle();
+                try {
+                    tblOrder.removeRow();
+                    calSum();
+                    updateTitle();
+                } catch(Exception ex) {
+                    Toast.makeText(getApplicationContext(),
+                            ex.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

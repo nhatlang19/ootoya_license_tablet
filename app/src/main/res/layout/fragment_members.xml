@@ -56,17 +56,6 @@
 
             <Button
                 android:visibility="gone"
-                android:id="@+id/btnCheckDuplicate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:background="@drawable/button_grey"
-                android:text="Kiểm tra trùng tên" />
-
-            <Button
-                android:visibility="gone"
                 android:id="@+id/btnSaveFormAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -133,14 +122,26 @@
 
             <EditText
                 android:id="@+id/txtMemberName"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="2"
                 android:ems="10"
-
                 android:hint="Member Name"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:singleLine="true"
                 android:textAlignment="textEnd" />
+
+            <Button
+                android:visibility="gone"
+                android:id="@+id/btnCheckDuplicate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@drawable/button_grey"
+                android:text="Kiểm tra trùng tên" />
+
         </LinearLayout>
 
 

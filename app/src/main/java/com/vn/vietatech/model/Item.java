@@ -181,7 +181,7 @@ public class Item {
 
     public String getDistAmt() {
         if (distAmt == null) {
-            distAmt = "";
+            distAmt = "0";
         }
         return distAmt;
     }

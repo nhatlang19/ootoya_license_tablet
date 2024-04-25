@@ -221,12 +221,12 @@ public class MainActivity extends AppCompatActivity {
             posBizDate = new AbstractAPI(context).getPOSBizDate(setting.getPosId());
             globalVariable.setPosBizDate(posBizDate);
         } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+            posBizDate = null;
+            globalVariable.setPosBizDate(posBizDate);
         }
-        if (posBizDate == null) {
+        if (posBizDate == null || posBizDate.isEmpty()) {
             Utils.playAlarm(context);
-            Utils.showAlert(context, "Vui lòng kết ngày trước khi Order");
+            Utils.showAlert(context, "Vui lòng dùng POS mở ngày để bán hàng");
             return;
         }
         //new UpdateTimeAsync(context).execute();
