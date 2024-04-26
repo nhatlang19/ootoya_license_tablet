@@ -178,7 +178,7 @@ public class TableBody extends TableLayout {
             act.btnIPlus.setEnabled(false);
             act.btnISub.setEnabled(false);
             act.btnIx.setEnabled(false);
-//            act.btnMemRemark.setEnabled(false);
+            act.btnMemRemark.setEnabled(false);
             newRow.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -212,7 +212,7 @@ public class TableBody extends TableLayout {
                             act.btnISub.setEnabled(true);
                             act.btnIx.setEnabled(true);
                         }
-//                        act.btnMemRemark.setEnabled(true);
+                        act.btnMemRemark.setEnabled(true);
                     }
                     for (int i = listRow.size() - 1; i >= 0; i--) {
                         ItemRow row = listRow.get(i);

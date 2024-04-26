@@ -296,7 +296,9 @@ public class POSMenuActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                onOpenDialogMembers();
+                if (tblOrder.getCurrentIndex() != -1) {
+                    onOpenDialogMembers();
+                }
             }
 
         });
